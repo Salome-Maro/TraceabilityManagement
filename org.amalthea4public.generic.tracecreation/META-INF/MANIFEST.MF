@@ -3,3 +3,4 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tracecreation
 Bundle-SymbolicName: org.amalthea4public.generic.tracecreation
 Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
