@@ -13,5 +13,17 @@
             class="org.amalthea4public.metamodel.trace.TracePackage"
             genModel="model/trace.xcore"/>
    </extension>
+   <extension
+         point="org.amalthea4public.configuration.metamodel.trace">
+      <trace_metamodel
+            adapter="org.amalthea4public.metamodel.trace.TraceMetamodelAdapter">
+      </trace_metamodel>
+   </extension>
+   <extension
+         point="org.amalthea4public.configuration.metamodel.trace">
+      <trace_metamodel
+            adapter="tracemetamodeladapter.TraceMetamodelAdapter1">
+      </trace_metamodel>
+   </extension>
 
 </plugin>

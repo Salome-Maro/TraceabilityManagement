@@ -2,5 +2,45 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.amalthea4public.configuration.metamodel.trace" name="Supply Trace Metamodel" schema="schema/org.amalthea4public.configuration.metamodel.trace.exsd"/>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.amalthea4public.generic.tracecreation.commands.createTrace"
+            name="Create Trace">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.amalthea4public.generic.tracecreation.handlers.TraceCreationHandler"
+            commandId="org.amalthea4public.generic.tracecreation.commands.createTrace">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <separator
+               name="org.amalthea4public.generic.tracecreation.separator2"
+               visible="true">
+         </separator>
+         <menu
+               id="org.amalthea4public.generic.tracecreation.menus.traceManagement"
+               label="Amalthea4Public Trace Managament"
+               mnemonic="M">
+            <command
+                  commandId="org.amalthea4public.generic.tracecreation.commands.createTrace"
+                  id="org.amalthea4public.generic.tracecreation.menus.sampleCommand"
+                  label="Create Trace"
+                  mnemonic="S"
+                  tooltip="Gives you a list of available trace types">
+            </command>
+         </menu>
+         <separator
+               name="org.amalthea4public.generic.tracecreation.separator1"
+               visible="true">
+         </separator>
+      </menuContribution>
+   </extension>
 
 </plugin>
