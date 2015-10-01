@@ -1,0 +1,21 @@
+package org.amalthea4public.metamodel.trace
+
+class AdvancedTraceModel {
+	contains Trace[0..*] trace
+}
+
+abstract class Trace {
+	
+}
+
+class UnaryTrace extends Trace {
+	
+}
+
+class BinaryTrace extends Trace {
+	
+}
+
+class NAryTrace extends Trace {
+	
+}

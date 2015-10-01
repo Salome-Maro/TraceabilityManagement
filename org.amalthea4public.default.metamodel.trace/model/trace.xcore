@@ -1,0 +1,9 @@
+package org.amalthea4public.metamodel.trace
+
+class TraceModel {
+	contains Trace[0..*] trace
+}
+
+class Trace {
+	
+}
