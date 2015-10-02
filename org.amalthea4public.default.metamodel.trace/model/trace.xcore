@@ -1,9 +1,12 @@
 package org.amalthea4public.metamodel.trace
 
+import org.eclipse.emf.ecore.EObject
+
 class TraceModel {
-	contains Trace[0..*] trace
+	contains Trace[0..*] traces
 }
 
 class Trace {
-	
+	refers EObject source
+	refers EObject target
 }

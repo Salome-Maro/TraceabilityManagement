@@ -19,11 +19,5 @@
             adapter="org.amalthea4public.configuration.metamodel.trace.TraceMetamodelAdapter">
       </trace_metamodel>
    </extension>
-   <extension
-         point="org.amalthea4public.configuration.metamodel.trace">
-      <trace_metamodel
-            adapter="org.amalthea4public.configuration.metamodel.trace.TraceMetamodelAdapter2">
-      </trace_metamodel>
-   </extension>
 
 </plugin>

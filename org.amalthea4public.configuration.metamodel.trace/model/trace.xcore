@@ -1,11 +1,13 @@
 package org.amalthea4public.metamodel.trace
 
+import org.eclipse.emf.ecore.EObject
+
 class AdvancedTraceModel {
-	contains Trace[0..*] trace
+	contains Trace[0..*] traces
 }
 
 abstract class Trace {
-	
+	refers EObject[0..*] elements
 }
 
 class UnaryTrace extends Trace {

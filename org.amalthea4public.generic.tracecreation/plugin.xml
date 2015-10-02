@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.amalthea4public.configuration.metamodel.trace" name="Supply Trace Metamodel" schema="schema/org.amalthea4public.configuration.metamodel.trace.exsd"/>
+   <extension-point id="org.amalthea4public.configuration.persistence.trace" name="Trace Persistence" schema="schema/org.amalthea4public.configuration.persistence.trace.exsd"/>
    <extension
          point="org.eclipse.ui.commands">
       <command
