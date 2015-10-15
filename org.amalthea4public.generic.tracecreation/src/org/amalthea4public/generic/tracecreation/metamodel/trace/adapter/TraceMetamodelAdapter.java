@@ -34,4 +34,6 @@ public interface TraceMetamodelAdapter {
 	 * @return root of trace model that now contains the newly created trace
 	 */
 	EObject createTrace(EClass traceType, Optional<EObject> traceModel, Object... selection);
+	
+	boolean isThereATraceBetween(EObject first, EObject second, EObject traceModel);
 }

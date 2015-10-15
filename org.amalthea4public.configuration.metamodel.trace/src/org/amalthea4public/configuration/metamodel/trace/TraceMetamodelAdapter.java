@@ -55,4 +55,10 @@ public class TraceMetamodelAdapter
 		return root;
 	}
 
+	@Override
+	public Optional<String> isThereATraceBetween(EObject first, EObject second, EObject traceModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -38,7 +38,7 @@ public class TraceCreationHandler extends AbstractHandler {
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		Object[] selection = extractSelectedElements(HandlerUtil.getCurrentSelection(event));
+		Object[] selection = TraceCreationHelper.extractSelectedElements(event);
 
 		TraceMetamodelAdapter traceAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get();
 		TracePersistenceAdapter persistenceAdapter = TraceCreationHelper.getTracePersistenceAdapter().get();
@@ -57,14 +57,7 @@ public class TraceCreationHandler extends AbstractHandler {
 		return null;
 	}
 
-	private Object[] extractSelectedElements(ISelection currentSelection) {
-		if(currentSelection instanceof IStructuredSelection){
-			IStructuredSelection selection = (IStructuredSelection) currentSelection;
-			return selection.toArray();
-		}else {
-			return new Object[]{};
-		}
-	}
+
 
 	private Optional<EClass> getTraceTypeToCreate(IWorkbenchWindow window, Collection<EClass> traceTypes) {
 		ElementListSelectionDialog dialog = new ElementListSelectionDialog(window.getShell(), new LabelProvider() {
