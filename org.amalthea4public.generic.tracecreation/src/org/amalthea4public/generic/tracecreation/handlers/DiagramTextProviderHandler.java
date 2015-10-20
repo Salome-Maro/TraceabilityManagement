@@ -9,13 +9,16 @@ import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TracePe
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
-public class DiagramTextProviderHandler extends net.sourceforge.plantuml.eclipse.utils.AbstractDiagramTextProvider {
+import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
+
+public class DiagramTextProviderHandler implements DiagramTextProvider {
 
 	@Override
-	public String getDiagramText(IEditorPart editor, IEditorInput input) {
+	public String getDiagramText(IEditorPart editor, ISelection input) {
 		TracePersistenceAdapter persistenceAdapter = TraceCreationHelper.getTracePersistenceAdapter().get();
 		Optional<EObject> traceModel = persistenceAdapter.getTraceModel();
 
@@ -69,5 +72,17 @@ public class DiagramTextProviderHandler extends net.sourceforge.plantuml.eclipse
 			if (!set.getResources().contains(tm.eResource()))
 				set.getResources().add(tm.eResource());
 		});
+	}
+
+	
+	@Override
+	public boolean supportsEditor(IEditorPart editor) {
+		return editor instanceof EcoreEditor;
+	}
+
+	@Override
+	public boolean supportsSelection(ISelection selection) {
+
+		return true;
 	}
 }
