@@ -39,9 +39,11 @@ public class TraceMetamodelAdapter
 	}
 
 	@Override
-	public boolean isThereATraceBetween(EObject firstElement, EObject secondElement, EObject traceModel) {
-		TraceModel root = (TraceModel) traceModel;
-		return root.getTraces().stream().anyMatch(trace -> isRelevant(trace, firstElement, secondElement));
+	public boolean isThereATraceBetween(EObject firstElement, EObject secondElement, Optional<EObject> traceModel) {
+		return traceModel.map(tm -> {
+			TraceModel root = (TraceModel) tm;
+			return root.getTraces().stream().anyMatch(trace -> isRelevant(trace, firstElement, secondElement));
+		}).orElse(false);
 	}
 
 	private boolean isRelevant(Trace trace, EObject firstElement, EObject secondElement) {

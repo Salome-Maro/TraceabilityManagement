@@ -35,5 +35,5 @@ public interface TraceMetamodelAdapter {
 	 */
 	EObject createTrace(EClass traceType, Optional<EObject> traceModel, Object... selection);
 	
-	boolean isThereATraceBetween(EObject first, EObject second, EObject traceModel);
+	boolean isThereATraceBetween(EObject first, EObject second, Optional<EObject> traceModel);
 }
