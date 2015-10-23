@@ -67,10 +67,12 @@ public class TraceCreationHelper {
 		}
 	}
 
-	public static List<EObject> linearize(Object object) {
-		EObject root = (EObject) object;
+	public static List<EObject> linearize(Object object) {		
 		ArrayList<EObject> elementList = new ArrayList<EObject>();
-		root.eAllContents().forEachRemaining(element -> elementList.add(element));	
+		if (object instanceof EObject) {
+			EObject root = (EObject) object;
+			root.eAllContents().forEachRemaining(element -> elementList.add(element));
+		}
 		return elementList;
 	}
 
