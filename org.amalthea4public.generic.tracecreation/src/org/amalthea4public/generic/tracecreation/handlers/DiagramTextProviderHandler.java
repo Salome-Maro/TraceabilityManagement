@@ -27,12 +27,21 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 
 		String umlString = "@startuml\nsalt\n{#\n";
 
-		if (selectedModels.length == 2) {
+		List<EObject> firstModelElements = null;
+		List<EObject> secondModelElements = null;
+
+		if(selectedModels.length == 1){
+			firstModelElements = TraceCreationHelper.linearize(selectedModels[0]);
+			secondModelElements = TraceCreationHelper.linearize(selectedModels[0]);
+		}
+		else if (selectedModels.length == 2) {
+			firstModelElements = TraceCreationHelper.linearize(selectedModels[0]);
+			secondModelElements = TraceCreationHelper.linearize(selectedModels[1]);
+		}
+		
+		if(firstModelElements != null){
 			addTraceModelToResourceSet(selectedModels, traceModel);
-
-			List<EObject> firstModelElements = TraceCreationHelper.linearize(selectedModels[0]);
-			List<EObject> secondModelElements = TraceCreationHelper.linearize(selectedModels[1]);
-
+			
 			umlString += " .";
 			for (EObject secondElement : secondModelElements) {
 				umlString += "|" + TraceCreationHelper.getIdentifier(secondElement);

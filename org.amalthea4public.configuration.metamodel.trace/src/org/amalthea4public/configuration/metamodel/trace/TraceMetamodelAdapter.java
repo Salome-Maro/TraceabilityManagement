@@ -55,10 +55,16 @@ public class TraceMetamodelAdapter
 		return root;
 	}
 
+
 	@Override
-	public Optional<String> isThereATraceBetween(EObject first, EObject second, EObject traceModel) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isThereATraceBetween(EObject firstElement, EObject secondElement, Optional<EObject> traceModel) {
+		return traceModel.map(tm -> {
+			AdvancedTraceModel root = (AdvancedTraceModel) tm;
+			return root.getTraces().stream().anyMatch(trace -> isRelevant(trace, firstElement, secondElement));
+		}).orElse(false);
 	}
 
+	private boolean isRelevant(Trace trace, EObject firstElement, EObject secondElement) {
+		return trace.getElements().contains(firstElement) && trace.getElements().contains(secondElement);
+	}
 }
