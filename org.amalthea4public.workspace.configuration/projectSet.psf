@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement,master,org.amalthea4public.configuration.metamodel.trace"/>
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement,master,org.amalthea4public.default.metamodel.trace"/>
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement,master,org.amalthea4public.default.persistence.trace"/>
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement,master,org.amalthea4public.generic.tracecreation"/>
+<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,com.rtlabs.requirements.edit"/>
+<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,com.rtlabs.requirements.model"/>
+<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.configuration.metamodel.trace"/>
+<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.default.metamodel.trace"/>
+<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.default.persistence.trace"/>
+<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.generic.tracecreation"/>
 </provider>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1442491807176_3" label="Default Components" name="Default Components">
-<item elementID="=org.amalthea4public.default.metamodel.trace" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.default.persistence.trace" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.amalthea4public.default.metamodel.trace" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1442491782055_2" label="Generic Layer" name="Generic Layer">
 <item elementID="=org.amalthea4public.generic.tracecreation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1442491852532_5" label="Specific Components (Configured)" name="Specific Components (Configured)">
+<item elementID="=com.rtlabs.requirements.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.configuration.metamodel.trace" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=com.rtlabs.requirements.model" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 </psf>
