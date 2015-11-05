@@ -1,0 +1,7 @@
+package org.amalthea4public.generic.tracecreation
+
+class ArtifactWrapper {
+	String uri
+	String name
+	String ArtifactHandler
+}

@@ -22,11 +22,11 @@ public class TraceMetamodelAdapter
 		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter {
 
 	@Override
-	public Collection<EClass> getAvailableTraceTypes(Object... selection) {
+	public Collection<EClass> getAvailableTraceTypes(EObject... selection) {
 
 		Collection<EClass> traceTypes = new ArrayList<>();
 
-		if (TraceCreationHelper.isEMFSelection(Arrays.asList(selection)) && selection.length == 2) {
+		if (selection.length == 2) {
 			if (everythingIsARequirement(selection))
 				traceTypes.add(TracesPackage.eINSTANCE.getReqToReq());
 			else if (selectionContainsRequirementAndArtifact(selection))
@@ -36,17 +36,17 @@ public class TraceMetamodelAdapter
 		return traceTypes;
 	}
 
-	private boolean selectionContainsRequirementAndArtifact(Object... selection) {
+	private boolean selectionContainsRequirementAndArtifact(EObject... selection) {
 		return Arrays.asList(selection).stream().anyMatch(o -> o instanceof Requirement)
 				&& Arrays.asList(selection).stream().anyMatch(o -> o instanceof Artifact);
 	}
 
-	private boolean everythingIsARequirement(Object... selection) {
+	private boolean everythingIsARequirement(EObject... selection) {
 		return Arrays.asList(selection).stream().allMatch(o -> o instanceof Requirement);
 	}
 
 	@Override
-	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, Object... selection) {
+	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, EObject... selection) {
 		TraceModel root = (TraceModel) traceModel.orElse(TracesFactory.eINSTANCE.createTraceModel());
 
 		Trace trace = (Trace) TracesFactory.eINSTANCE.create(traceType);

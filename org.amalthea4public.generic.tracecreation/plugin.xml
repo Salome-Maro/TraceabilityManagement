@@ -3,6 +3,7 @@
 <plugin>
    <extension-point id="org.amalthea4public.configuration.metamodel.trace" name="Supply Trace Metamodel" schema="schema/org.amalthea4public.configuration.metamodel.trace.exsd"/>
    <extension-point id="org.amalthea4public.configuration.persistence.trace" name="Trace Persistence" schema="schema/org.amalthea4public.configuration.persistence.trace.exsd"/>
+   <extension-point id="org.amalthea4public.configuration.artifacthandler" name="org.amalthea4public.configuration.artifacthandler" schema="schema/org.amalthea4public.configuration.artifacthandler.exsd"/>
    <extension
          point="org.eclipse.ui.commands">
       <command
@@ -58,11 +59,24 @@
          </separator>
       </menuContribution>
    </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated artifactMetamodel -->
+      <package
+            uri="org.amalthea4public.generic.tracecreation"
+            class="org.amalthea4public.generic.tracecreation.TracecreationPackage"
+            genModel="model/artifactMetamodel.xcore"/>
+   </extension>
    <extension
-         point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
-      <diagramTextProvider
-            providerClass="org.amalthea4public.generic.tracecreation.handlers.DiagramTextProviderHandler">
-      </diagramTextProvider>
+         point="org.amalthea4public.configuration.artifacthandler">
+      <artifact_handler
+            handler="org.amalthea4public.generic.tracecreation.artifacthandling.EMFHandler">
+      </artifact_handler>
+   </extension>
+   <extension
+         point="org.amalthea4public.configuration.artifacthandler">
+      <artifact_handler
+            handler="org.amalthea4public.generic.tracecreation.artifacthandling.IFileHandler">
+      </artifact_handler>
    </extension>
 
 </plugin>

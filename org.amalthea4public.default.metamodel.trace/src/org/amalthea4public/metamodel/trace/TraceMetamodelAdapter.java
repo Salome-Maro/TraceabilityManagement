@@ -1,11 +1,11 @@
 package org.amalthea4public.metamodel.trace;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper;
+import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -13,28 +13,46 @@ public class TraceMetamodelAdapter
 		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter {
 
 	@Override
-	public Collection<EClass> getAvailableTraceTypes(Object... selection) {
+	public Collection<EClass> getAvailableTraceTypes(List<EObject> selection) {
 
 		Collection<EClass> traceTypes = new ArrayList<>();
 
-		if (selection.length == 2 && TraceCreationHelper.isEMFSelection(Arrays.asList(selection))) {
-			traceTypes.add(TracePackage.eINSTANCE.getTrace());
+		if (selection.size() == 2) {
+			if(selection.get(0) instanceof ArtifactWrapper && selection.get(1) instanceof ArtifactWrapper){
+				traceTypes.add(TracePackage.eINSTANCE.getArtifactToArtifact());
+			} else if(selection.get(0) instanceof ArtifactWrapper || selection.get(1) instanceof ArtifactWrapper){
+				traceTypes.add(TracePackage.eINSTANCE.getTraceToArtifact());				
+			} else {
+				traceTypes.add(TracePackage.eINSTANCE.getTrace());
+			}
 		}
 
 		return traceTypes;
 	}
 
 	@Override
-	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, Object... selection) {
+	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection) {
 		TraceModel root = (TraceModel) traceModel.orElse(TraceFactory.eINSTANCE.createTraceModel());
 
-		Trace trace = (Trace) TraceFactory.eINSTANCE.create(traceType);
+		EObject trace = TraceFactory.eINSTANCE.create(traceType);
 
-		trace.setSource((EObject) selection[0]);
-		trace.setTarget((EObject) selection[1]);
-
-		root.getTraces().add(trace);
-
+		if(trace instanceof Trace){
+			((Trace) trace).setSource(selection.get(0));
+			((Trace) trace).setTarget(selection.get(1));
+			
+		} else if(trace instanceof ArtifactToArtifact){
+			((ArtifactToArtifact) trace).setSource((ArtifactWrapper) selection.get(0));
+			((ArtifactToArtifact) trace).setTarget((ArtifactWrapper) selection.get(1));
+	
+		} else if (trace instanceof TraceToArtifact){
+			if (selection.get(0) instanceof ArtifactWrapper) {
+				((TraceToArtifact) trace).setSource(selection.get(1));
+				((TraceToArtifact) trace).setTarget((ArtifactWrapper) selection.get(0));
+			}else 
+			((TraceToArtifact) trace).setSource(selection.get(0));
+			((TraceToArtifact) trace).setTarget((ArtifactWrapper) selection.get(1));
+		}
+		root.getTraces().add((TraceElement) trace);
 		return root;
 	}
 
@@ -46,9 +64,16 @@ public class TraceMetamodelAdapter
 		}).orElse(false);
 	}
 
-	private boolean isRelevant(Trace trace, EObject firstElement, EObject secondElement) {
-		return (trace.getSource().equals(firstElement) && trace.getTarget().equals(secondElement))
-				|| (trace.getSource().equals(secondElement) && trace.getTarget().equals(firstElement));
-	}
+	private boolean isRelevant(TraceElement trace, EObject firstElement, EObject secondElement) {
+		if (trace instanceof Trace) {
+		return (((Trace) trace).getSource().equals(firstElement) && (((Trace) trace).getTarget().equals(secondElement))
+				|| ( ((Trace) trace).getSource().equals(secondElement) && (((Trace) trace).getTarget().equals(firstElement))));
+		} else if (trace instanceof ArtifactToArtifact) {
+			return (((ArtifactToArtifact) trace).getSource().equals(firstElement) && (((ArtifactToArtifact) trace).getTarget().equals(secondElement))
+					|| ( ((ArtifactToArtifact) trace).getSource().equals(secondElement) && (((ArtifactToArtifact) trace).getTarget().equals(firstElement))));		
+			}
+		else return (((TraceToArtifact) trace).getSource().equals(firstElement) && (((TraceToArtifact) trace).getTarget().equals(secondElement))
+				|| ( ((TraceToArtifact) trace).getSource().equals(secondElement) && (((TraceToArtifact) trace).getTarget().equals(firstElement))));
+		}
 
 }

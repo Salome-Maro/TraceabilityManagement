@@ -2,9 +2,12 @@ package org.amalthea4public.generic.tracecreation.metamodel.trace.adapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.amalthea4public.generic.tracecreation.artifacthandling.ArtifactHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -22,22 +25,26 @@ public class TraceCreationHelper {
 	private static final String PERSISTENCE_ID = "org.amalthea4public.configuration.persistence.trace";
 	private static final String PERSISTENCE_CONFIG = "adapter";
 	
-	public static Optional<Object> getExtension(final String ID, final String CONFIG) {
+	private static final String ARTIFACT_HANDLER_ID = "org.amalthea4public.configuration.artifacthandler";
+	private static final String ARTIFACT_HANDLER_CONFIG = "handler";
+	
+	public static List<Object> getExtensions(final String ID, final String CONFIG) {
 		try {
-			IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(ID);
-			return Optional.of(config[0].createExecutableExtension(CONFIG));
+			IConfigurationElement[] configs = Platform.getExtensionRegistry().getConfigurationElementsFor(ID);
+			
+			List<Object> extensions = new ArrayList<>();
+			for (IConfigurationElement config : configs)
+				extensions.add(config.createExecutableExtension(CONFIG));
+			
+			return extensions;
 		} catch (Exception ex) {
-			return Optional.empty();
+			return Collections.emptyList();
 		}
-	}
-
-	public static boolean isEMFSelection(Collection<Object> selection) {
-		return selection.stream().allMatch(o -> o instanceof EObject);
 	}
 
 	public static Optional<TraceMetamodelAdapter> getTraceMetamodelAdapter() {
 		try {
-			Object extension = getExtension(TRACE_ID, TRACE_CONFIG).get();
+			Object extension = getExtensions(TRACE_ID, TRACE_CONFIG).get(0);
 			return Optional.of((TraceMetamodelAdapter) extension);
 		} catch (Exception e) {
 			return Optional.empty();
@@ -46,10 +53,21 @@ public class TraceCreationHelper {
 
 	public static Optional<TracePersistenceAdapter> getTracePersistenceAdapter() {
 		try {
-			Object extension = getExtension(PERSISTENCE_ID, PERSISTENCE_CONFIG).get();
+			Object extension = getExtensions(PERSISTENCE_ID, PERSISTENCE_CONFIG).get(0);
 			return Optional.of((TracePersistenceAdapter) extension);
 		} catch (Exception e) {
 			return Optional.empty();
+		}
+	}
+	
+
+	public static Collection<ArtifactHandler> getArtifactHandlers() {
+		try {
+			return getExtensions(ARTIFACT_HANDLER_ID, ARTIFACT_HANDLER_CONFIG).stream()
+																			  .map(ArtifactHandler.class::cast)
+																			  .collect(Collectors.toList());
+		} catch (Exception e) {
+			return Collections.<ArtifactHandler>emptyList();
 		}
 	}
 	

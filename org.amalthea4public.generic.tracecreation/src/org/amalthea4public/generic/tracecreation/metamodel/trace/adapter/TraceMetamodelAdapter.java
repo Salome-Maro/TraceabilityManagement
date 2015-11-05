@@ -1,6 +1,7 @@
 package org.amalthea4public.generic.tracecreation.metamodel.trace.adapter;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.emf.ecore.EClass;
@@ -18,7 +19,7 @@ public interface TraceMetamodelAdapter {
 	 * @return A collection of possible types of traces that can be created for
 	 *         the given selection
 	 */
-	Collection<EClass> getAvailableTraceTypes(Object... selection);
+	Collection<EClass> getAvailableTraceTypes(List<EObject> selection);
 
 	/**
 	 * Used to create a trace of the given type
@@ -33,7 +34,7 @@ public interface TraceMetamodelAdapter {
 	 *            Objects to create the trace for
 	 * @return root of trace model that now contains the newly created trace
 	 */
-	EObject createTrace(EClass traceType, Optional<EObject> traceModel, Object... selection);
+	EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection);
 	
 	boolean isThereATraceBetween(EObject first, EObject second, Optional<EObject> traceModel);
 }

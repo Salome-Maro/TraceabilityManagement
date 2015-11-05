@@ -1,10 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracecreation
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.amalthea4public.generic.tracecreation;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.emf.ecore,
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.ui,
  org.eclipse.equinox.registry,
  org.eclipse.core.runtime;bundle-version="3.11.0",
@@ -14,7 +17,12 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.editor;bundle-version="2.11.0",
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
+ org.eclipse.emf.ecore.xcore.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro
-Export-Package: org.amalthea4public.generic.tracecreation.metamodel.trace.adapter
+Bundle-ActivationPolicy: lazy
+Export-Package: org.amalthea4public.generic.tracecreation.metamodel.trace.adapter,
+ org.amalthea4public.generic.tracecreation,
+ org.amalthea4public.generic.tracecreation.impl,
+ org.amalthea4public.generic.tracecreation.util
 

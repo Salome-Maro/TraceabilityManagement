@@ -1,12 +1,27 @@
 package org.amalthea4public.metamodel.trace
 
 import org.eclipse.emf.ecore.EObject
+import org.amalthea4public.generic.tracecreation.ArtifactWrapper
 
 class TraceModel {
-	contains Trace[0..*] traces
+	contains TraceElement[0..*] traces
 }
 
-class Trace {
+abstract class TraceElement {
+	
+}
+
+class Trace extends TraceElement {
 	refers EObject source
 	refers EObject target
+}
+
+class TraceToArtifact extends TraceElement {
+	refers EObject source
+	contains ArtifactWrapper target
+}
+
+class ArtifactToArtifact extends TraceElement {
+	contains ArtifactWrapper source
+	contains ArtifactWrapper target
 }

@@ -1,8 +1,12 @@
 package org.amalthea4public.generic.tracecreation.handlers;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.amalthea4public.generic.tracecreation.artifacthandling.ArtifactHandler;
 import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper;
 import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter;
 import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TracePersistenceAdapter;
@@ -40,15 +44,19 @@ public class TraceCreationHandler extends AbstractHandler {
 
 		TraceMetamodelAdapter traceAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get();
 		TracePersistenceAdapter persistenceAdapter = TraceCreationHelper.getTracePersistenceAdapter().get();
-
-		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selection);
+		Collection<ArtifactHandler> artifactHandlers = TraceCreationHelper.getArtifactHandlers();
+		
+		List<EObject> selectionAsEObjects = Arrays.asList(selection).stream()
+														.map(sel -> convertToEObject(sel, artifactHandlers))
+														.collect(Collectors.toList());
+		
+		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
 		Optional<EClass> chosenType = getTraceTypeToCreate(window, traceTypes);
 
 		Optional<EObject> traceModel = persistenceAdapter.getTraceModel();
-		
 
 		if (chosenType.isPresent()){
-			EObject root = traceAdapter.createTrace(chosenType.get(), traceModel, selection);
+			EObject root = traceAdapter.createTrace(chosenType.get(), traceModel, selectionAsEObjects);
 			persistenceAdapter.saveTraceModel(root);
 		}
 		
@@ -56,6 +64,19 @@ public class TraceCreationHandler extends AbstractHandler {
 	}
 
 
+
+	private EObject convertToEObject(Object sel, Collection<ArtifactHandler> artifactHandlers) {
+		List<ArtifactHandler> availableHandlers = artifactHandlers.stream()
+																		.filter(handler -> handler.canHandleSelection(sel))
+																		.collect(Collectors.toList());
+		if(availableHandlers.size() == 1){
+			return availableHandlers.get(0).getEObjectForSelection(sel); 
+		}else{
+			// TODO:  No handler, too many handlers
+			return null;
+		}
+		
+	}
 
 	private Optional<EClass> getTraceTypeToCreate(IWorkbenchWindow window, Collection<EClass> traceTypes) {
 		ElementListSelectionDialog dialog = new ElementListSelectionDialog(window.getShell(), new LabelProvider() {
