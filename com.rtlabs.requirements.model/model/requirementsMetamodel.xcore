@@ -1,0 +1,21 @@
+@GenModel(fileExtensions="req,xmi", editDirectory="/com.rtlabs.requirements.edit/src")
+package com.rtlabs.requirements
+
+class Root {
+	contains Requirement[] requirements
+	contains TestCase[] testCases
+
+}
+
+class Requirement {	
+ 	String ID
+    @GenModel(propertyMultiLine="true")
+	String body
+	derived Date created get {} // get from revision control?
+	derived Date modified get {}		
+}
+
+class TestCase extends Requirement {
+	derived boolean pass get { return false } // get from testrunner?
+}
+

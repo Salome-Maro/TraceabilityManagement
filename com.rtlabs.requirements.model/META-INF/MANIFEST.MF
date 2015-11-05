@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.rtlabs.requirements.model;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: com.rtlabs.requirements,
+ com.rtlabs.requirements.impl,
+ com.rtlabs.requirements.util,
+ com.rtlabs.traces,
+ com.rtlabs.traces.impl,
+ com.rtlabs.traces.util,
+ com.rtlabs.artifacts,
+ com.rtlabs.artifacts.impl,
+ com.rtlabs.artifacts.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.emf.ecore.xcore.lib,
+ com.rtlabs.requirements.model;visibility:=reexport,
+ org.eclipse.emf.ecp.core;bundle-version="1.7.0",
+ org.amalthea4public.generic.tracecreation
+Bundle-ActivationPolicy: lazy
+
+

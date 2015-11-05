@@ -1,0 +1,10 @@
+package com.rtlabs.artifacts
+
+class ResourceContainer {
+	contains Artifact[] artifacts
+}
+
+class Artifact {
+	String name
+	String uri
+}
