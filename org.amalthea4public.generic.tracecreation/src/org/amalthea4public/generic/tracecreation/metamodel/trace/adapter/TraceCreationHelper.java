@@ -72,6 +72,7 @@ public class TraceCreationHelper {
 		if (object instanceof EObject) {
 			EObject root = (EObject) object;
 			root.eAllContents().forEachRemaining(element -> elementList.add(element));
+			elementList.add(root);
 		}
 		return elementList;
 	}

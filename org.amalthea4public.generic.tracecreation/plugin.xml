@@ -23,11 +23,6 @@
       <handler
             class="org.amalthea4public.generic.tracecreation.handlers.DisplayTraceMatrixHandler"
             commandId="org.amalthea4public.generic.tracecreation.displayTraceMatrix">
-         <activeWhen>
-            <count
-                  value="2">
-            </count>
-         </activeWhen>
       </handler>
    </extension>
    <extension
