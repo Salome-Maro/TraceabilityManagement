@@ -3,6 +3,7 @@ package org.amalthea4public.configuration.metamodel.trace;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper;
@@ -17,12 +18,12 @@ public class TraceMetamodelAdapter
 		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter {
 
 	@Override
-	public Collection<EClass> getAvailableTraceTypes(Object... selection) {
+	public Collection<EClass> getAvailableTraceTypes(List<EObject> selection) {
 
 		Collection<EClass> traceTypes = new ArrayList<>();
 
-		if (TraceCreationHelper.isEMFSelection(Arrays.asList(selection))) {
-			switch (selection.length) {
+		if (TraceCreationHelper.noArtifactsSelected(selection)) {
+			switch (selection.size()) {
 			case 0:
 				break;
 			case 1:
@@ -44,7 +45,7 @@ public class TraceMetamodelAdapter
 	}
 
 	@Override
-	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, Object... selection) {
+	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection) {
 		AdvancedTraceModel root = (AdvancedTraceModel) traceModel.orElse(TraceFactory.eINSTANCE.createAdvancedTraceModel());
 		
 		Trace trace = (Trace) TraceFactory.eINSTANCE.create(traceType);

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
 import org.amalthea4public.generic.tracecreation.artifacthandling.ArtifactHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -210,5 +211,9 @@ public class TraceCreationHelper {
 			success = true;
 		}
 		return success;
+	} 
+	
+	public static boolean noArtifactsSelected(Collection<EObject> selection) {
+		return selection.stream().noneMatch(o -> o instanceof ArtifactWrapper);
 	}
 }
