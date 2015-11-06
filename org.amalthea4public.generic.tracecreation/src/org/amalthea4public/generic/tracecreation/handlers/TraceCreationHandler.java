@@ -51,7 +51,7 @@ public class TraceCreationHandler extends AbstractHandler {
 														.collect(Collectors.toList());
 		
 		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
-		Optional<EClass> chosenType = getTraceTypeToCreate(window, traceTypes);
+		Optional<EClass> chosenType = getTraceTypeToCreate(window, traceTypes, selectionAsEObjects);
 
 		Optional<EObject> traceModel = persistenceAdapter.getTraceModel();
 
@@ -78,7 +78,7 @@ public class TraceCreationHandler extends AbstractHandler {
 		
 	}
 
-	private Optional<EClass> getTraceTypeToCreate(IWorkbenchWindow window, Collection<EClass> traceTypes) {
+	private Optional<EClass> getTraceTypeToCreate(IWorkbenchWindow window, Collection<EClass> traceTypes, List<EObject> selectionAsEObjects) {
 		ElementListSelectionDialog dialog = new ElementListSelectionDialog(window.getShell(), new LabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -88,6 +88,9 @@ public class TraceCreationHandler extends AbstractHandler {
 		});
 		dialog.setTitle("Select the trace type you want to create");
 		dialog.setElements(traceTypes.toArray());
+		dialog.setMessage("Selection: " + selectionAsEObjects.stream()
+			     									         .map(TraceCreationHelper::getIdentifier)
+			     									         .collect(Collectors.toList()));
 
 		if (dialog.open() == Window.OK) {
 			return Optional.of((EClass) dialog.getFirstResult());
