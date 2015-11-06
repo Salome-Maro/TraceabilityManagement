@@ -1,5 +1,6 @@
 package org.amalthea4public.generic.tracecreation.handlers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +18,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 

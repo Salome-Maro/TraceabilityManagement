@@ -78,5 +78,10 @@
             handler="org.amalthea4public.generic.tracecreation.artifacthandling.IFileHandler">
       </artifact_handler>
    </extension>
-
+	<extension
+        point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
+      <diagramTextProvider
+            providerClass="org.amalthea4public.generic.tracecreation.handlers.DiagramTextProviderHandler">
+      </diagramTextProvider>
+     </extension>
 </plugin>

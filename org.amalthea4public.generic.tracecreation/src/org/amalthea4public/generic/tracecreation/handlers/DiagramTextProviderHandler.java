@@ -68,7 +68,6 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 
 	@Override
 	public boolean supportsSelection(ISelection selection) {
-
 		return true;
 	}
 }
