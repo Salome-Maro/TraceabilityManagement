@@ -14,6 +14,15 @@
             id="org.amalthea4public.generic.tracecreation.displayTraceMatrix"
             name="Display Trace Matrix">
       </command>
+      <command
+            helpContextId="Add currently selected item to list of selection"
+            id="org.amalthea4public.generic.tracecreation.commands.addtoSelection"
+            name="Add to Selection">
+      </command>
+      <command
+            id="org.amalthea4public.generic.tracecreation.clearselection"
+            name="Clear Selection">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -24,6 +33,14 @@
       <handler
             class="org.amalthea4public.generic.tracecreation.handlers.DisplayTraceMatrixHandler"
             commandId="org.amalthea4public.generic.tracecreation.displayTraceMatrix">
+      </handler>
+      <handler
+            class="org.amalthea4public.generic.tracecreation.handlers.ItemSelectionHandler"
+            commandId="org.amalthea4public.generic.tracecreation.commands.addtoSelection">
+      </handler>
+      <handler
+            class="org.amalthea4public.generic.tracecreation.handlers.ClearSelectionHandler"
+            commandId="org.amalthea4public.generic.tracecreation.clearselection">
       </handler>
    </extension>
    <extension
@@ -51,6 +68,18 @@
                   label="Display Trace Matrix"
                   style="push"
                   tooltip="Displays traces between two models">
+            </command>
+            <command
+                  commandId="org.amalthea4public.generic.tracecreation.commands.addtoSelection"
+                  label="Add to Selection"
+                  style="push"
+                  tooltip="Adds the selected items to the current selection">
+            </command>
+            <command
+                  commandId="org.amalthea4public.generic.tracecreation.clearselection"
+                  label="Clear Selection"
+                  style="push"
+                  tooltip="Clears the current selection of elements">
             </command>
          </menu>
          <separator

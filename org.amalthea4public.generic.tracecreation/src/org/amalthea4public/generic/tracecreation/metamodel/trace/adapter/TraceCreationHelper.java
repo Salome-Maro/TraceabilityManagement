@@ -72,17 +72,18 @@ public class TraceCreationHelper {
 		}
 	}
 	
-	public static Object[] extractSelectedElements(ExecutionEvent event) {
+	public static List<Object> extractSelectedElements(ExecutionEvent event) {
 		ISelection currentSelection = HandlerUtil.getCurrentSelection(event);
 		return extractSelectedElements(currentSelection);
 	}
 	
-	public static Object[] extractSelectedElements(ISelection selection){
+	@SuppressWarnings("unchecked")
+	public static List<Object> extractSelectedElements(ISelection selection){
 		if(selection instanceof IStructuredSelection){
 			IStructuredSelection sselection = (IStructuredSelection) selection;
-			return sselection.toArray();
+			return sselection.toList();
 		}else {
-			return new Object[]{};
+			return new ArrayList<Object>();
 		}
 	}
 
@@ -114,7 +115,13 @@ public class TraceCreationHelper {
 	 * value null, this function will only return the type of the EObject.
 	 */
 	public static String getIdentifier(final EObject eObject) {
+		if(eObject == null)
+			return "<null>";
+		if(eObject.eClass() == null)
+			return eObject.toString();
+		
 		boolean success = false;
+		
 		List<EAttribute> attributes = eObject.eClass().getEAllAttributes();
 		StringBuilder identifier = new StringBuilder();
 	

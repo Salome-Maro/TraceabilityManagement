@@ -1,11 +1,12 @@
 package org.amalthea4public.generic.tracecreation.handlers
 
-import java.util.Optional
-import org.eclipse.emf.ecore.EObject
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper
 import java.util.Collection
+import java.util.List
+import java.util.Optional
+import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper
+import org.eclipse.emf.ecore.EObject
 
-class MatrixHelper {
+class VisualizationHelper {
 	def static String createMatrix(Optional<EObject> traceModel, Collection<EObject> firstElements, Collection<EObject> secondElements){
 	val traceAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get()
 	'''
@@ -24,7 +25,21 @@ class MatrixHelper {
 	@enduml
 	'''
 	}
+	
+	def static String createNeighboursView(List<EObject> connectedElements, List<String> traceLabels, EObject selectedElement){
+	var i = 1
+	var j = 1
+	'''
+	@startuml
+	object "«TraceCreationHelper.getIdentifier(selectedElement)»" as o0 #pink
+	«FOR e:connectedElements»object "«TraceCreationHelper.getIdentifier(e)»" as o«i++»
+	«ENDFOR»
+	«FOR t:traceLabels» o0 --> o«j++» : "«t»"
+	«ENDFOR» 
+	@enduml
+	'''
+	}
 }
 
 
-
+ 

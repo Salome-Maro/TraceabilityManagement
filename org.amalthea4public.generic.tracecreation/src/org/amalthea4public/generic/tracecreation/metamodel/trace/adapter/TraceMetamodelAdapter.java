@@ -2,6 +2,7 @@ package org.amalthea4public.generic.tracecreation.metamodel.trace.adapter;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.emf.ecore.EClass;
@@ -36,5 +37,9 @@ public interface TraceMetamodelAdapter {
 	 */
 	EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection);
 	
+	//FIXME[Salome]:  Document me
 	boolean isThereATraceBetween(EObject first, EObject second, Optional<EObject> traceModel);
+	
+	//FIXME[Salome]:  Document me
+	Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel); 
 }

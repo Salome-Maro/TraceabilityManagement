@@ -2,7 +2,9 @@ package org.amalthea4public.metamodel.trace;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
@@ -48,9 +50,10 @@ public class TraceMetamodelAdapter
 			if (selection.get(0) instanceof ArtifactWrapper) {
 				((TraceToArtifact) trace).setSource(selection.get(1));
 				((TraceToArtifact) trace).setTarget((ArtifactWrapper) selection.get(0));
-			}else 
-			((TraceToArtifact) trace).setSource(selection.get(0));
-			((TraceToArtifact) trace).setTarget((ArtifactWrapper) selection.get(1));
+			}else {
+				((TraceToArtifact) trace).setSource(selection.get(0));
+				((TraceToArtifact) trace).setTarget((ArtifactWrapper) selection.get(1));
+			}
 		}
 		root.getTraces().add((TraceElement) trace);
 		return root;
@@ -75,5 +78,63 @@ public class TraceMetamodelAdapter
 		else return (((TraceToArtifact) trace).getSource().equals(firstElement) && (((TraceToArtifact) trace).getTarget().equals(secondElement))
 				|| ( ((TraceToArtifact) trace).getSource().equals(secondElement) && (((TraceToArtifact) trace).getTarget().equals(firstElement))));
 		}
+
+	@Override
+	public Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel) {
+		Map<EObject, List<EObject>> traces = new HashMap<>();
+		
+		traceModel.ifPresent(tm -> {
+			TraceModel root = (TraceModel)tm;
+			root.getTraces().forEach(trace -> {
+				if (trace instanceof Trace) {
+					Trace t = (Trace) trace;
+					if (t.getSource().equals(element)) {
+						List<EObject> tracedElements = new ArrayList<>();
+						tracedElements.add(t.getTarget());
+						traces.put(trace, tracedElements);
+					}
+					else if (t.getTarget().equals(element)) {
+						List<EObject> tracedElements = new ArrayList<>();
+						tracedElements.add(t.getSource());
+						traces.put(trace, tracedElements);
+					}
+					
+				}
+				
+				else if (trace instanceof TraceToArtifact) {
+					TraceToArtifact t = (TraceToArtifact) trace;
+					if (t.getSource().equals(element)) {
+						List<EObject> tracedElements = new ArrayList<>();
+						tracedElements.add(t.getTarget());
+						traces.put(trace, tracedElements);
+					}
+					else if (t.getTarget().equals(element)) {
+						List<EObject> tracedElements = new ArrayList<>();
+						tracedElements.add(t.getSource());
+						traces.put(trace, tracedElements);
+					}
+					
+				}
+				
+				else if (trace instanceof ArtifactToArtifact) {
+					ArtifactToArtifact t = (ArtifactToArtifact) trace;
+					if (t.getSource().equals(element)) {
+						List<EObject> tracedElements = new ArrayList<>();
+						tracedElements.add(t.getTarget());
+						traces.put(trace, tracedElements);
+					}
+					else if (t.getTarget().equals(element)) {
+						List<EObject> tracedElements = new ArrayList<>();
+						tracedElements.add(t.getSource());
+						traces.put(trace, tracedElements);
+					}
+					
+				}
+				
+			});
+		});
+		
+		return traces;
+	}
 
 }
