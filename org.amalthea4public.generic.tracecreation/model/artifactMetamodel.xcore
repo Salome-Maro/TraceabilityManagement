@@ -1,5 +1,9 @@
 package org.amalthea4public.generic.tracecreation
 
+class ArtifactWrapperContainer {
+	contains ArtifactWrapper [0..*] artifacts 
+}
+
 class ArtifactWrapper {
 	String uri
 	String name

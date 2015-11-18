@@ -1,16 +1,18 @@
 package org.amalthea4public.generic.tracecreation.artifacthandling;
 
+import java.util.Optional;
+
+import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
 import org.eclipse.emf.ecore.EObject;
 
 public class EMFHandler implements ArtifactHandler {
-
-
-	@Override
-	public EObject getEObjectForSelection(Object selection) {
-		return EObject.class.cast(selection);
-	}
 	
 	public boolean canHandleSelection(Object selection) {
 		return selection instanceof EObject;
+	}
+
+	@Override
+	public EObject getEObjectForSelection(Object selection, Optional<ArtifactWrapperContainer> existingWrappers) {
+		return EObject.class.cast(selection);
 	}
 }

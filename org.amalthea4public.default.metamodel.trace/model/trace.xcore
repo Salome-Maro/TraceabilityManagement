@@ -8,7 +8,7 @@ class TraceModel {
 }
 
 abstract class TraceElement {
-	
+
 }
 
 class Trace extends TraceElement {
@@ -18,10 +18,10 @@ class Trace extends TraceElement {
 
 class TraceToArtifact extends TraceElement {
 	refers EObject source
-	contains ArtifactWrapper target
+	refers ArtifactWrapper target
 }
 
 class ArtifactToArtifact extends TraceElement {
-	contains ArtifactWrapper source
-	contains ArtifactWrapper target
+	refers ArtifactWrapper source
+	refers ArtifactWrapper target
 }

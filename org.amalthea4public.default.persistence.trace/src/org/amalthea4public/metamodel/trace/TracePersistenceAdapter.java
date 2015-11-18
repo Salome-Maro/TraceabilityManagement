@@ -1,8 +1,12 @@
 package org.amalthea4public.metamodel.trace;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
+import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
+import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
+import org.amalthea4public.generic.tracecreation.TracecreationFactory;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -17,18 +21,18 @@ public class TracePersistenceAdapter
 		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TracePersistenceAdapter {
 
 	private static final String DEFAULT_PROJECT_NAME = "__WorkspaceTraceModels";
-	private static final String DEFAULT_TRACE_MODEL_NAME = "defaultTraceModel.xmi";
+	private static final String DEFAULT_TRACE_MODEL_NAME = "traceModel.xmi";
+	private static final String DEFAULT_ARTIFACT_WRAPPER_MODEL_NAME = "artifactWrappers.xmi";
 
 	@Override
-	public Optional<EObject> getTraceModel() {
+	public Optional<EObject> getTraceModel(ResourceSet resourceSet) {
 		try {
 			ensureProjectExists(DEFAULT_PROJECT_NAME);
 			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_TRACE_MODEL_NAME, true);
-			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource resource = resourceSet.getResource(uri, true);
 			resource.load(null);
 
-			return Optional.ofNullable(resource.getContents().get(0));
+			return Optional.of(resource.getContents().get(0));
 		} catch (Exception e) {
 			return Optional.empty();
 		}
@@ -45,16 +49,43 @@ public class TracePersistenceAdapter
 	}
 
 	@Override
-	public void saveTraceModel(EObject root) {
+	public void saveTracesAndArtifactWrappers(EObject traceModel, List<EObject> selectionForTraceCreation, Optional<ArtifactWrapperContainer> artifactWrappers) {
 		try {
 			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_TRACE_MODEL_NAME, true);
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource resource = resourceSet.createResource(uri);
-			resource.getContents().add(root);
+			resource.getContents().add(traceModel);
+			
+			ArtifactWrapperContainer container =  artifactWrappers.orElse(TracecreationFactory.eINSTANCE.createArtifactWrapperContainer());
+			
+			selectionForTraceCreation.forEach(o -> {
+				if(o instanceof ArtifactWrapper && o.eContainer() == null)
+					container.getArtifacts().add((ArtifactWrapper) o);
+			});
+			
+			uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_ARTIFACT_WRAPPER_MODEL_NAME, true);
+			Resource resourceForArtifacts = resourceSet.createResource(uri);
+			resourceForArtifacts.getContents().add(container);
+			
+			resourceForArtifacts.save(null);
 			resource.save(null);
 		} catch (IOException e) {
-			System.err.println("Unable to save!");
+			System.err.println("Unable to save trace model!");
 			e.printStackTrace();
 		} 
+	}
+
+	@Override
+	public Optional<ArtifactWrapperContainer> getArtifactWrappers(ResourceSet resourceSet) {
+		try {
+			ensureProjectExists(DEFAULT_PROJECT_NAME);
+			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_ARTIFACT_WRAPPER_MODEL_NAME, true);
+			Resource resource = resourceSet.getResource(uri, true);
+			resource.load(null);
+
+			return Optional.of((ArtifactWrapperContainer) resource.getContents().get(0));
+		} catch (Exception e) {
+			return Optional.empty();
+		}
 	}
 }

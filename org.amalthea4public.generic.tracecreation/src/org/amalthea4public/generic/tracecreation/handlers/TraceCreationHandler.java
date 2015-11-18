@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
 import org.amalthea4public.generic.tracecreation.artifacthandling.ArtifactHandler;
 import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper;
 import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter;
@@ -15,6 +16,8 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
@@ -49,11 +52,17 @@ public class TraceCreationHandler extends AbstractHandler {
 		preSelection.addAll(selection);
 		
 		TraceMetamodelAdapter traceAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get();
+		
 		TracePersistenceAdapter persistenceAdapter = TraceCreationHelper.getTracePersistenceAdapter().get();
+		
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Optional<EObject> traceModel = persistenceAdapter.getTraceModel(resourceSet);
+		Optional<ArtifactWrapperContainer> existingArtifactWrappers = persistenceAdapter.getArtifactWrappers(resourceSet);
+
 		Collection<ArtifactHandler> artifactHandlers = TraceCreationHelper.getArtifactHandlers();
 		
 		List<EObject> selectionAsEObjects = preSelection.stream()
-														.map(sel -> convertToEObject(sel, artifactHandlers))
+														.map(sel -> convertToEObject(sel, artifactHandlers, existingArtifactWrappers))
 														.filter(Optional::isPresent)
 														.map(Optional::get)
 														.collect(Collectors.toList());
@@ -61,11 +70,9 @@ public class TraceCreationHandler extends AbstractHandler {
 		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
 		Optional<EClass> chosenType = getTraceTypeToCreate(window, traceTypes, selectionAsEObjects);
 
-		Optional<EObject> traceModel = persistenceAdapter.getTraceModel();
-
 		if (chosenType.isPresent()){
 			EObject root = traceAdapter.createTrace(chosenType.get(), traceModel, selectionAsEObjects);
-			persistenceAdapter.saveTraceModel(root);
+			persistenceAdapter.saveTracesAndArtifactWrappers(root, selectionAsEObjects, existingArtifactWrappers);
 			preSelection.clear();
 		}
 		
@@ -74,12 +81,12 @@ public class TraceCreationHandler extends AbstractHandler {
 
 
 
-	private Optional<EObject> convertToEObject(Object sel, Collection<ArtifactHandler> artifactHandlers) {
+	private Optional<EObject> convertToEObject(Object sel, Collection<ArtifactHandler> artifactHandlers, Optional<ArtifactWrapperContainer> existingArtifactWrappers) {
 		List<ArtifactHandler> availableHandlers = artifactHandlers.stream()
-																		.filter(handler -> handler.canHandleSelection(sel))
-																		.collect(Collectors.toList());
+																  .filter(handler -> handler.canHandleSelection(sel))
+																  .collect(Collectors.toList());
 		if(availableHandlers.size() == 1){
-			return Optional.of(availableHandlers.get(0).getEObjectForSelection(sel)); 
+			return Optional.of(availableHandlers.get(0).getEObjectForSelection(sel, existingArtifactWrappers)); 
 		}else{
 			MessageDialog.openWarning(window.getShell(), "No handler for selected item", "There is no handler for " + sel + " so it will be ignored.");
 			return Optional.empty();

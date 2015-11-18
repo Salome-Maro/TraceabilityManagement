@@ -12,6 +12,7 @@ import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TracePe
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 
@@ -20,9 +21,8 @@ import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
 public class DiagramTextProviderHandler implements DiagramTextProvider {
 
 	@Override
-	public String getDiagramText(IEditorPart editor, ISelection input) {
+	public String getDiagramText(IEditorPart editor, ISelection input) {		
 		TracePersistenceAdapter persistenceAdapter = TraceCreationHelper.getTracePersistenceAdapter().get();
-		Optional<EObject> traceModel = persistenceAdapter.getTraceModel();
 		TraceMetamodelAdapter metamodelAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get();
 
 		EcoreEditor eeditor = EcoreEditor.class.cast(editor);
@@ -30,13 +30,17 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 		List<EObject> firstModelElements = null;
 		List<EObject> secondModelElements = null;
 
+		ResourceSet resourceSet = new ResourceSetImpl();
+		if(selectedModels.size() > 0 && selectedModels.get(0) instanceof EObject)
+			resourceSet = ((EObject) selectedModels.get(0)).eResource().getResourceSet();
+		
+		Optional<EObject> traceModel = persistenceAdapter.getTraceModel(resourceSet);
+		
 		if(selectedModels.size() == 1 && selectedModels.get(0) instanceof EObject){
 			
 			EObject selectedEObject = (EObject) selectedModels.get(0);
 			
-			addTraceModelToResourceSet(selectedModels, traceModel);
 			Map<EObject, List<EObject>> traces = metamodelAdapter.getConnectedElements(selectedEObject, traceModel);
-			removeTraceModelFromResourceSet(selectedModels, traceModel);
 			
 			List<String> traceLabels = new ArrayList<>();
 			List<EObject> connectedElements = new ArrayList<>();
@@ -60,33 +64,10 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 			secondModelElements = firstModelElements;
 		}
 		
-		addTraceModelToResourceSet(selectedModels, traceModel);
 		String umlString = VisualizationHelper.createMatrix(traceModel, firstModelElements, secondModelElements);
-		removeTraceModelFromResourceSet(selectedModels, traceModel);
 		
 		return umlString;
 	}
-
-
-	private void removeTraceModelFromResourceSet(List<Object> selectedModels, Optional<EObject> traceModel) {
-		traceModel.ifPresent(tm -> {
-			if (selectedModels.size() > 0 && selectedModels.get(0) instanceof EObject) {
-				ResourceSet set = ((EObject) selectedModels.get(0)).eResource().getResourceSet();
-				set.getResources().remove(tm.eResource());
-			}
-		});
-	}
-
-	private void addTraceModelToResourceSet(List<Object> selectedModels, Optional<EObject> traceModel) {
-		traceModel.ifPresent(tm -> {
-			if (selectedModels.size() > 0 && selectedModels.get(0) instanceof EObject) {
-				ResourceSet set = ((EObject) selectedModels.get(0)).eResource().getResourceSet();
-				if (!set.getResources().contains(tm.eResource()))
-					set.getResources().add(tm.eResource());
-			}
-		});
-	}
-
 	
 	@Override
 	public boolean supportsEditor(IEditorPart editor) {
