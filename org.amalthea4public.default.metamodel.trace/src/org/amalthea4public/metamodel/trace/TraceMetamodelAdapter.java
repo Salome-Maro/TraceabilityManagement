@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.amalthea4public.metamodel.trace.helpers.ArtifactToArtifactHelper;
-import org.amalthea4public.metamodel.trace.helpers.Helper;
+import org.amalthea4public.metamodel.trace.helpers.TraceTypeHelper;
 import org.amalthea4public.metamodel.trace.helpers.TraceHelper;
 import org.amalthea4public.metamodel.trace.helpers.TraceToArtifactHelper;
 import org.eclipse.emf.ecore.EClass;
@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 public class TraceMetamodelAdapter
 		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter {
 	
-	private Collection<Helper> helpers;
+	private Collection<TraceTypeHelper> helpers;
 	
 	public TraceMetamodelAdapter() {
 		helpers = new ArrayList<>();

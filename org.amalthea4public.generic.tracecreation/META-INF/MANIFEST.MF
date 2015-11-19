@@ -21,8 +21,9 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro
 Bundle-ActivationPolicy: lazy
-Export-Package: org.amalthea4public.generic.tracecreation.metamodel.trace.adapter,
- org.amalthea4public.generic.tracecreation,
+Export-Package: org.amalthea4public.generic.tracecreation,
+ org.amalthea4public.generic.tracecreation.artifacthandling,
  org.amalthea4public.generic.tracecreation.impl,
+ org.amalthea4public.generic.tracecreation.metamodel.trace.adapter,
  org.amalthea4public.generic.tracecreation.util
 

@@ -10,7 +10,7 @@ import org.amalthea4public.metamodel.trace.TraceToArtifact;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class TraceToArtifactHelper extends Helper {
+public class TraceToArtifactHelper extends TraceTypeHelper {
 
 	@Override
 	public boolean fitsSelection(List<EObject> selection) {

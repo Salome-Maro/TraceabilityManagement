@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xcore.lib,
  org.amalthea4public.generic.tracecreation;visibility:=reexport,
  org.amalthea4public.generic.tracecreation,
- org.eclipse.core.resources;bundle-version="3.10.0"
+ org.eclipse.core.resources;bundle-version="3.10.0",
+ org.eclipse.jdt.core;bundle-version="3.11.0"
 Bundle-ActivationPolicy: lazy

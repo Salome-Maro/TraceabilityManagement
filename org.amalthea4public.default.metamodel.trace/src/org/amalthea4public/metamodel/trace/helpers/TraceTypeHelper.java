@@ -8,7 +8,7 @@ import org.amalthea4public.metamodel.trace.TraceElement;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-abstract public class Helper {
+abstract public class TraceTypeHelper {
 	public abstract boolean fitsSelection(List<EObject> selection);
 
 	public abstract EClass getType();

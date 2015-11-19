@@ -19,4 +19,22 @@
             adapter="org.amalthea4public.metamodel.trace.TraceMetamodelAdapter">
       </trace_metamodel>
    </extension>
+    <extension
+         point="org.amalthea4public.configuration.artifacthandler">
+      <artifact_handler
+            handler="org.amalthea4public.tracecreation.artifacthandling.JavaElementHandler">
+      </artifact_handler>
+   </extension>
+   <extension
+         point="org.amalthea4public.configuration.artifacthandler">
+      <artifact_handler
+            handler="org.amalthea4public.tracecreation.artifacthandling.EMFHandler">
+      </artifact_handler>
+   </extension>
+   <extension
+         point="org.amalthea4public.configuration.artifacthandler">
+      <artifact_handler
+            handler="org.amalthea4public.tracecreation.artifacthandling.IFileHandler">
+      </artifact_handler>
+   </extension>
 </plugin>

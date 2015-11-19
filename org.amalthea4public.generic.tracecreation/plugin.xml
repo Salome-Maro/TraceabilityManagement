@@ -95,18 +95,6 @@
             class="org.amalthea4public.generic.tracecreation.TracecreationPackage"
             genModel="model/artifactMetamodel.xcore"/>
    </extension>
-   <extension
-         point="org.amalthea4public.configuration.artifacthandler">
-      <artifact_handler
-            handler="org.amalthea4public.generic.tracecreation.artifacthandling.EMFHandler">
-      </artifact_handler>
-   </extension>
-   <extension
-         point="org.amalthea4public.configuration.artifacthandler">
-      <artifact_handler
-            handler="org.amalthea4public.generic.tracecreation.artifacthandling.IFileHandler">
-      </artifact_handler>
-   </extension>
 	<extension
         point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
       <diagramTextProvider
