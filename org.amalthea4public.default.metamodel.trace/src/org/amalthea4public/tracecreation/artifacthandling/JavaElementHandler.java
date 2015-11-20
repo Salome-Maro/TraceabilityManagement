@@ -2,10 +2,10 @@ package org.amalthea4public.tracecreation.artifacthandling;
 
 import java.util.Optional;
 
-import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
-import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
-import org.amalthea4public.generic.tracecreation.TracecreationFactory;
-import org.amalthea4public.generic.tracecreation.artifacthandling.ArtifactHandler;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsFactory;
+import org.amalthea4public.tracemanagement.generic.handlers.ArtifactHandler;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement; 
 
@@ -22,7 +22,7 @@ public class JavaElementHandler implements ArtifactHandler {
 	@Override  
 	public EObject getEObjectForSelection(Object selection, Optional<ArtifactWrapperContainer> existingWrappers) {
 		IJavaElement cu = (IJavaElement) selection;
-		ArtifactWrapper wrapper = TracecreationFactory.eINSTANCE.createArtifactWrapper();
+		ArtifactWrapper wrapper = ArtifactsFactory.eINSTANCE.createArtifactWrapper();
 		wrapper.setName(cu.getElementName());
 		wrapper.setUri(cu.getHandleIdentifier());
 		wrapper.setArtifactHandler(this.getClass().getName());

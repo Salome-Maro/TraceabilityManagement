@@ -1,9 +1,9 @@
-package org.amalthea4public.generic.tracecreation.artifacthandling;
+package org.amalthea4public.tracemanagement.generic.handlers;
 
 import java.util.Optional;
 
-import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
-import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
 import org.eclipse.emf.ecore.EObject;
 
 public interface ArtifactHandler {

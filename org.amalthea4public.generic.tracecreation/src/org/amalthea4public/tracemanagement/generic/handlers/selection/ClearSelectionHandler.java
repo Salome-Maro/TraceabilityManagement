@@ -1,5 +1,6 @@
-package org.amalthea4public.generic.tracecreation.handlers;
+package org.amalthea4public.tracemanagement.generic.handlers.selection;
 
+import org.amalthea4public.tracemanagement.generic.handlers.TraceCreationHandler;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;

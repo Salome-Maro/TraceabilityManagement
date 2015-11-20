@@ -27,19 +27,19 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.amalthea4public.generic.tracecreation.handlers.TraceCreationHandler"
+            class="org.amalthea4public.tracemanagement.generic.handlers.TraceCreationHandler"
             commandId="org.amalthea4public.generic.tracecreation.commands.createTrace">
       </handler>
       <handler
-            class="org.amalthea4public.generic.tracecreation.handlers.DisplayTraceMatrixHandler"
+            class="org.amalthea4public.generic.tracemanagement.handlers.plantuml.DisplayTraceMatrixHandler"
             commandId="org.amalthea4public.generic.tracecreation.displayTraceMatrix">
       </handler>
       <handler
-            class="org.amalthea4public.generic.tracecreation.handlers.ItemSelectionHandler"
+            class="org.amalthea4public.tracemanagement.generic.handlers.selection.ItemSelectionHandler"
             commandId="org.amalthea4public.generic.tracecreation.commands.addtoSelection">
       </handler>
       <handler
-            class="org.amalthea4public.generic.tracecreation.handlers.ClearSelectionHandler"
+            class="org.amalthea4public.tracemanagement.generic.handlers.selection.ClearSelectionHandler"
             commandId="org.amalthea4public.generic.tracecreation.clearselection">
       </handler>
    </extension>
@@ -91,14 +91,9 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated artifactMetamodel -->
       <package
-            uri="org.amalthea4public.generic.tracecreation"
-            class="org.amalthea4public.generic.tracecreation.TracecreationPackage"
+            uri="org.amalthea4public.tracemanagement.generic.artifacts"
+            class="org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsPackage"
             genModel="model/artifactMetamodel.xcore"/>
    </extension>
-	<extension
-        point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
-      <diagramTextProvider
-            providerClass="org.amalthea4public.generic.tracecreation.handlers.DiagramTextProviderHandler">
-      </diagramTextProvider>
-     </extension>
+
 </plugin>

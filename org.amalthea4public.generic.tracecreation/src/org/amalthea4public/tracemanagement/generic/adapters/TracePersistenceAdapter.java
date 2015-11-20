@@ -1,9 +1,9 @@
-package org.amalthea4public.generic.tracecreation.metamodel.trace.adapter;
+package org.amalthea4public.tracemanagement.generic.adapters;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 

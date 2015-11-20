@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.amalthea4public.generic.tracecreation;singleton:=true
+Bundle-SymbolicName: org.amalthea4public.tracemanagement.generic;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
@@ -22,8 +22,10 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtend.lib.macro
 Bundle-ActivationPolicy: lazy
 Export-Package: org.amalthea4public.generic.tracecreation,
- org.amalthea4public.generic.tracecreation.artifacthandling,
- org.amalthea4public.generic.tracecreation.impl,
- org.amalthea4public.generic.tracecreation.metamodel.trace.adapter,
- org.amalthea4public.generic.tracecreation.util
+ org.amalthea4public.tracemanagement.generic.adapters,
+ org.amalthea4public.tracemanagement.generic.handlers,
+ org.amalthea4public.tracemanagement.generic.helpers,
+ org.amalthea4public.tracemanagement.generic.artifacts,
+ org.amalthea4public.tracemanagement.generic.artifacts.impl,
+ org.amalthea4public.tracemanagement.generic.artifacts.util
 

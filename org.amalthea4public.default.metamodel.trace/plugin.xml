@@ -13,28 +13,12 @@
             class="org.amalthea4public.metamodel.trace.TracePackage"
             genModel="model/trace.xcore"/>
    </extension>
-   <extension
-         point="org.amalthea4public.configuration.metamodel.trace">
-      <trace_metamodel
-            adapter="org.amalthea4public.metamodel.trace.TraceMetamodelAdapter">
-      </trace_metamodel>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated requirements -->
+      <package
+            uri="org.amalthea4public.metamodel.requirements"
+            class="org.amalthea4public.metamodel.requirements.RequirementsPackage"
+            genModel="model/requirements.xcore"/>
    </extension>
-    <extension
-         point="org.amalthea4public.configuration.artifacthandler">
-      <artifact_handler
-            handler="org.amalthea4public.tracecreation.artifacthandling.JavaElementHandler">
-      </artifact_handler>
-   </extension>
-   <extension
-         point="org.amalthea4public.configuration.artifacthandler">
-      <artifact_handler
-            handler="org.amalthea4public.tracecreation.artifacthandling.EMFHandler">
-      </artifact_handler>
-   </extension>
-   <extension
-         point="org.amalthea4public.configuration.artifacthandler">
-      <artifact_handler
-            handler="org.amalthea4public.tracecreation.artifacthandling.IFileHandler">
-      </artifact_handler>
-   </extension>
+
 </plugin>

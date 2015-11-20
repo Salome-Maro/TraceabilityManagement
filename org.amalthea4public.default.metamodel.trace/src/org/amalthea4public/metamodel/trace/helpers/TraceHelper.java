@@ -3,10 +3,10 @@ package org.amalthea4public.metamodel.trace.helpers;
 import java.util.List;
 import java.util.Map;
 
-import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
 import org.amalthea4public.metamodel.trace.Trace;
 import org.amalthea4public.metamodel.trace.TraceElement;
 import org.amalthea4public.metamodel.trace.TracePackage;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 

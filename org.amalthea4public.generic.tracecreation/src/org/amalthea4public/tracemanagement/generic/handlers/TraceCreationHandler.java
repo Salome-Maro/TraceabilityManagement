@@ -1,4 +1,4 @@
-package org.amalthea4public.generic.tracecreation.handlers;
+package org.amalthea4public.tracemanagement.generic.handlers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
-import org.amalthea4public.generic.tracecreation.artifacthandling.ArtifactHandler;
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper;
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter;
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TracePersistenceAdapter;
+import org.amalthea4public.tracemanagement.generic.adapters.TraceMetamodelAdapter;
+import org.amalthea4public.tracemanagement.generic.adapters.TracePersistenceAdapter;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
+import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper;
+import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper;
+import org.amalthea4public.tracemanagement.generic.helpers.TraceCreationHelper;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -51,15 +52,15 @@ public class TraceCreationHandler extends AbstractHandler {
 
 		preSelection.addAll(selection);
 		
-		TraceMetamodelAdapter traceAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get();
+		TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 		
-		TracePersistenceAdapter persistenceAdapter = TraceCreationHelper.getTracePersistenceAdapter().get();
+		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Optional<EObject> traceModel = persistenceAdapter.getTraceModel(resourceSet);
 		Optional<ArtifactWrapperContainer> existingArtifactWrappers = persistenceAdapter.getArtifactWrappers(resourceSet);
 
-		Collection<ArtifactHandler> artifactHandlers = TraceCreationHelper.getArtifactHandlers();
+		Collection<ArtifactHandler> artifactHandlers = ExtensionPointHelper.getArtifactHandlers();
 		
 		List<EObject> selectionAsEObjects = preSelection.stream()
 														.map(sel -> convertToEObject(sel, artifactHandlers, existingArtifactWrappers))
@@ -105,7 +106,7 @@ public class TraceCreationHandler extends AbstractHandler {
 		dialog.setTitle("Select the trace type you want to create");
 		dialog.setElements(traceTypes.toArray());
 		dialog.setMessage("Selection: " + selectionAsEObjects.stream()
-			     									         .map(TraceCreationHelper::getIdentifier)
+			     									         .map(EMFHelper::getIdentifier)
 			     									         .collect(Collectors.toList()));
 
 		if (dialog.open() == Window.OK) {

@@ -1,4 +1,4 @@
-package org.amalthea4public.generic.tracecreation.metamodel.trace.adapter;
+package org.amalthea4public.tracemanagement.generic.adapters;
 
 import java.util.Collection;
 import java.util.List;

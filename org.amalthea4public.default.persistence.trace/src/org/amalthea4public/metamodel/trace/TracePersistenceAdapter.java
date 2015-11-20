@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.amalthea4public.generic.tracecreation.ArtifactWrapper;
-import org.amalthea4public.generic.tracecreation.ArtifactWrapperContainer;
-import org.amalthea4public.generic.tracecreation.TracecreationFactory;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsFactory;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class TracePersistenceAdapter
-		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TracePersistenceAdapter {
+		implements org.amalthea4public.tracemanagement.generic.adapters.TracePersistenceAdapter {
 
 	private static final String DEFAULT_PROJECT_NAME = "__WorkspaceTraceModels";
 	private static final String DEFAULT_TRACE_MODEL_NAME = "traceModel.xmi";
@@ -56,7 +56,7 @@ public class TracePersistenceAdapter
 			Resource resource = resourceSet.createResource(uri);
 			resource.getContents().add(traceModel);
 			
-			ArtifactWrapperContainer container =  artifactWrappers.orElse(TracecreationFactory.eINSTANCE.createArtifactWrapperContainer());
+			ArtifactWrapperContainer container =  artifactWrappers.orElse(ArtifactsFactory.eINSTANCE.createArtifactWrapperContainer());
 			
 			selectionForTraceCreation.forEach(o -> {
 				if(o instanceof ArtifactWrapper && o.eContainer() == null)

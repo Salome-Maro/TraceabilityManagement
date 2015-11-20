@@ -1,8 +1,9 @@
-package org.amalthea4public.generic.tracecreation.handlers;
+package org.amalthea4public.tracemanagement.generic.handlers.selection;
 
 import java.util.List;
 
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper;
+import org.amalthea4public.tracemanagement.generic.handlers.TraceCreationHandler;
+import org.amalthea4public.tracemanagement.generic.helpers.TraceCreationHelper;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;

@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 public class TraceMetamodelAdapter
-		implements org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceMetamodelAdapter {
+		implements org.amalthea4public.tracemanagement.generic.adapters.TraceMetamodelAdapter {
 	
 	private Collection<TraceTypeHelper> helpers;
 	

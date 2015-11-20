@@ -1,4 +1,4 @@
-package org.amalthea4public.generic.tracecreation.handlers;
+package org.amalthea4public.plantuml;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

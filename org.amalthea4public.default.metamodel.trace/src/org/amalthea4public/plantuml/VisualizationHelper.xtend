@@ -1,22 +1,23 @@
-package org.amalthea4public.generic.tracecreation.handlers
+package org.amalthea4public.plantuml
 
 import java.util.Collection
 import java.util.List
 import java.util.Optional
-import org.amalthea4public.generic.tracecreation.metamodel.trace.adapter.TraceCreationHelper
 import org.eclipse.emf.ecore.EObject
+import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper
+import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper
 
 class VisualizationHelper {
 	def static String createMatrix(Optional<EObject> traceModel, Collection<EObject> firstElements, Collection<EObject> secondElements){
-	val traceAdapter = TraceCreationHelper.getTraceMetamodelAdapter().get()
+	val traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get()
 	'''
 	@startuml
 	salt
 	{#
 	«IF firstElements != null»
-	.«FOR e : secondElements»|«TraceCreationHelper.getIdentifier(e)»«ENDFOR»
+	.«FOR e : secondElements»|«EMFHelper.getIdentifier(e)»«ENDFOR»
 	«FOR first : firstElements»
-	«TraceCreationHelper.getIdentifier(first)» «FOR second : secondElements»|«IF traceAdapter.isThereATraceBetween(first, second, traceModel)»X«ELSE».«ENDIF»«ENDFOR»
+	«EMFHelper.getIdentifier(first)» «FOR second : secondElements»|«IF traceAdapter.isThereATraceBetween(first, second, traceModel)»X«ELSE».«ENDIF»«ENDFOR»
 	«ENDFOR»
 	«ELSE»
 	Choose two containers to show a traceability matrix of their contents.
@@ -31,8 +32,8 @@ class VisualizationHelper {
 	var j = 1
 	'''
 	@startuml
-	object "«TraceCreationHelper.getIdentifier(selectedElement)»" as o0 #pink
-	«FOR e:connectedElements»object "«TraceCreationHelper.getIdentifier(e)»" as o«i++»
+	object "«EMFHelper.getIdentifier(selectedElement)»" as o0 #pink
+	«FOR e:connectedElements»object "«EMFHelper.getIdentifier(e)»" as o«i++»
 	«ENDFOR»
 	«FOR t:traceLabels» o0 --> o«j++» : "«t»"
 	«ENDFOR» 
