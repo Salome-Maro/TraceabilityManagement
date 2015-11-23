@@ -1,4 +1,4 @@
-package org.amalthea4public.tracecreation.artifacthandling;
+package org.amalthea4public.tracemanagement.artifacthandling;
 
 import java.util.Optional;
 

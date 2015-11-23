@@ -7,18 +7,14 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.amalthea4public.metamodel.trace,
- org.amalthea4public.metamodel.trace.impl,
- org.amalthea4public.metamodel.trace.util,
- org.amalthea4public.metamodel.requirements,
- org.amalthea4public.metamodel.requirements.impl,
- org.amalthea4public.metamodel.requirements.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
+Export-Package: org.amalthea4public.tracemanagement.tracemetamodel,
+ org.amalthea4public.tracemanagement.tracemetamodel.impl,
+ org.amalthea4public.tracemanagement.tracemetamodel.util
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.core.runtime,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore.xcore.lib,
  org.amalthea4public.tracemanagement.generic;visibility:=reexport,
- org.amalthea4public.tracemanagement.generic,
  org.eclipse.core.resources;bundle-version="3.10.0",
  org.eclipse.jdt.core;bundle-version="3.11.0",
  net.sourceforge.plantuml.eclipse,

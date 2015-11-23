@@ -7,18 +7,19 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated trace -->
-      <package
-            uri="org.amalthea4public.metamodel.trace"
-            class="org.amalthea4public.metamodel.trace.TracePackage"
-            genModel="model/trace.xcore"/>
-   </extension>
-   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated requirements -->
       <package
             uri="org.amalthea4public.metamodel.requirements"
             class="org.amalthea4public.metamodel.requirements.RequirementsPackage"
             genModel="model/requirements.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated trace -->
+      <package
+            uri="org.amalthea4public.tracemanagement.tracemetamodel"
+            class="org.amalthea4public.tracemanagement.tracemetamodel.TracemetamodelPackage"
+            genModel="model/trace.xcore"/>
    </extension>
 
 </plugin>

@@ -1,12 +1,12 @@
-package org.amalthea4public.metamodel.trace.helpers;
+package org.amalthea4public.tracemanagement.tracemetamodel.helpers;
 
 import java.util.List;
 import java.util.Map;
 
-import org.amalthea4public.metamodel.trace.ArtifactToArtifact;
-import org.amalthea4public.metamodel.trace.TraceElement;
-import org.amalthea4public.metamodel.trace.TracePackage;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
+import org.amalthea4public.tracemanagement.tracemetamodel.ArtifactToArtifact;
+import org.amalthea4public.tracemanagement.tracemetamodel.TraceElement;
+import org.amalthea4public.tracemanagement.tracemetamodel.TracemetamodelPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -21,7 +21,7 @@ public class ArtifactToArtifactHelper extends TraceTypeHelper {
 
 	@Override
 	public EClass getType() {
-		return TracePackage.eINSTANCE.getArtifactToArtifact();
+		return TracemetamodelPackage.eINSTANCE.getArtifactToArtifact();
 	}
 
 	@Override

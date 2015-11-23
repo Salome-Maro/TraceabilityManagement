@@ -1,4 +1,4 @@
-package org.amalthea4public.plantuml;
+package org.amalthea4public.tracemanagement.visualisation.plantuml;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.amalthea4public.plantuml.VisualizationHelper;
 import org.amalthea4public.tracemanagement.generic.adapters.TraceMetamodelAdapter;
 import org.amalthea4public.tracemanagement.generic.adapters.TracePersistenceAdapter;
 import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper;

@@ -1,4 +1,4 @@
-package org.amalthea4public.tracecreation.artifacthandling;
+package org.amalthea4public.tracemanagement.artifacthandling;
 
 import java.util.Optional;
 
@@ -6,24 +6,28 @@ import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsFactory;
 import org.amalthea4public.tracemanagement.generic.handlers.ArtifactHandler;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.IJavaElement; 
 
-public class IFileHandler implements ArtifactHandler {
-
+public class JavaElementHandler implements ArtifactHandler {
 	@Override
 	public boolean canHandleSelection(Object selection) {
-		return selection instanceof IFile;
+		if(selection instanceof IJavaElement){
+			return true;
+		}
+		
+		return false;
 	}
 
-	@Override
+	@Override  
 	public EObject getEObjectForSelection(Object selection, Optional<ArtifactWrapperContainer> existingWrappers) {
-		IFile selectionAsFile = (IFile) selection;
+		IJavaElement cu = (IJavaElement) selection;
 		ArtifactWrapper wrapper = ArtifactsFactory.eINSTANCE.createArtifactWrapper();
-		wrapper.setName(selectionAsFile.getName());
-		wrapper.setUri(selectionAsFile.getFullPath().toString());
+		wrapper.setName(cu.getElementName());
+		wrapper.setUri(cu.getHandleIdentifier());
 		wrapper.setArtifactHandler(this.getClass().getName());
 		
 		return existingWrapperWithURIorNew(wrapper, existingWrappers);
 	}
+
 }

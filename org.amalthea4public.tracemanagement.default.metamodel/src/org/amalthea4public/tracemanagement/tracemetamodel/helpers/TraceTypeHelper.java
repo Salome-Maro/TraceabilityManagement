@@ -1,10 +1,10 @@
-package org.amalthea4public.metamodel.trace.helpers;
+package org.amalthea4public.tracemanagement.tracemetamodel.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.amalthea4public.metamodel.trace.TraceElement;
+import org.amalthea4public.tracemanagement.tracemetamodel.TraceElement;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 

@@ -4,7 +4,7 @@
 <extension
          point="org.amalthea4public.configuration.persistence.trace">
       <trace_persistence
-            adapter="org.amalthea4public.metamodel.trace.TracePersistenceAdapter">
+            adapter="org.amalthea4public.tracemanagement.persistence.TracePersistenceAdapter">
       </trace_persistence>
    </extension>
 </plugin>

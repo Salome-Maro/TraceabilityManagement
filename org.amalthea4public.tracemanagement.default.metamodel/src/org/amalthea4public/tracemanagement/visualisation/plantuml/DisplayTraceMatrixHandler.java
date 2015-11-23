@@ -1,4 +1,4 @@
-package org.amalthea4public.plantuml;
+package org.amalthea4public.tracemanagement.visualisation.plantuml;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

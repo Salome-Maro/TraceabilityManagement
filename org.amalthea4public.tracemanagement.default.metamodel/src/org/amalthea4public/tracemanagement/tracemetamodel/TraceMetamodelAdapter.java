@@ -1,4 +1,4 @@
-package org.amalthea4public.metamodel.trace;
+package org.amalthea4public.tracemanagement.tracemetamodel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.amalthea4public.metamodel.trace.helpers.ArtifactToArtifactHelper;
-import org.amalthea4public.metamodel.trace.helpers.TraceTypeHelper;
-import org.amalthea4public.metamodel.trace.helpers.TraceHelper;
-import org.amalthea4public.metamodel.trace.helpers.TraceToArtifactHelper;
+import org.amalthea4public.tracemanagement.tracemetamodel.TraceElement;
+import org.amalthea4public.tracemanagement.tracemetamodel.TraceModel;
+import org.amalthea4public.tracemanagement.tracemetamodel.TracemetamodelFactory;
+import org.amalthea4public.tracemanagement.tracemetamodel.helpers.ArtifactToArtifactHelper;
+import org.amalthea4public.tracemanagement.tracemetamodel.helpers.TraceHelper;
+import org.amalthea4public.tracemanagement.tracemetamodel.helpers.TraceToArtifactHelper;
+import org.amalthea4public.tracemanagement.tracemetamodel.helpers.TraceTypeHelper;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -40,9 +43,9 @@ public class TraceMetamodelAdapter
 
 	@Override
 	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection) {
-		TraceModel root = (TraceModel) traceModel.orElse(TraceFactory.eINSTANCE.createTraceModel());
+		TraceModel root = (TraceModel) traceModel.orElse(TracemetamodelFactory.eINSTANCE.createTraceModel());
 
-		EObject trace = TraceFactory.eINSTANCE.create(traceType);
+		EObject trace = TracemetamodelFactory.eINSTANCE.create(traceType);
 
 		helpers.forEach(h -> {
 			h.initialise(trace, selection);
