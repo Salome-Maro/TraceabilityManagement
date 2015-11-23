@@ -12,5 +12,35 @@
             class="org.amalthea4public.tracemanagement.tracemetamodel.TracemetamodelPackage"
             genModel="model/trace.xcore"/>
    </extension>
-
+	<extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.amalthea4public.tracemanagement.visualisation.plantuml.DisplayTraceMatrixHandler"
+            commandId="org.amalthea4public.generic.tracecreation.displayTraceMatrix">
+      </handler>
+    </extension>
+ <extension
+       point="org.amalthea4public.configuration.metamodel.trace">
+    <trace_metamodel
+          adapter="org.amalthea4public.tracemanagement.tracemetamodel.TraceMetamodelAdapter">
+    </trace_metamodel>
+ </extension>
+ <extension
+       point="org.amalthea4public.configuration.artifacthandler">
+    <artifact_handler
+          handler="org.amalthea4public.tracemanagement.artifacthandling.IFileHandler">
+    </artifact_handler>
+    <artifact_handler
+          handler="org.amalthea4public.tracemanagement.artifacthandling.EMFHandler">
+    </artifact_handler>
+    <artifact_handler
+          handler="org.amalthea4public.tracemanagement.artifacthandling.JavaElementHandler">
+    </artifact_handler>
+ </extension>
+ <extension
+       point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
+    <diagramTextProvider
+          providerClass="org.amalthea4public.tracemanagement.visualisation.plantuml.DiagramTextProviderHandler">
+    </diagramTextProvider>
+ </extension>
 </plugin>

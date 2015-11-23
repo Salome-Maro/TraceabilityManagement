@@ -31,10 +31,6 @@
             commandId="org.amalthea4public.generic.tracecreation.commands.createTrace">
       </handler>
       <handler
-            class="org.amalthea4public.generic.tracemanagement.handlers.plantuml.DisplayTraceMatrixHandler"
-            commandId="org.amalthea4public.generic.tracecreation.displayTraceMatrix">
-      </handler>
-      <handler
             class="org.amalthea4public.tracemanagement.generic.handlers.selection.ItemSelectionHandler"
             commandId="org.amalthea4public.generic.tracecreation.commands.addtoSelection">
       </handler>
