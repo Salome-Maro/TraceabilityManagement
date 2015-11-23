@@ -13,7 +13,6 @@ public class ItemSelectionHandler extends AbstractHandler  {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		List<Object> selection = TraceCreationHelper.extractSelectedElements(event);
-
 		TraceCreationHandler.preSelection.addAll(selection);
 		return null;
 	}

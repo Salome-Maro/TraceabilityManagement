@@ -6,9 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 
-public class EMFHelper {
-
-	
+public class EMFHelper {	
 	/**
 	 * Builds an identifier String for the given EObject. This identifier starts
 	 * with

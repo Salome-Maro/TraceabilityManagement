@@ -9,9 +9,7 @@ public class ClearSelectionHandler extends AbstractHandler  {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
 		TraceCreationHandler.preSelection.clear();
-		
 		return null;
 	}
 

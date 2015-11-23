@@ -6,6 +6,7 @@ import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsFactory;
 import org.amalthea4public.tracemanagement.generic.handlers.ArtifactHandler;
+import org.amalthea4public.tracemanagement.generic.helpers.ArtifactHelper;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement; 
 
@@ -27,7 +28,7 @@ public class JavaElementHandler implements ArtifactHandler {
 		wrapper.setUri(cu.getHandleIdentifier());
 		wrapper.setArtifactHandler(this.getClass().getName());
 		
-		return existingWrapperWithURIorNew(wrapper, existingWrappers);
+		return ArtifactHelper.existingWrapperWithURIorNew(wrapper, existingWrappers);
 	}
 
 }

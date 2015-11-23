@@ -8,6 +8,14 @@ import java.util.Optional;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * This interface defines all functionality that must be implemented to support
+ * a specific trace metamodel. This enables swapping the concept of what a
+ * "trace" is, as long as these methods can be implemented.
+ * 
+ * @author Anthony Anjorin, Salome Maro
+ *
+ */
 public interface TraceMetamodelAdapter {
 
 	/**
@@ -36,10 +44,31 @@ public interface TraceMetamodelAdapter {
 	 * @return root of trace model that now contains the newly created trace
 	 */
 	EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection);
-	
-	//FIXME[Salome]:  Document me
+
+	/**
+	 * Decide if two objects are connected according to the given trace model
+	 * 
+	 * @param first
+	 *            First object
+	 * @param second
+	 *            Second object
+	 * @param traceModel
+	 *            Trace model to base decision on
+	 * @return <code>true</code> if object are connected, <code>false</code>
+	 *         otherwise
+	 */
 	boolean isThereATraceBetween(EObject first, EObject second, Optional<EObject> traceModel);
-	
-	//FIXME[Salome]:  Document me
-	Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel); 
+
+	/**
+	 * Determine a list of all objects connected to element according to the
+	 * given trace model
+	 * 
+	 * @param element
+	 *            The element used to determine the list of connected objects
+	 * @param traceModel
+	 *            Trace model to base calculation on
+	 * @return A Map with the following structure: [Trace object t -> {list of
+	 *         all objects connected to element via t}]
+	 */
+	Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel);
 }

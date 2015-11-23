@@ -6,6 +6,7 @@ import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapperContainer;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsFactory;
 import org.amalthea4public.tracemanagement.generic.handlers.ArtifactHandler;
+import org.amalthea4public.tracemanagement.generic.helpers.ArtifactHelper;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
@@ -24,6 +25,6 @@ public class IFileHandler implements ArtifactHandler {
 		wrapper.setUri(selectionAsFile.getFullPath().toString());
 		wrapper.setArtifactHandler(this.getClass().getName());
 		
-		return existingWrapperWithURIorNew(wrapper, existingWrappers);
+		return ArtifactHelper.existingWrapperWithURIorNew(wrapper, existingWrappers);
 	}
 }

@@ -26,34 +26,18 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-/**
- * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
- */
 public class TraceCreationHandler extends AbstractHandler {
-	/**
-	 * The constructor.
-	 */
+	
 	public static Collection<Object> preSelection = new ArrayList<>();
 	private IWorkbenchWindow window;
 	
-	public TraceCreationHandler() {
-	}
-
-	/**
-	 * the command has been executed, so extract extract the needed information
-	 * from the application context.
-	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		
 		List<Object> selection = TraceCreationHelper.extractSelectedElements(event);
-
 		preSelection.addAll(selection);
 		
 		TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
-		
 		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -62,11 +46,7 @@ public class TraceCreationHandler extends AbstractHandler {
 
 		Collection<ArtifactHandler> artifactHandlers = ExtensionPointHelper.getArtifactHandlers();
 		
-		List<EObject> selectionAsEObjects = preSelection.stream()
-														.map(sel -> convertToEObject(sel, artifactHandlers, existingArtifactWrappers))
-														.filter(Optional::isPresent)
-														.map(Optional::get)
-														.collect(Collectors.toList());
+		List<EObject> selectionAsEObjects = mapSelectionToEObjects(existingArtifactWrappers, artifactHandlers);
 		
 		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
 		Optional<EClass> chosenType = getTraceTypeToCreate(window, traceTypes, selectionAsEObjects);
@@ -80,7 +60,14 @@ public class TraceCreationHandler extends AbstractHandler {
 		return null;
 	}
 
-
+	private List<EObject> mapSelectionToEObjects(Optional<ArtifactWrapperContainer> existingArtifactWrappers,
+			Collection<ArtifactHandler> artifactHandlers) {
+		return preSelection.stream()
+						   .map(sel -> convertToEObject(sel, artifactHandlers, existingArtifactWrappers))
+						   .filter(Optional::isPresent)
+						   .map(Optional::get)
+						   .collect(Collectors.toList());
+	}
 
 	private Optional<EObject> convertToEObject(Object sel, Collection<ArtifactHandler> artifactHandlers, Optional<ArtifactWrapperContainer> existingArtifactWrappers) {
 		List<ArtifactHandler> availableHandlers = artifactHandlers.stream()
