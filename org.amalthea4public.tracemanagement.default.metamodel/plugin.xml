@@ -5,15 +5,6 @@
 -->
 
 <plugin>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated requirements -->
-      <package
-            uri="org.amalthea4public.metamodel.requirements"
-            class="org.amalthea4public.metamodel.requirements.RequirementsPackage"
-            genModel="model/requirements.xcore"/>
-   </extension>
-
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated trace -->
       <package
