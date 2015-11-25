@@ -27,7 +27,7 @@ class ReqToReq extends Trace {
 }
 
 class ReqToArtifact extends Trace {
-	refers Requirement[1..1] parent
+	refers Requirement[1..1] parent 
 	refers ArtifactWrapper[1..1] artifact
 	
 	op EObject[] computeTracedElements(){
