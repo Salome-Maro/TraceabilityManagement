@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated requirements -->
+      <package
+            uri="com.rtlabs.requirements"
+            class="com.rtlabs.requirements.RequirementsPackage"
+            genModel="model/requirementsMetamodel.xcore"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecp.core.filters">
+      <FilterProvider
+            class="com.rtlabs.requirements.model.ECPFilterProvider1">
+      </FilterProvider>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated traceMetamodel -->
+      <package
+            uri="com.rtlabs.traces"
+            class="com.rtlabs.traces.TracesPackage"
+            genModel="model/traceMetamodel.xcore"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated artifactsMetamodel -->
+      <package
+            uri="com.rtlabs.artifacts"
+            class="com.rtlabs.artifacts.ArtifactsPackage"
+            genModel="model/artifactsMetamodel"/>
+   </extension>
+   <extension
+         point="org.amalthea4public.configuration.metamodel.trace">
+      <trace_metamodel
+            adapter="com.rtlabs.tracemanagement.tracemetamodel.TraceMetamodelAdapter">
+      </trace_metamodel>
+   </extension>
+
+</plugin>

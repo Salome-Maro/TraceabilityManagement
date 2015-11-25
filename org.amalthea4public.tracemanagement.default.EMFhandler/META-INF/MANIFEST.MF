@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFHandler
+Bundle-SymbolicName: org.amalthea4public.tracemanagement.default.EMFhandler;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.amalthea4public.tracemanagement.generic,
+ org.eclipse.emf.ecore

@@ -1,0 +1,40 @@
+package com.rtlabs.traces
+
+import com.rtlabs.requirements.Requirement
+import org.eclipse.emf.ecore.EObject
+import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper
+
+
+class RtLabsTraceModel{
+	contains Trace[] traces
+}
+
+class Trace{
+	refers EObject[] tracedElements
+	op EObject[] computeTracedElements()
+}
+
+class ReqToReq extends Trace {
+	refers Requirement[1..1] parent
+	refers Requirement[1..1] child
+	
+	op EObject[] computeTracedElements(){
+		tracedElements.clear
+		tracedElements.add(parent) 
+		tracedElements.add(child)
+		return tracedElements
+	}
+}
+
+class ReqToArtifact extends Trace {
+	refers Requirement[1..1] parent
+	refers ArtifactWrapper[1..1] artifact
+	
+	op EObject[] computeTracedElements(){
+		tracedElements.clear
+		tracedElements.add(parent) 
+		tracedElements.add(artifact)
+		return tracedElements
+	}
+}
+

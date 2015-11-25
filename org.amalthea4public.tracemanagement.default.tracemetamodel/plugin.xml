@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated trace -->
+      <package
+            uri="org.amalthea4public.tracemanagement.simpletrace.tracemetamodel"
+            class="org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelPackage"
+            genModel="model/trace.xcore"/>
+   </extension>
+   <extension
+         point="org.amalthea4public.configuration.metamodel.trace">
+      <trace_metamodel
+            adapter="adapter.TraceMetamodelAdapter">
+      </trace_metamodel>
+   </extension>
+
+</plugin>

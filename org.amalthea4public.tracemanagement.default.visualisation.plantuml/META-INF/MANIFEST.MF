@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracemetamodel1
+Bundle-SymbolicName: org.amalthea4public.tracemanagement.default.visualisation.plantuml;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.ui.workbench,
+ org.eclipse.jface,
+ org.amalthea4public.tracemanagement.generic,
+ org.eclipse.emf.ecore.editor,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.eclipse.jdt.core;bundle-version="3.11.1",
+ org.eclipse.core.runtime;bundle-version="3.11.1",
+ net.sourceforge.plantuml.eclipse
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+
