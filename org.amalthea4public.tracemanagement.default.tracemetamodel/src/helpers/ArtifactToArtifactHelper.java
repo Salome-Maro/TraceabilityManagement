@@ -50,4 +50,15 @@ public class ArtifactToArtifactHelper extends TraceTypeHelper {
 		
 		return false;
 	}
+
+	@Override
+	public void addObjectsConnectedtoTrace(List<EObject> connectedElements, TraceElement trace) {
+		if(trace instanceof ArtifactToArtifact) {
+			ArtifactToArtifact t = (ArtifactToArtifact) trace;
+			
+			connectedElements.add(t.getSource());
+			connectedElements.add(t.getTarget());
+		}
+		
+	}
 } 

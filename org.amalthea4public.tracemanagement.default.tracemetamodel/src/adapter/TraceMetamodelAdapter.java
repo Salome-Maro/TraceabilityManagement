@@ -73,10 +73,19 @@ public class TraceMetamodelAdapter
 		Map<EObject, List<EObject>> traces = new HashMap<>();
 		
 		traceModel.ifPresent(tm -> {
+			if (element instanceof TraceElement) {
+				TraceElement t = (TraceElement) element;
+				List<EObject> tracedElements =  new ArrayList<>();
+				helpers.forEach(h -> {
+					h.addObjectsConnectedtoTrace(tracedElements, t);
+				});
+				
+				traces.put(t, tracedElements);
+			}else {
 			SimpleTraceModel root = (SimpleTraceModel)tm;
 			root.getTraces().forEach(trace -> {
 				helpers.forEach(h -> h.addConnectedElements(element, trace, traces));	
-			});
+			}); }
 		});
 		
 		return traces;

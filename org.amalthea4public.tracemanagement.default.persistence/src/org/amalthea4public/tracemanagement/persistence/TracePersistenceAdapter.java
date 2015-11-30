@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,16 +27,30 @@ public class TracePersistenceAdapter
 
 	@Override
 	public Optional<EObject> getTraceModel(ResourceSet resourceSet) {
-		try {
-			ensureProjectExists(DEFAULT_PROJECT_NAME);
-			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_TRACE_MODEL_NAME, true);
-			Resource resource = resourceSet.getResource(uri, true);
-			resource.load(null);
+		if (projectExist(DEFAULT_PROJECT_NAME) && fileExists(DEFAULT_PROJECT_NAME + "/" + DEFAULT_TRACE_MODEL_NAME)) {
+			try {
+				URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_TRACE_MODEL_NAME, true);
+				Resource resource = resourceSet.getResource(uri, true);
+				resource.load(null);
 
-			return Optional.of(resource.getContents().get(0));
-		} catch (Exception e) {
-			return Optional.empty();
+				return Optional.of(resource.getContents().get(0));
+			} catch (Exception e)
+
+			{
+				return Optional.empty();
+			}
+
 		}
+		return Optional.empty();
+	}
+
+	private boolean fileExists(String path) {
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path)).exists();
+		
+	}
+
+	private boolean projectExist(String defaultProjectName) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(defaultProjectName).exists();
 	}
 
 	private IProject ensureProjectExists(String defaultProjectName) throws CoreException {
@@ -49,37 +64,42 @@ public class TracePersistenceAdapter
 	}
 
 	@Override
-	public void saveTracesAndArtifactWrappers(EObject traceModel, List<EObject> selectionForTraceCreation, Optional<ArtifactWrapperContainer> artifactWrappers) {
+	public void saveTracesAndArtifactWrappers(EObject traceModel, List<EObject> selectionForTraceCreation,
+			Optional<ArtifactWrapperContainer> artifactWrappers) {
 		try {
 			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_TRACE_MODEL_NAME, true);
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource resource = resourceSet.createResource(uri);
 			resource.getContents().add(traceModel);
-			
-			ArtifactWrapperContainer container =  artifactWrappers.orElse(ArtifactsFactory.eINSTANCE.createArtifactWrapperContainer());
-			
+
+			ArtifactWrapperContainer container = artifactWrappers
+					.orElse(ArtifactsFactory.eINSTANCE.createArtifactWrapperContainer());
+
 			selectionForTraceCreation.forEach(o -> {
-				if(o instanceof ArtifactWrapper && o.eContainer() == null)
+				if (o instanceof ArtifactWrapper && o.eContainer() == null)
 					container.getArtifacts().add((ArtifactWrapper) o);
 			});
-			
+
 			uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_ARTIFACT_WRAPPER_MODEL_NAME, true);
 			Resource resourceForArtifacts = resourceSet.createResource(uri);
 			resourceForArtifacts.getContents().add(container);
-			
+
+			ensureProjectExists(DEFAULT_PROJECT_NAME);
+
 			resourceForArtifacts.save(null);
 			resource.save(null);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.err.println("Unable to save trace model!");
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	@Override
 	public Optional<ArtifactWrapperContainer> getArtifactWrappers(ResourceSet resourceSet) {
 		try {
 			ensureProjectExists(DEFAULT_PROJECT_NAME);
-			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_ARTIFACT_WRAPPER_MODEL_NAME, true);
+			URI uri = URI.createPlatformResourceURI(DEFAULT_PROJECT_NAME + "/" + DEFAULT_ARTIFACT_WRAPPER_MODEL_NAME,
+					true);
 			Resource resource = resourceSet.getResource(uri, true);
 			resource.load(null);
 

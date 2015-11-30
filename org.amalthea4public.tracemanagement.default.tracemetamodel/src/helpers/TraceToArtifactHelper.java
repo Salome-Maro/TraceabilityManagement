@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
+import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.ArtifactToArtifact;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceToArtifact;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelPackage;
@@ -61,6 +62,17 @@ public class TraceToArtifactHelper extends TraceTypeHelper {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public void addObjectsConnectedtoTrace(List<EObject> connectedElements, TraceElement trace) {
+		if(trace instanceof TraceToArtifact) {
+			TraceToArtifact t = (TraceToArtifact) trace;
+			
+			connectedElements.add(t.getSource());
+			connectedElements.add(t.getTarget());
+		}
+		
 	}
 
 }

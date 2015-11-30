@@ -1,5 +1,6 @@
 package helpers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,17 @@ public class TraceHelper extends TraceTypeHelper {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public void addObjectsConnectedtoTrace(List<EObject> connectedElements, TraceElement trace) {
+		if (trace instanceof Trace) {
+			Trace t = (Trace) trace;
+			connectedElements.add(t.getSource());
+			connectedElements.add(t.getTarget());
+			
+		}
+		
 	}
 
 }

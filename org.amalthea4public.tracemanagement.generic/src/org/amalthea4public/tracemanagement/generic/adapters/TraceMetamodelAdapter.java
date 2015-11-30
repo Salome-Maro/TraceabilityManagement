@@ -64,7 +64,8 @@ public interface TraceMetamodelAdapter {
 	 * given trace model
 	 * 
 	 * @param element
-	 *            The element used to determine the list of connected objects
+	 *            The element used to determine the list of connected objects.
+	 *            Note that this element could be a trace in the trace model
 	 * @param traceModel
 	 *            Trace model to base calculation on
 	 * @return A Map with the following structure: [Trace object t -> {list of
