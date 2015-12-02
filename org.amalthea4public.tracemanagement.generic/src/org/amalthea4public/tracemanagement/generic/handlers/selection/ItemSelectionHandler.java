@@ -17,25 +17,26 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class ItemSelectionHandler extends AbstractHandler {
 	private IWorkbenchWindow window;
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
+
 		List<Object> selection = TraceCreationHelper.extractSelectedElements(event);
-		
+
 		Collection<ArtifactHandler> artifactHandlers = ExtensionPointHelper.getArtifactHandlers();
 		window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+			List<ArtifactHandler> availableHandlers = artifactHandlers.stream()
+					.filter(handler -> handler.canHandleSelection(selection.get(0))).collect(Collectors.toList());
 
-		List<ArtifactHandler> availableHandlers = artifactHandlers.stream()
-				.filter(handler -> handler.canHandleSelection(selection)).collect(Collectors.toList());
-		if (availableHandlers.size() == 0) {
-			MessageDialog.openWarning(window.getShell(), "No handler for selected item",
-					"There is no handler for " + selection + " so it will be ignored.");
-		} else if (availableHandlers.size() > 1) {
-			MessageDialog.openWarning(window.getShell(), "Multiple handlers for selected item",
-					"There are multiple handlers for " + selection + " so it will be ignored.");
-		} else {
-			TraceCreationHandler.preSelection.addAll(selection);
-		}
+			if (availableHandlers.size() == 0) {
+				MessageDialog.openWarning(window.getShell(), "No handler for selected item",
+						"There is no handler for " + selection + " so it will be ignored.");
+			} else if (availableHandlers.size() > 1) {
+				MessageDialog.openWarning(window.getShell(), "Multiple handlers for selected item",
+						"There are multiple handlers for " + selection + " so it will be ignored.");
+			} else {
+				TraceCreationHandler.preSelection.addAll(selection);
+			}
 		return null;
 	}
 
