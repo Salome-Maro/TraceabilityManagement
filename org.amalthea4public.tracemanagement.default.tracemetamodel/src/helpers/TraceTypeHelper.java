@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.Trace;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
