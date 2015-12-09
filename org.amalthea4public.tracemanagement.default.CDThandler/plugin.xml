@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.amalthea4public.configuration.artifacthandler">
+      <artifact_handler
+            handler="handlers.CDTHandler">
+      </artifact_handler>
+   </extension>
+
+</plugin>

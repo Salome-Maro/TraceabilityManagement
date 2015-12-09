@@ -5,3 +5,4 @@ Bundle-SymbolicName: org.amalthea4public.tracemanagement.default.EMFhandler;sing
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.amalthea4public.tracemanagement.generic,
  org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

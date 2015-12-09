@@ -1,15 +1,14 @@
 package org.amalthea4public.tracemanagement.generic.tests;
 
+import static org.amalthea4public.tracemanagement.generic.helpers.EMFHelper.getIdentifier;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Optional;
 
 import org.amalthea4public.tracemanagement.generic.adapters.TracePersistenceAdapter;
 import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper;
-import static org.amalthea4public.tracemanagement.generic.helpers.EMFHelper.getIdentifier;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.SimpleTraceModel;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.Trace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
