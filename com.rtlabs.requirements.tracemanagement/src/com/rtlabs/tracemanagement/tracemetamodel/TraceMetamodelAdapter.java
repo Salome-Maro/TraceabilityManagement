@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.rtlabs.requirements.Requirement;
+import com.rtlabs.traces.ArtifactToArtifact;
 import com.rtlabs.traces.Children;
 import com.rtlabs.traces.ReqToArtifact;
 import com.rtlabs.traces.ReqToReq;
@@ -30,13 +31,18 @@ public class TraceMetamodelAdapter
 
 		Collection<EClass> traceTypes = new ArrayList<>();
 
-		if (selection.size() >= 2) {
-			if (everythingIsARequirement(selection))
-				traceTypes.add(TracesPackage.eINSTANCE.getChildren());
-			else if (selectionContainsRequirementAndArtifact(selection))
-				traceTypes.add(TracesPackage.eINSTANCE.getReqToArtifact());
+		if (selection.size() == 2 && everythingIsARequirement(selection)) {
+			traceTypes.add(TracesPackage.eINSTANCE.getReqToReq());
 		}
-
+		if (selection.size() == 2 && selectionContainsRequirementAndArtifact(selection)) {
+			traceTypes.add(TracesPackage.eINSTANCE.getReqToArtifact());
+		}
+		if (selection.size() >= 2 && everythingIsARequirement(selection)) {
+			traceTypes.add(TracesPackage.eINSTANCE.getChildren());
+		}
+		if (selection.size() == 2 && everythingIsArtifact(selection)) {
+			traceTypes.add(TracesPackage.eINSTANCE.getArtifactToArtifact());
+		}
 		return traceTypes;
 	}
 
@@ -49,6 +55,10 @@ public class TraceMetamodelAdapter
 		return selection.stream().allMatch(o -> o instanceof Requirement);
 	}
 
+	private boolean everythingIsArtifact(List<EObject> selection) {
+		return selection.stream().allMatch(sel->sel instanceof ArtifactWrapper);
+		
+	}
 	@Override
 	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection) {
 
@@ -57,8 +67,8 @@ public class TraceMetamodelAdapter
 		Trace trace = (Trace) TracesFactory.eINSTANCE.create(traceType);
 		if (trace instanceof ReqToReq) {
 			ReqToReq reqToReq = (ReqToReq) trace;
-			reqToReq.setParent((Requirement) selection.get(0));
-			reqToReq.setChild((Requirement) selection.get(1));
+			reqToReq.setSource((Requirement) selection.get(0));
+			reqToReq.setTarget((Requirement) selection.get(1));
 		} else if (trace instanceof Children) {
 			Children reqChildren = (Children) trace;
 			reqChildren.setParent((Requirement) selection.get(0));
@@ -71,12 +81,16 @@ public class TraceMetamodelAdapter
 		} else if (trace instanceof ReqToArtifact) {
 			ReqToArtifact reqToArtifact = (ReqToArtifact) trace;
 			if (selection.get(0) instanceof Requirement) {
-				reqToArtifact.setParent((Requirement) selection.get(0));
-				reqToArtifact.setArtifact((ArtifactWrapper) selection.get(1));
+				reqToArtifact.setSource((Requirement) selection.get(0));
+				reqToArtifact.setTarget((ArtifactWrapper) selection.get(1));
 			} else {
-				reqToArtifact.setParent((Requirement) selection.get(1));
-				reqToArtifact.setArtifact((ArtifactWrapper) selection.get(0));
+				reqToArtifact.setSource((Requirement) selection.get(1));
+				reqToArtifact.setTarget((ArtifactWrapper) selection.get(0));
 			}
+		} else if (trace instanceof ArtifactToArtifact) {
+			ArtifactToArtifact t = (ArtifactToArtifact) trace;
+			t.setSource((ArtifactWrapper)selection.get(0));
+			t.setTarget((ArtifactWrapper)selection.get(1));
 		}
 
 		root.getTraces().add(trace);
@@ -118,10 +132,8 @@ public class TraceMetamodelAdapter
 									.collect(Collectors.toList());
 							connectedElements.put(t, tracedElements);
 						}
-						
-					} 
-					else 
-					{
+
+					} else {
 						List<EObject> tracedElements = new ArrayList<>();
 						EList<EObject> allelements = t.computeTracedElements();
 						tracedElements = allelements.stream().filter(e -> !e.equals(element))
@@ -131,6 +143,49 @@ public class TraceMetamodelAdapter
 
 				}
 			});
+			
+			if (element instanceof ReqToReq) {
+				List<EObject> tracedSource = new ArrayList<>();
+				ReqToReq trace = (ReqToReq) element;
+				tracedSource.add(trace.getSource());
+				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_REQ__SOURCE), tracedSource);
+				
+				List<EObject> tracedTarget = new ArrayList<>();
+				tracedTarget.add(trace.getTarget());
+				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_REQ__TARGET), tracedTarget);
+			}
+			if (element instanceof Children) {
+				Children c = (Children) element;
+				List<EObject> tracedParent = new ArrayList<>();
+				tracedParent.add(c.getParent());
+				connectedElements.put(c.eClass().getEStructuralFeature(TracesPackage.CHILDREN__PARENT), tracedParent);
+				
+				List<EObject> tracedChildren = new ArrayList<>();
+				tracedChildren.addAll(c.getChild());
+				connectedElements.put(c.eClass().getEStructuralFeature(TracesPackage.CHILDREN__CHILD), tracedChildren);
+			}
+			
+			if (element instanceof ReqToArtifact) {
+				List<EObject> tracedSource = new ArrayList<>();
+				ReqToArtifact trace = (ReqToArtifact) element;
+				tracedSource.add(trace.getSource());
+				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_ARTIFACT__SOURCE), tracedSource);
+				
+				List<EObject> tracedTarget = new ArrayList<>();
+				tracedTarget.add(trace.getTarget());
+				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_ARTIFACT__TARGET), tracedTarget);
+			}
+			
+			if (element instanceof ArtifactToArtifact) {
+				List<EObject> tracedSource = new ArrayList<>();
+				ArtifactToArtifact trace = (ArtifactToArtifact) element;
+				tracedSource.add(trace.getSource());
+				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.ARTIFACT_TO_ARTIFACT__SOURCE), tracedSource);
+				
+				List<EObject> tracedTarget = new ArrayList<>();
+				tracedTarget.add(trace.getTarget());
+				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.ARTIFACT_TO_ARTIFACT__TARGET), tracedTarget);
+			}
 		});
 		return connectedElements;
 	}

@@ -11,6 +11,7 @@ public class EMFHandler implements ArtifactHandler {
 	
 	public boolean canHandleSelection(Object selection) {
 		return selection instanceof EObject;
+		
 	}
 
 	@Override

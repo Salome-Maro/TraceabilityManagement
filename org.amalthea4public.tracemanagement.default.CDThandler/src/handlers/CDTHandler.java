@@ -14,10 +14,7 @@ public class CDTHandler implements ArtifactHandler {
 
 	@Override
 	public boolean canHandleSelection(Object selection) {
-		if (selection instanceof ICElement) {
-			return true;
-		}
-		return false;
+		return selection instanceof ICElement; 
 	}
 
 	@Override
