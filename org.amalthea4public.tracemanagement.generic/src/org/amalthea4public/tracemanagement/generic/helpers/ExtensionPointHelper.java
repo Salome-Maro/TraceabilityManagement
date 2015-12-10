@@ -22,6 +22,17 @@ public class ExtensionPointHelper {
 	private static final String ARTIFACT_HANDLER_ID = "org.amalthea4public.configuration.artifacthandler";
 	private static final String ARTIFACT_HANDLER_CONFIG = "handler";
 
+	/**
+	 * Gets extension point from the ID and attribute passed
+	 * 
+	 * @param ID 
+	 * the ID of the extension point
+	 * 		  
+	 * @param CONFIG 
+	 * the name of the attribute
+	 * 
+	 * @return List of extension points
+	 */
 	public static List<Object> getExtensions(final String ID, final String CONFIG) {
 		try {
 			IConfigurationElement[] configs = Platform.getExtensionRegistry().getConfigurationElementsFor(ID);
@@ -36,6 +47,11 @@ public class ExtensionPointHelper {
 		}
 	}
 
+	/**
+	 *
+	 * @return
+	 * Trace metamodel adapter. If this is empty then a null is returned
+	 */
 	public static Optional<TraceMetamodelAdapter> getTraceMetamodelAdapter() {
 		try {
 			Object extension = getExtensions(TRACE_ID, TRACE_CONFIG).get(0);
@@ -45,6 +61,11 @@ public class ExtensionPointHelper {
 		}
 	}
 
+	/**
+	 *
+	 * @return
+	 * Trace persistence adapter. If this is empty, then a null is returned
+	 */
 	public static Optional<TracePersistenceAdapter> getTracePersistenceAdapter() {
 		try {
 			Object extension = getExtensions(PERSISTENCE_ID, PERSISTENCE_CONFIG).get(0);
@@ -54,6 +75,11 @@ public class ExtensionPointHelper {
 		}
 	}
 
+	/**
+	 * 
+	 * @return A collection of all the artifact handlers available. 
+	 * This method collects all plugins that have an extension to the ArtifactHandler Extension point
+	 */
 	public static Collection<ArtifactHandler> getArtifactHandlers() {
 		try {
 			return getExtensions(ARTIFACT_HANDLER_ID, ARTIFACT_HANDLER_CONFIG).stream()

@@ -12,13 +12,25 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 public class TraceCreationHelper {
-
+	/**
+	 * 
+	 * @param event
+	 * This is the click event to create a trace
+	 * @return
+	 * A list of all the selected elements
+	 */
 	public static List<Object> extractSelectedElements(ExecutionEvent event) {
 		ISelection currentSelection = HandlerUtil.getCurrentSelection(event);
 		return extractSelectedElements(currentSelection);
 	}
 	
 	@SuppressWarnings("unchecked")
+	/**
+	 * 
+	 * @param selection
+	 * @return
+	 * A list of all the selected elements
+	 */
 	public static List<Object> extractSelectedElements(ISelection selection){
 		if(selection instanceof IStructuredSelection){
 			IStructuredSelection sselection = (IStructuredSelection) selection;
@@ -26,10 +38,6 @@ public class TraceCreationHelper {
 		}else {
 			return new ArrayList<Object>();
 		}
-	}
-
-	public static boolean noArtifactsSelected(Collection<EObject> selection) {
-		return selection.stream().noneMatch(o -> o instanceof ArtifactWrapper);
 	}
 	
 }
