@@ -29,6 +29,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
@@ -219,6 +221,18 @@ public class SelectionView extends ViewPart {
 	public void clearSelection() {
 		selection.clear();
 		viewer.refresh();
+		
+	}
+	
+	public static SelectionView getOpenedView(){
+		
+		try {
+			return (SelectionView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+					.showView(ID);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+		return null;
 		
 	}
 }

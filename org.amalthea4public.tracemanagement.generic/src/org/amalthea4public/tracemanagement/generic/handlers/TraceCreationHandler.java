@@ -35,13 +35,7 @@ public class TraceCreationHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
-		IViewPart view;
-		try {
-			view = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.showView("org.amalthea4public.tracemanagement.generic.views.SelectionView");
-
-			SelectionView selectionView = (SelectionView) view;
-			List<Object> selection = selectionView.getSelection();
+			List<Object> selection = SelectionView.getOpenedView().getSelection();
 
 			TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 			TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
@@ -66,10 +60,6 @@ public class TraceCreationHandler extends AbstractHandler {
 				persistenceAdapter.saveTracesAndArtifactWrappers(root, selectionAsEObjects, existingArtifactWrappers);
 			}
 
-		} catch (PartInitException e) {
-
-			e.printStackTrace();
-		}
 
 		return null;
 	}

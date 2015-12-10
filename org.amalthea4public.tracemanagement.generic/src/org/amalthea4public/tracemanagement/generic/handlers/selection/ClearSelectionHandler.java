@@ -11,14 +11,7 @@ public class ClearSelectionHandler extends AbstractHandler  {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		try {
-			SelectionView v = (SelectionView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.showView(SelectionView.ID).getViewSite().getPart();
-			v.clearSelection();
-		} catch (PartInitException e) {
-			e.printStackTrace();
-		}
-		
+		SelectionView.getOpenedView().clearSelection();
 		return null;
 	}
 

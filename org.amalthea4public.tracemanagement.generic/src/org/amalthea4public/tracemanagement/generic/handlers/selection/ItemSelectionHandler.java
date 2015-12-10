@@ -16,16 +16,7 @@ public class ItemSelectionHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		List<Object> selection = TraceCreationHelper.extractSelectedElements(event);
-
-		try {
-			SelectionView v = (SelectionView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.showView(SelectionView.ID).getViewSite().getPart();
-			
-			v.droptoSelection(selection);
-		} catch (PartInitException e) {
-			e.printStackTrace();
-		}
-		
+		SelectionView.getOpenedView().droptoSelection(selection);
 		return null;
 	}
 
