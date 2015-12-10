@@ -7,8 +7,6 @@ import org.amalthea4public.tracemanagement.generic.views.SelectionView;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 public class ItemSelectionHandler extends AbstractHandler {
 
@@ -16,7 +14,7 @@ public class ItemSelectionHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		List<Object> selection = TraceCreationHelper.extractSelectedElements(event);
-		SelectionView.getOpenedView().droptoSelection(selection);
+		SelectionView.getOpenedView().dropToSelection(selection);
 		return null;
 	}
 
