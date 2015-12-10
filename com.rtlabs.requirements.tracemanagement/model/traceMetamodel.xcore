@@ -15,13 +15,13 @@ class Trace{
 }
 
 class ReqToReq extends Trace {
-	refers Requirement[1..1] parent
-	refers Requirement[1..1] child
+	refers Requirement[1..1] source
+	refers Requirement[1..1] target
 	
 	op EObject[] computeTracedElements(){
 		tracedElements.clear
-		tracedElements.add(parent) 
-		tracedElements.add(child)
+		tracedElements.add(source) 
+		tracedElements.add(target)
 		return tracedElements
 	}
 }
@@ -39,25 +39,25 @@ class Children extends Trace{
 }
 
 class ReqToArtifact extends Trace {
-	refers Requirement[1..1] parent 
-	refers ArtifactWrapper[1..1] artifact
+	refers Requirement[1..1] source 
+	refers ArtifactWrapper[1..1] target
 	
 	op EObject[] computeTracedElements(){
 		tracedElements.clear
-		tracedElements.add(parent) 
-		tracedElements.add(artifact)
+		tracedElements.add(source) 
+		tracedElements.add(target)
 		return tracedElements
 	}
 }
 
 class ArtifactToArtifact extends Trace {
-	refers ArtifactWrapper [1..1] parent
-	refers ArtifactWrapper[1..1] artifact
+	refers ArtifactWrapper [1..1] source
+	refers ArtifactWrapper[1..1] target
 	
 	op EObject[] computeTracedElements(){
 		tracedElements.clear
-		tracedElements.add(parent) 
-		tracedElements.add(artifact)
+		tracedElements.add(source) 
+		tracedElements.add(target)
 		return tracedElements
 	}
 } 
