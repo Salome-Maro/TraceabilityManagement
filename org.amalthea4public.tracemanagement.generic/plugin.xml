@@ -91,5 +91,25 @@
             class="org.amalthea4public.tracemanagement.generic.artifacts.ArtifactsPackage"
             genModel="model/artifactMetamodel.xcore"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.amalthea4public.tracemanagement.generic.views"
+            name="AMALTHEA4Public Views">
+      </category>
+      <view
+            category="org.amalthea4public.tracemanagement.generic.views"
+            class="org.amalthea4public.tracemanagement.generic.views.SelectionView"
+            icon="icons/sample.gif"
+            id="org.amalthea4public.tracemanagement.generic.views.SelectionView"
+            name="Selection View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
 
 </plugin>
