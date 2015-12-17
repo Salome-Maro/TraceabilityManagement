@@ -53,7 +53,13 @@ public class CreateProjectTest {
 		editorBot.bot().tree().getTreeItem("platform:/resource/TestProject/src/Test.uml").expand();
 		editorBot.bot().tree().getTreeItem("platform:/resource/TestProject/src/Test.uml").getNode("<Model> TestModel").expand();
 		editorBot.bot().tree().getTreeItem("platform:/resource/TestProject/src/Test.uml").getNode("<Model> TestModel").select("<Class> BBB", "<Class> AAA");
-		editorBot.bot().tree().contextMenu("Amalthea4Public Trace Managament").menu("Create Trace").click();
+		editorBot.bot().tree().contextMenu("Amalthea4Public Trace Managament").menu("Add to Selection").click();
+		bot.viewByTitle("Selection View").show();
+		bot.editorByTitle("Test.uml").show();
+		bot.tree().contextMenu("Amalthea4Public Trace Managament").menu("Create Trace").click();
+		bot.viewByTitle("Selection View").show();
+		//bot.tree().contextMenu("Amalthea4Public Trace Managament").menu("Create Trace").click();
+		//editorBot.bot().tree().contextMenu("Amalthea4Public Trace Managament").menu("Create Trace").click();
 		bot.shell("Select the trace type you want to create").activate().bot().button("OK").click();
 
 	
