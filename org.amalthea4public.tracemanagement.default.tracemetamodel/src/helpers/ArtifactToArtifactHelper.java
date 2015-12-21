@@ -2,6 +2,7 @@ package helpers;
 
 import java.util.List;
 import java.util.Map;
+import org.amalthea4public.tracemanagement.generic.adapters.Connection;
 
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.ArtifactToArtifact;
@@ -34,7 +35,7 @@ public class ArtifactToArtifactHelper extends TraceTypeHelper {
 	}
 
 	@Override
-	public void addConnectedElements(EObject element, TraceElement trace, Map<EObject, List<EObject>> traces) {
+	public void addConnectedElements(EObject element, TraceElement trace, List<Connection> traces) {
 		if (trace instanceof ArtifactToArtifact) {
 			ArtifactToArtifact t = (ArtifactToArtifact) trace;
 			addConnectedElementsToSourceAndTarget(element, trace, t.getSource(), t.getTarget(), traces);

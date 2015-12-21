@@ -11,13 +11,9 @@
             name="Create Trace">
       </command>
       <command
-            id="org.amalthea4public.generic.tracecreation.displayTraceMatrix"
-            name="Display Trace Matrix">
-      </command>
-      <command
-            helpContextId="Add currently selected item to list of selection"
-            id="org.amalthea4public.generic.tracecreation.commands.addtoSelection"
-            name="Add to Selection">
+            helpContextId="Remove currently selected item from the  list of selection"
+            id="org.amalthea4public.generic.tracecreation.commands.removefromselection"
+            name="Remove from Selection">
       </command>
       <command
             id="org.amalthea4public.generic.tracecreation.clearselection"
@@ -31,8 +27,8 @@
             commandId="org.amalthea4public.generic.tracecreation.commands.createTrace">
       </handler>
       <handler
-            class="org.amalthea4public.tracemanagement.generic.handlers.selection.ItemSelectionHandler"
-            commandId="org.amalthea4public.generic.tracecreation.commands.addtoSelection">
+            class="org.amalthea4public.tracemanagement.generic.handlers.selection.RemoveSelectionHandler"
+            commandId="org.amalthea4public.generic.tracecreation.commands.removefromselection">
       </handler>
       <handler
             class="org.amalthea4public.tracemanagement.generic.handlers.selection.ClearSelectionHandler"
@@ -42,42 +38,30 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+            locationURI="popup:org.amalthea4public.tracemanagement.generic.views.SelectionView?after=additions">
          <separator
                name="org.amalthea4public.generic.tracecreation.separator2"
                visible="true">
          </separator>
-         <menu
-               id="org.amalthea4public.generic.tracecreation.menus.traceManagement"
-               label="Amalthea4Public Trace Managament"
-               mnemonic="M">
-            <command
-                  commandId="org.amalthea4public.generic.tracecreation.commands.createTrace"
-                  id="org.amalthea4public.generic.tracecreation.menus.createTrace"
-                  label="Create Trace"
-                  mnemonic="S"
-                  tooltip="Gives you a list of available trace types">
-            </command>
-            <command
-                  commandId="org.amalthea4public.generic.tracecreation.displayTraceMatrix"
-                  id="org.amalthea4public.generic.tracecreation.menus.displayTraceMatrix"
-                  label="Display Trace Matrix"
-                  style="push"
-                  tooltip="Displays traces between two models">
-            </command>
-            <command
-                  commandId="org.amalthea4public.generic.tracecreation.commands.addtoSelection"
-                  label="Add to Selection"
-                  style="push"
-                  tooltip="Adds the selected items to the current selection">
-            </command>
-            <command
-                  commandId="org.amalthea4public.generic.tracecreation.clearselection"
-                  label="Clear Selection"
-                  style="push"
-                  tooltip="Clears the current selection of elements">
-            </command>
-         </menu>
+         <command
+               commandId="org.amalthea4public.generic.tracecreation.commands.createTrace"
+               id="org.amalthea4public.generic.tracecreation.menus.createTrace"
+               label="Create Trace"
+               mnemonic="S"
+               tooltip="Gives you a list of available trace types">
+         </command>
+         <command
+               commandId="org.amalthea4public.generic.tracecreation.commands.removefromselection"
+               label="Remove from Selection"
+               style="push"
+               tooltip="Remove the selected item from the current selection">
+         </command>
+         <command
+               commandId="org.amalthea4public.generic.tracecreation.clearselection"
+               label="Clear Selection"
+               style="push"
+               tooltip="Clears the current selection of elements">
+         </command>
          <separator
                name="org.amalthea4public.generic.tracecreation.separator1"
                visible="true">

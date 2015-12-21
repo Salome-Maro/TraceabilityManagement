@@ -6,6 +6,8 @@ import java.util.Optional
 import org.eclipse.emf.ecore.EObject
 import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper
 import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper
+import java.util.Map
+import org.amalthea4public.tracemanagement.generic.adapters.Connection
 
 class VisualizationHelper {
 	def static String createMatrix(Optional<EObject> traceModel, Collection<EObject> firstElements, Collection<EObject> secondElements){
@@ -23,19 +25,21 @@ class VisualizationHelper {
 	Choose two containers to show a traceability matrix of their contents.
 	«ENDIF»
 	}
+	
 	@enduml
 	'''
 	} 
 	
-	def static String createNeighboursView(List<EObject> connectedElements, List<String> traceLabels, EObject selectedElement){
-	var i = 1
-	var j = 1
+	def static String createNeighboursView(List<Connection> connections, EObject selectedObject){
+	var helper = new Connections(connections, selectedObject);
 	'''
 	@startuml
-	object "«EMFHelper.getIdentifier(selectedElement)»" as o0 #pink
-	«FOR e:connectedElements»object "«EMFHelper.getIdentifier(e)»" as o«i++»
+	object "«helper.originLabel()»" as «helper.originId()» #pink
+	«FOR id:helper.objectIdsWithoutOrigin()»
+	object "«helper.label(id)»" as «id»
 	«ENDFOR»
-	«FOR t:traceLabels» o0 --> o«j++» : "«t»"
+	«FOR a:helper.arrows()» 
+	«a»
 	«ENDFOR» 
 	@enduml
 	''' 

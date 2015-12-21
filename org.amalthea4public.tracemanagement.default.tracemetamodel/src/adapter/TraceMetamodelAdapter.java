@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.amalthea4public.tracemanagement.generic.adapters.Connection;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.SimpleTraceModel;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelFactory;
@@ -20,38 +21,39 @@ import helpers.TraceTypeHelper;
 
 public class TraceMetamodelAdapter
 		implements org.amalthea4public.tracemanagement.generic.adapters.TraceMetamodelAdapter {
-	
+
 	private Collection<TraceTypeHelper> helpers;
-	
+
 	public TraceMetamodelAdapter() {
 		helpers = new ArrayList<>();
 		helpers.add(new TraceHelper());
 		helpers.add(new ArtifactToArtifactHelper());
 		helpers.add(new TraceToArtifactHelper());
 	}
-	
+
 	@Override
 	public Collection<EClass> getAvailableTraceTypes(List<EObject> selection) {
 		Collection<EClass> traceTypes = new ArrayList<>();
-		
+
 		helpers.forEach(h -> {
-			if(h.fitsSelection(selection))
+			if (h.fitsSelection(selection))
 				traceTypes.add(h.getType());
 		});
-		
+
 		return traceTypes;
 	}
 
 	@Override
 	public EObject createTrace(EClass traceType, Optional<EObject> traceModel, List<EObject> selection) {
-		SimpleTraceModel root = (SimpleTraceModel) traceModel.orElse(TracemetamodelFactory.eINSTANCE.createSimpleTraceModel());
+		SimpleTraceModel root = (SimpleTraceModel) traceModel
+				.orElse(TracemetamodelFactory.eINSTANCE.createSimpleTraceModel());
 
 		EObject trace = TracemetamodelFactory.eINSTANCE.create(traceType);
 
 		helpers.forEach(h -> {
 			h.initialise(trace, selection);
 		});
-		
+
 		root.getTraces().add((TraceElement) trace);
 		return root;
 	}
@@ -69,27 +71,27 @@ public class TraceMetamodelAdapter
 	}
 
 	@Override
-	public Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel) {
-		Map<EObject, List<EObject>> traces = new HashMap<>();
-		
+	public List<Connection> getConnectedElements(EObject element, Optional<EObject> traceModel) {
+		List<Connection> traces = new ArrayList<>();
+
 		traceModel.ifPresent(tm -> {
 			if (element instanceof TraceElement) {
 				TraceElement t = (TraceElement) element;
-				List<EObject> tracedElements =  new ArrayList<>();
+				List<EObject> tracedElements = new ArrayList<>();
 				helpers.forEach(h -> {
 					h.addObjectsConnectedtoTrace(tracedElements, t);
 				});
-				
-				traces.put(t, tracedElements);
-			}else {
-			SimpleTraceModel root = (SimpleTraceModel)tm;
-			root.getTraces().forEach(trace -> {
-				helpers.forEach(h -> h.addConnectedElements(element, trace, traces));	
-			}); }
+
+				traces.add(new Connection(element, tracedElements, t));
+			} else {
+				SimpleTraceModel root = (SimpleTraceModel) tm;
+				root.getTraces().forEach(trace -> {
+					helpers.forEach(h -> h.addConnectedElements(element, trace, traces));
+				});
+			}
 		});
-		
+
 		return traces;
 	}
 
-	
 }

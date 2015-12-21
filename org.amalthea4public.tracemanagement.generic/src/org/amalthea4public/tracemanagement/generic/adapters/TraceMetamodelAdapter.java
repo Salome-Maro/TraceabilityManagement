@@ -71,5 +71,5 @@ public interface TraceMetamodelAdapter {
 	 * @return A Map with the following structure: [Trace object t -> {list of
 	 *         all objects connected to element via t}]
 	 */
-	Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel);
+	List<Connection> getConnectedElements(EObject element, Optional<EObject> traceModel);
 }
