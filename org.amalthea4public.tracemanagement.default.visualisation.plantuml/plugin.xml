@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="handlers.DisplayTraceMatrixHandler"
+            class="handlers.DisplayTracesHandler"
             commandId="org.amalthea4public.tracemanagement.default.visualisation.plantuml.toggleTransitivity">
       </handler>
    </extension>

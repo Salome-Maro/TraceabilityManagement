@@ -84,10 +84,19 @@
       <view
             category="org.amalthea4public.tracemanagement.generic.views"
             class="org.amalthea4public.tracemanagement.generic.views.SelectionView"
-            icon="icons/sample.gif"
+            icon="icons/selectionView.png"
             id="org.amalthea4public.tracemanagement.generic.views.SelectionView"
             name="Selection View">
       </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.amalthea4public.tracemanagement.generic.perspective.CapraPerspective"
+            icon="icons/capra.png"
+            id="org.amalthea4public.tracemanagement.generic.perspective.CapraPerspective"
+            name="Capra">
+      </perspective>
    </extension>
 
 </plugin>
