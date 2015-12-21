@@ -34,4 +34,18 @@
          
       </menuContribution>
    </extension>
+   
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.amalthea4public.tracemanagement.generic.perspective.CapraPerspective">
+         <view
+               id="net.sourceforge.plantuml.eclipse.views.PlantUmlView"
+               minimized="false"
+               ratio="0.25"
+               relationship="right"
+               relative="org.amalthea4public.tracemanagement.generic.views.SelectionView">
+         </view>
+      </perspectiveExtension>
+   </extension>
 </plugin>
