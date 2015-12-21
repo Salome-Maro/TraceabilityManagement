@@ -2,7 +2,12 @@ package org.amalthea4public.tracemanagement.generic.views;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.amalthea4public.tracemanagement.generic.handlers.ArtifactHandler;
@@ -42,7 +47,7 @@ public class SelectionView extends ViewPart {
 	public TableViewer viewer;
 
 	/** The maintained selection of EObjects */
-	private List<Object> selection = new ArrayList<>();
+	private Set<Object> selection = new LinkedHashSet<>();
 
 	class ViewContentProvider implements IStructuredContentProvider {
 		@Override
@@ -153,14 +158,17 @@ public class SelectionView extends ViewPart {
 
 	@SuppressWarnings("unchecked")
 	public void dropToSelection(Object data) {
+		
 		if (data instanceof TreeSelection) {
 			TreeSelection tree = (TreeSelection) data;
 			if (tree.toList().stream().allMatch(this::validateSelection))
 				selection.addAll(tree.toList());
-		} else {
-			if (validateSelection(data))
+		} else if (data instanceof Collection<?>) {
+			 Collection<Object> arrayselection = (Collection<Object>) data;
+			 if (arrayselection.stream().allMatch(this::validateSelection))
+					selection.addAll(arrayselection);
+		}else if (validateSelection(data))
 				selection.add(data);
-		}
 
 		viewer.refresh();
 	}
@@ -183,7 +191,7 @@ public class SelectionView extends ViewPart {
 	}
 
 	public List<Object> getSelection() {
-		return selection;
+		return new ArrayList<Object>(selection);
 	}
 
 	public void clearSelection() {
@@ -199,5 +207,10 @@ public class SelectionView extends ViewPart {
 		}
 
 		return null;
+	}
+
+	public void removeFromSelection(List<Object> currentselection) {
+		selection.removeAll(currentselection);
+		viewer.refresh();
 	}
 }
