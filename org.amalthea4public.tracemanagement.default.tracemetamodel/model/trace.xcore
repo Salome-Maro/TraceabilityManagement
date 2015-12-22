@@ -10,12 +10,12 @@ abstract class TraceElement {
 
 }
 
-class Trace extends TraceElement {
+class EObjectToEObject extends TraceElement {
 	refers EObject source
 	refers EObject target
 }
 
-class TraceToArtifact extends TraceElement {
+class EObjectToArtifact extends TraceElement {
 	refers EObject source
 	refers ArtifactWrapper target
 }

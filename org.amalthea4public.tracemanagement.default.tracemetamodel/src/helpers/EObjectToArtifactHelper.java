@@ -4,47 +4,59 @@ import java.util.List;
 
 import org.amalthea4public.tracemanagement.generic.adapters.Connection;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.Trace;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
+import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.EObjectToArtifact;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class TraceHelper extends TraceTypeHelper {
+public class EObjectToArtifactHelper extends TraceTypeHelper {
 
 	@Override
 	public boolean fitsSelection(List<EObject> selection) {
 		return selection.size() == 2
-			&& !(selection.get(0) instanceof ArtifactWrapper)
-			&& !(selection.get(1) instanceof ArtifactWrapper);
+				
+				&& (selection.get(0) instanceof ArtifactWrapper 
+				    && !(selection.get(1) instanceof ArtifactWrapper)
+				    
+				|| (selection.get(1) instanceof ArtifactWrapper 
+				    && !(selection.get(0) instanceof ArtifactWrapper)));
 	}
 
 	@Override
 	public EClass getType() {
-		return TracemetamodelPackage.eINSTANCE.getTrace();
+		return TracemetamodelPackage.eINSTANCE.getEObjectToArtifact();
 	}
 
 	@Override
 	public void initialise(EObject trace, List<EObject> selection) {
-		if(trace instanceof Trace){
-			Trace t = (Trace) trace;
-			t.setSource(selection.get(0));
-			t.setTarget(selection.get(1));
+		if(trace instanceof EObjectToArtifact){
+			EObjectToArtifact t2a = (EObjectToArtifact) trace;
+			
+			int artifactWrapper = 0;
+			int other = 1;
+			if(selection.get(1) instanceof ArtifactWrapper){
+				artifactWrapper = 1;
+				other = 0;
+			}
+				
+			t2a.setTarget((ArtifactWrapper) selection.get(artifactWrapper));
+			t2a.setSource(selection.get(other));
 		}
 	}
 
 	@Override
 	public void addConnectedElements(EObject element, TraceElement trace, List<Connection> traces) {
-		if (trace instanceof Trace) {
-			Trace t = (Trace) trace;
+		if (trace instanceof EObjectToArtifact) {
+			EObjectToArtifact t = (EObjectToArtifact) trace;
 			addConnectedElementsToSourceAndTarget(element, trace, t.getSource(), t.getTarget(), traces);
 		}
 	}
 
 	@Override
 	public boolean isRelevant(TraceElement trace, EObject firstElement, EObject secondElement) {
-		if (trace instanceof Trace) {
-			Trace t = (Trace)trace;
+		if(trace instanceof EObjectToArtifact){
+			EObjectToArtifact t = (EObjectToArtifact) trace;
 			return isRelevantForSourceAndTarget(t.getSource(), t.getTarget(), firstElement, secondElement);
 		}
 		
@@ -53,11 +65,11 @@ public class TraceHelper extends TraceTypeHelper {
 
 	@Override
 	public void addObjectsConnectedtoTrace(List<EObject> connectedElements, TraceElement trace) {
-		if (trace instanceof Trace) {
-			Trace t = (Trace) trace;
+		if(trace instanceof EObjectToArtifact) {
+			EObjectToArtifact t = (EObjectToArtifact) trace;
+			
 			connectedElements.add(t.getSource());
 			connectedElements.add(t.getTarget());
-			
 		}
 		
 	}

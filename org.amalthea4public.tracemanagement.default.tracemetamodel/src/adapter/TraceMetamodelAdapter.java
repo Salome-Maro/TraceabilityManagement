@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import helpers.ArtifactToArtifactHelper;
-import helpers.TraceHelper;
-import helpers.TraceToArtifactHelper;
+import helpers.EObjectToArtifactHelper;
+import helpers.EObjectToEObjectHelper;
 import helpers.TraceTypeHelper;
 
 public class TraceMetamodelAdapter
@@ -24,9 +24,9 @@ public class TraceMetamodelAdapter
 
 	public TraceMetamodelAdapter() {
 		helpers = new ArrayList<>();
-		helpers.add(new TraceHelper());
+		helpers.add(new EObjectToEObjectHelper());
 		helpers.add(new ArtifactToArtifactHelper());
-		helpers.add(new TraceToArtifactHelper());
+		helpers.add(new EObjectToArtifactHelper());
 	}
 
 	@Override
