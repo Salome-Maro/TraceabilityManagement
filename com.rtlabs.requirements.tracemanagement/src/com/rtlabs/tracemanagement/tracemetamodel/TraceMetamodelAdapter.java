@@ -2,12 +2,11 @@ package com.rtlabs.tracemanagement.tracemetamodel;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.amalthea4public.tracemanagement.generic.adapters.Connection;
 import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -112,9 +111,9 @@ public class TraceMetamodelAdapter
 	}
 
 	@Override
-	public Map<EObject, List<EObject>> getConnectedElements(EObject element, Optional<EObject> traceModel) {
+	public List<Connection> getConnectedElements(EObject element, Optional<EObject> traceModel) {
 
-		Map<EObject, List<EObject>> connectedElements = new HashMap<>();
+		List<Connection> connectedElements = new ArrayList<>();
 
 		traceModel.ifPresent(tm -> {
 			RtLabsTraceModel root = (RtLabsTraceModel) tm;
@@ -124,13 +123,13 @@ public class TraceMetamodelAdapter
 						if (((Children) t).getChild().contains(element)) {
 							List<EObject> tracedElements = new ArrayList<>();
 							tracedElements.add(((Children) t).getParent());
-							connectedElements.put(t, tracedElements);
+							connectedElements.add(new Connection(element, tracedElements, t));
 						} else {
 							List<EObject> tracedElements = new ArrayList<>();
 							EList<EObject> allelements = t.computeTracedElements();
 							tracedElements = allelements.stream().filter(e -> !e.equals(element))
 									.collect(Collectors.toList());
-							connectedElements.put(t, tracedElements);
+							connectedElements.add(new Connection(element, tracedElements, t));
 						}
 
 					} else {
@@ -138,7 +137,7 @@ public class TraceMetamodelAdapter
 						EList<EObject> allelements = t.computeTracedElements();
 						tracedElements = allelements.stream().filter(e -> !e.equals(element))
 								.collect(Collectors.toList());
-						connectedElements.put(t, tracedElements);
+						connectedElements.add(new Connection(element, tracedElements, t));
 					}
 
 				}
@@ -148,43 +147,43 @@ public class TraceMetamodelAdapter
 				List<EObject> tracedSource = new ArrayList<>();
 				ReqToReq trace = (ReqToReq) element;
 				tracedSource.add(trace.getSource());
-				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_REQ__SOURCE), tracedSource);
+				connectedElements.add(new Connection(element, tracedSource, trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_REQ__SOURCE)));
 				
 				List<EObject> tracedTarget = new ArrayList<>();
 				tracedTarget.add(trace.getTarget());
-				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_REQ__TARGET), tracedTarget);
+				connectedElements.add(new Connection(element, tracedTarget, trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_REQ__TARGET)));
 			}
 			if (element instanceof Children) {
 				Children c = (Children) element;
 				List<EObject> tracedParent = new ArrayList<>();
 				tracedParent.add(c.getParent());
-				connectedElements.put(c.eClass().getEStructuralFeature(TracesPackage.CHILDREN__PARENT), tracedParent);
+				connectedElements.add(new Connection(element, tracedParent, c.eClass().getEStructuralFeature(TracesPackage.CHILDREN__PARENT)));
 				
 				List<EObject> tracedChildren = new ArrayList<>();
 				tracedChildren.addAll(c.getChild());
-				connectedElements.put(c.eClass().getEStructuralFeature(TracesPackage.CHILDREN__CHILD), tracedChildren);
+				connectedElements.add(new Connection(element, tracedChildren, c.eClass().getEStructuralFeature(TracesPackage.CHILDREN__CHILD)));
 			}
 			
 			if (element instanceof ReqToArtifact) {
 				List<EObject> tracedSource = new ArrayList<>();
 				ReqToArtifact trace = (ReqToArtifact) element;
 				tracedSource.add(trace.getSource());
-				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_ARTIFACT__SOURCE), tracedSource);
+				connectedElements.add(new Connection(element, tracedSource, trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_ARTIFACT__SOURCE)));
 				
 				List<EObject> tracedTarget = new ArrayList<>();
 				tracedTarget.add(trace.getTarget());
-				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_ARTIFACT__TARGET), tracedTarget);
+				connectedElements.add(new Connection(element, tracedTarget, trace.eClass().getEStructuralFeature(TracesPackage.REQ_TO_ARTIFACT__TARGET)));
 			}
 			
 			if (element instanceof ArtifactToArtifact) {
 				List<EObject> tracedSource = new ArrayList<>();
 				ArtifactToArtifact trace = (ArtifactToArtifact) element;
 				tracedSource.add(trace.getSource());
-				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.ARTIFACT_TO_ARTIFACT__SOURCE), tracedSource);
+				connectedElements.add(new Connection(element, tracedSource, trace.eClass().getEStructuralFeature(TracesPackage.ARTIFACT_TO_ARTIFACT__SOURCE)));
 				
 				List<EObject> tracedTarget = new ArrayList<>();
 				tracedTarget.add(trace.getTarget());
-				connectedElements.put(trace.eClass().getEStructuralFeature(TracesPackage.ARTIFACT_TO_ARTIFACT__TARGET), tracedTarget);
+				connectedElements.add(new Connection(element, tracedTarget, trace.eClass().getEStructuralFeature(TracesPackage.ARTIFACT_TO_ARTIFACT__TARGET)));
 			}
 		});
 		return connectedElements;

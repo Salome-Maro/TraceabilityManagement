@@ -2,7 +2,6 @@ package helpers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.amalthea4public.tracemanagement.generic.adapters.Connection;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;

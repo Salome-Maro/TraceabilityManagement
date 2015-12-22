@@ -1,9 +1,7 @@
 package handlers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -13,19 +11,21 @@ import org.amalthea4public.tracemanagement.generic.adapters.TracePersistenceAdap
 import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper;
 import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper;
 import org.amalthea4public.tracemanagement.generic.helpers.TraceCreationHelper;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
-import org.osgi.service.prefs.Preferences;
 
 import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
 
+/**
+ * Provides PlantUML with a string representation of elements connected by trace links
+ * 
+ * @author Anthony Anjorin, Salome Maro
+ */
 public class DiagramTextProviderHandler implements DiagramTextProvider {
-
 	private TraceMetamodelAdapter metamodelAdapter;
 	private List<Connection> traces = new ArrayList<>();
 
@@ -40,24 +40,18 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 		List<EObject> secondModelElements = null;
 
 		ResourceSet resourceSet = new ResourceSetImpl();
-
-		Preferences preferences = InstanceScope.INSTANCE
-				.getNode("org.amalthea4public.tracemanagement.generic.preferences");
-		Preferences transitivity = preferences.node("transitivity");
-
 		if (selectedModels.size() > 0 && selectedModels.get(0) instanceof EObject)
 			resourceSet = ((EObject) selectedModels.get(0)).eResource().getResourceSet();
+		
 		Optional<EObject> traceModel = persistenceAdapter.getTraceModel(resourceSet);
 
 		if (selectedModels.size() == 1 && selectedModels.get(0) instanceof EObject) {
-
 			EObject selectedEObject = (EObject) selectedModels.get(0);
-			List<Object> accumulator = new ArrayList<>();
-
-			if (transitivity.get("option", "direct").equals("direct")) {
-				traces = metamodelAdapter.getConnectedElements(selectedEObject, traceModel);
-			} else {
+			if (DisplayTracesHandler.isTraceViewTransitive()) {
+				List<Object> accumulator = new ArrayList<>();
 				traces = getTransitivelyConnectedElements(selectedEObject, traceModel, accumulator);
+			} else {
+				traces = metamodelAdapter.getConnectedElements(selectedEObject, traceModel);
 			}
 
 			return VisualizationHelper.createNeighboursView(traces, selectedEObject);
@@ -77,11 +71,11 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 
 	}
 
-	List<Connection> getTransitivelyConnectedElements(EObject element, Optional<EObject> traceModel,
+	private List<Connection> getTransitivelyConnectedElements(EObject element, Optional<EObject> traceModel,
 			List<Object> accumulator) {
 		List<Connection> directElements = metamodelAdapter.getConnectedElements(element, traceModel);
 		List<Connection> allElements = new ArrayList<>();
-		
+
 		directElements.forEach(connection -> {
 			if (!accumulator.contains(connection.getTlink())) {
 				allElements.add(connection);

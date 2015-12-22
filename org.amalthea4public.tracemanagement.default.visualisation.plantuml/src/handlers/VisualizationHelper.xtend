@@ -1,13 +1,12 @@
-package handlers 
+package handlers
 
 import java.util.Collection
-import java.util.List 
+import java.util.List
 import java.util.Optional
-import org.eclipse.emf.ecore.EObject
-import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper
-import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper
-import java.util.Map
 import org.amalthea4public.tracemanagement.generic.adapters.Connection
+import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper
+import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper
+import org.eclipse.emf.ecore.EObject
 
 class VisualizationHelper {
 	def static String createMatrix(Optional<EObject> traceModel, Collection<EObject> firstElements, Collection<EObject> secondElements){

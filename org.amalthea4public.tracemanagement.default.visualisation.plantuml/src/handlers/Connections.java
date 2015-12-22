@@ -3,7 +3,6 @@ package handlers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,11 @@ import org.amalthea4public.tracemanagement.generic.adapters.Connection;
 import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Helper class for generating PlantUML diagrams from a collection of {@link Connection}
+ * 
+ * @author Anthony Anjorin, Salome Maro
+ */
 public class Connections {
 
 	private List<Connection> connections;
