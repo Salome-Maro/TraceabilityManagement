@@ -82,7 +82,6 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 				accumulator.add(connection.getTlink());
 				connection.getTargets().forEach(e -> {
 					allElements.addAll(getTransitivelyConnectedElements(e, traceModel, accumulator));
-
 				});
 			}
 		});

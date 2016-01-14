@@ -3,6 +3,7 @@ package org.amalthea4public.tracemanagement.generic.handlers;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import org.amalthea4public.tracemanagement.generic.adapters.TraceMetamodelAdapter;
@@ -27,47 +28,46 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class TraceCreationHandler extends AbstractHandler {
 
-	private IWorkbenchWindow window;
-
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-
-			List<Object> selection = SelectionView.getOpenedView().getSelection();
-
-			TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
-			TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
-
-			ResourceSet resourceSet = new ResourceSetImpl();
-			// add trace model to resource set
-			Optional<EObject> traceModel = persistenceAdapter.getTraceModel(resourceSet);
-			// add artifact wrapper model to resource set
-			Optional<ArtifactWrapperContainer> existingArtifactWrappers = persistenceAdapter
-					.getArtifactWrappers(resourceSet);
-
-			Collection<ArtifactHandler> artifactHandlers = ExtensionPointHelper.getArtifactHandlers();
-
-			List<EObject> selectionAsEObjects = mapSelectionToEObjects(existingArtifactWrappers, artifactHandlers,
-					selection);
-
-			Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
-			Optional<EClass> chosenType = getTraceTypeToCreate(window, traceTypes, selectionAsEObjects);
-
-			if (chosenType.isPresent()) {
-				EObject root = traceAdapter.createTrace(chosenType.get(), traceModel, selectionAsEObjects);
-				persistenceAdapter.saveTracesAndArtifactWrappers(root, selectionAsEObjects, existingArtifactWrappers);
-			}
-
-
+		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		createTrace(window, (traceTypes, selection) -> getTraceTypeToCreate(window, traceTypes, selection));
 		return null;
 	}
 
-	private List<EObject> mapSelectionToEObjects(Optional<ArtifactWrapperContainer> existingArtifactWrappers,
+	public void createTrace(IWorkbenchWindow window, BiFunction<Collection<EClass>, List<EObject>, Optional<EClass>> chooseTraceType) {
+		List<Object> selection = SelectionView.getOpenedView().getSelection();
+
+		TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
+		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+		// add trace model to resource set
+		Optional<EObject> traceModel = persistenceAdapter.getTraceModel(resourceSet);
+		// add artifact wrapper model to resource set
+		Optional<ArtifactWrapperContainer> existingArtifactWrappers = persistenceAdapter
+				.getArtifactWrappers(resourceSet);
+
+		Collection<ArtifactHandler> artifactHandlers = ExtensionPointHelper.getArtifactHandlers();
+
+		List<EObject> selectionAsEObjects = mapSelectionToEObjects(window, existingArtifactWrappers, artifactHandlers,
+				selection);
+
+		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
+		Optional<EClass> chosenType = chooseTraceType.apply(traceTypes, selectionAsEObjects);
+
+		if (chosenType.isPresent()) {
+			EObject root = traceAdapter.createTrace(chosenType.get(), traceModel, selectionAsEObjects);
+			persistenceAdapter.saveTracesAndArtifactWrappers(root, selectionAsEObjects, existingArtifactWrappers);
+		}
+	}
+
+	private List<EObject> mapSelectionToEObjects(IWorkbenchWindow window, Optional<ArtifactWrapperContainer> existingArtifactWrappers,
 			Collection<ArtifactHandler> artifactHandlers, List<Object> selection) {
-		return selection.stream().map(sel -> convertToEObject(sel, artifactHandlers, existingArtifactWrappers))
+		return selection.stream().map(sel -> convertToEObject(window, sel, artifactHandlers, existingArtifactWrappers))
 				.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 	}
 
-	private Optional<EObject> convertToEObject(Object sel, Collection<ArtifactHandler> artifactHandlers,
+	private Optional<EObject> convertToEObject(IWorkbenchWindow window, Object sel, Collection<ArtifactHandler> artifactHandlers,
 			Optional<ArtifactWrapperContainer> existingArtifactWrappers) {
 		List<ArtifactHandler> availableHandlers = artifactHandlers.stream()
 				.filter(handler -> handler.canHandleSelection(sel)).collect(Collectors.toList());

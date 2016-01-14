@@ -23,9 +23,10 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.jface
 Bundle-ActivationPolicy: lazy
 Export-Package: org.amalthea4public.tracemanagement.generic.adapters,
- org.amalthea4public.tracemanagement.generic.handlers,
- org.amalthea4public.tracemanagement.generic.helpers,
  org.amalthea4public.tracemanagement.generic.artifacts,
  org.amalthea4public.tracemanagement.generic.artifacts.impl,
- org.amalthea4public.tracemanagement.generic.artifacts.util
+ org.amalthea4public.tracemanagement.generic.artifacts.util,
+ org.amalthea4public.tracemanagement.generic.handlers,
+ org.amalthea4public.tracemanagement.generic.helpers,
+ org.amalthea4public.tracemanagement.generic.views
 

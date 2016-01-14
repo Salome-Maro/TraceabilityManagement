@@ -132,7 +132,7 @@ public class SelectionView extends ViewPart {
 				org.eclipse.swt.dnd.RTFTransfer.getInstance(), org.eclipse.ui.part.MarkerTransfer.getInstance(),
 				org.eclipse.jface.util.LocalSelectionTransfer.getTransfer(),
 				org.eclipse.emf.edit.ui.dnd.LocalTransfer.getInstance() };
-		
+
 		viewer.addDropSupport(ops, transfers, new SelectionDropAdapter(viewer));
 	}
 
@@ -155,17 +155,16 @@ public class SelectionView extends ViewPart {
 
 	@SuppressWarnings("unchecked")
 	public void dropToSelection(Object data) {
-		
 		if (data instanceof TreeSelection) {
 			TreeSelection tree = (TreeSelection) data;
 			if (tree.toList().stream().allMatch(this::validateSelection))
 				selection.addAll(tree.toList());
 		} else if (data instanceof Collection<?>) {
-			 Collection<Object> arrayselection = (Collection<Object>) data;
-			 if (arrayselection.stream().allMatch(this::validateSelection))
-					selection.addAll(arrayselection);
-		}else if (validateSelection(data))
-				selection.add(data);
+			Collection<Object> arrayselection = (Collection<Object>) data;
+			if (arrayselection.stream().allMatch(this::validateSelection))
+				selection.addAll(arrayselection);
+		} else if (validateSelection(data))
+			selection.add(data);
 
 		viewer.refresh();
 	}
