@@ -15,14 +15,14 @@ Export-Package: com.rtlabs.traces,
  com.rtlabs.requirements.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore.xcore.lib,
  com.rtlabs.tracemanagement;visibility:=reexport,
- org.eclipse.emf.ecp.core;bundle-version="1.7.0",
  org.amalthea4public.tracemanagement.generic;visibility:=reexport,
  org.eclipse.ui.workbench,
  org.eclipse.jface,
  org.eclipse.emf.ecore.editor,
- org.eclipse.xtext.xbase.lib;bundle-version="2.8.4"
+ org.eclipse.xtext.xbase;bundle-version="2.7.3"
 Bundle-ActivationPolicy: lazy
 Import-Package: net.sourceforge.plantuml.eclipse.utils
 

@@ -127,11 +127,16 @@ public class SelectionView extends ViewPart {
 		hookContextMenu();
 
 		int ops = DND.DROP_COPY | DND.DROP_MOVE;
-		Transfer[] transfers = new Transfer[] { org.eclipse.ui.part.ResourceTransfer.getInstance(),
-				org.eclipse.ui.part.EditorInputTransfer.getInstance(), org.eclipse.swt.dnd.FileTransfer.getInstance(),
-				org.eclipse.swt.dnd.RTFTransfer.getInstance(), org.eclipse.ui.part.MarkerTransfer.getInstance(),
+		Transfer[] transfers = new Transfer[] { 
+				org.eclipse.ui.part.ResourceTransfer.getInstance(),
+				org.eclipse.ui.part.EditorInputTransfer.getInstance(), 
+				org.eclipse.swt.dnd.FileTransfer.getInstance(),
+				org.eclipse.swt.dnd.RTFTransfer.getInstance(),
+				org.eclipse.swt.dnd.TextTransfer.getInstance(),
+				org.eclipse.swt.dnd.URLTransfer.getInstance(),
 				org.eclipse.jface.util.LocalSelectionTransfer.getTransfer(),
-				org.eclipse.emf.edit.ui.dnd.LocalTransfer.getInstance() };
+				org.eclipse.emf.edit.ui.dnd.LocalTransfer.getInstance()
+		};
 
 		viewer.addDropSupport(ops, transfers, new SelectionDropAdapter(viewer));
 	}

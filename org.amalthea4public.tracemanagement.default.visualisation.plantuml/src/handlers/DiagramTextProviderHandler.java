@@ -12,7 +12,6 @@ import org.amalthea4public.tracemanagement.generic.helpers.EMFHelper;
 import org.amalthea4public.tracemanagement.generic.helpers.ExtensionPointHelper;
 import org.amalthea4public.tracemanagement.generic.helpers.TraceCreationHelper;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
@@ -34,8 +33,7 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 		metamodelAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 
-		EcoreEditor eeditor = EcoreEditor.class.cast(editor);
-		List<Object> selectedModels = TraceCreationHelper.extractSelectedElements(eeditor.getSelection());
+		List<Object> selectedModels = TraceCreationHelper.extractSelectedElements(editor.getSite().getSelectionProvider().getSelection());
 		List<EObject> firstModelElements = null;
 		List<EObject> secondModelElements = null;
 
@@ -91,7 +89,7 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 
 	@Override
 	public boolean supportsEditor(IEditorPart editor) {
-		return editor instanceof EcoreEditor;
+		return true;
 	}
 
 	@Override

@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.impl.ArtifactToArtifactImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.impl.ArtifactToArtifactImpl#getTarget <em>Target</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
