@@ -8,7 +8,7 @@
         <repository location='http://download.eclipse.org/eclipse/updates/4.5'/>
         <repository location='http://download.eclipse.org/releases/mars/201510021000'/>
         <repository location='http://www.eclipse.org/modeling/amalgam/downloads/package/modeling/mars/'/>
-      </repositories>
+      </repositories> 
     </iu>
     <iu id='epp.package.modeling' name='Eclipse Modeling Tools' version='4.5.1.20150917-1200'>
       <repositories size='2'>

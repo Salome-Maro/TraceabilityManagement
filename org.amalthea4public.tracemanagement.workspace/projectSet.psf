@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,com.rtlabs.requirements.edit"/>
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,com.rtlabs.requirements.tracemanagement"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.CDThandler"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.EMFhandler"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.IFilehandler"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.Javahandler"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.Mylynhandler"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.persistence"/>
-<project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.testsuite"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.tracemetamodel"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.default.visualisation.plantuml"/>
 <project reference="1.0,https://github.com/Salome-Maro/TraceabilityManagement.git,master,org.amalthea4public.tracemanagement.generic"/>
@@ -20,7 +17,6 @@
 <item elementID="=org.amalthea4public.tracemanagement.default.tracemetamodel" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.tracemanagement.default.Mylynhandler" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.tracemanagement.default.Javahandler" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.amalthea4public.tracemanagement.default.testsuite" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.tracemanagement.default.EMFhandler" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.tracemanagement.default.IFilehandler" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.amalthea4public.tracemanagement.default.persistence" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -29,7 +25,8 @@
 <item elementID="=org.amalthea4public.tracemanagement.generic" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1442491852532_5" label="Specific Components (Configured)" name="Specific Components (Configured)">
-<item elementID="=com.rtlabs.requirements.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=com.rtlabs.tracemanagement" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/com.rtlabs.requirements.edit" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/com.rtlabs.tracemanagement" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/com.rtlabls.workspace" type="4"/>
 </workingSets>
 </psf>
