@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracemetamodel1
+Bundle-SymbolicName: org.eclipse.app4mc.capra.default.visualisation.plantuml;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.ui.workbench,
+ org.eclipse.jface,
+ org.eclipse.app4mc.capra.generic,
+ org.eclipse.emf.ecore.editor,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ net.sourceforge.plantuml.eclipse,
+ org.eclipse.ui,
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime;bundle-version="3.10.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.app4mc.capra.handlers
+

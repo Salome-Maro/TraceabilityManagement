@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension
+         point="org.amalthea4public.configuration.persistence.trace">
+      <trace_persistence
+            adapter="org.eclipse.app4mc.capra.handlers.TracePersistenceAdapter">
+      </trace_persistence>
+   </extension>
+</plugin>

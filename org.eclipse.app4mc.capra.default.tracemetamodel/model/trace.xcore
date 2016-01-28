@@ -1,0 +1,26 @@
+package org.amalthea4public.tracemanagement.simpletrace.tracemetamodel
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper
+
+class SimpleTraceModel {
+	contains TraceElement[0..*] traces
+}
+
+abstract class TraceElement {
+
+}
+
+class EObjectToEObject extends TraceElement {
+	refers EObject source
+	refers EObject target
+}
+
+class EObjectToArtifact extends TraceElement {
+	refers EObject source
+	refers ArtifactWrapper target
+}
+
+class ArtifactToArtifact extends TraceElement {
+	refers ArtifactWrapper source
+	refers ArtifactWrapper target  
+}  
