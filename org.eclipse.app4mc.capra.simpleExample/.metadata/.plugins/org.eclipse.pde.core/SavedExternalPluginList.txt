@@ -1,4 +1,4 @@
-# List of external plug-in models previously loaded. Timestamp: 1453799651314
+# List of external plug-in models previously loaded. Timestamp: 1453989280142
 file:/Users/salomem/.p2/pool/plugins/ca.odell.glazedlists_1.9.0.v201303080712.jar
 file:/Users/salomem/.p2/pool/plugins/com.google.gson_2.2.4.v201311231704.jar
 file:/Users/salomem/.p2/pool/plugins/com.google.guava_15.0.0.v201403281430.jar
@@ -21,15 +21,6 @@ file:/Users/salomem/.p2/pool/plugins/net.sourceforge.plantuml.jdt_0.9.0.20140429
 file:/Users/salomem/.p2/pool/plugins/net.sourceforge.plantuml.text_0.9.0.201404292234.jar
 file:/Users/salomem/.p2/pool/plugins/net.sourceforge.plantuml.xcore_0.9.0.201404292234.jar
 file:/Users/salomem/.p2/pool/plugins/org.agilemore.agilegrid_1.4.0.201601250503.jar
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.CDThandler/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.EMFhandler/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.IFilehandler/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.Javahandler/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.Mylynhandler/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.persistence/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.tracemetamodel/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.default.visualisation.plantuml/
-file:/Users/salomem/git/TraceabilityManagement/org.amalthea4public.tracemanagement.generic/
 file:/Users/salomem/.p2/pool/plugins/org.antlr.runtime_4.3.0.v201502022030.jar
 file:/Users/salomem/.p2/pool/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 file:/Users/salomem/.p2/pool/plugins/org.apache.ant_1.9.4.v201504302020/
@@ -85,6 +76,14 @@ file:/Users/salomem/.p2/pool/plugins/org.eclipse.amalgam.discovery.ui_1.6.0.2015
 file:/Users/salomem/.p2/pool/plugins/org.eclipse.ant.core_3.4.0.v20150428-1928.jar
 file:/Users/salomem/.p2/pool/plugins/org.eclipse.ant.launching_1.1.100.v20150826-1124.jar
 file:/Users/salomem/.p2/pool/plugins/org.eclipse.ant.ui_3.6.100.v20150901-0506.jar
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.CDThandler/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.EMFhandler/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.IFilehandler/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.Javahandler/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.Mylynhandler/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.persistence/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.default.visualisation.plantuml/
+file:/Users/salomem/git/TraceabilityManagement/org.eclipse.app4mc.capra.generic/
 file:/Users/salomem/.p2/pool/plugins/org.eclipse.cdt_8.8.0.201509131935.jar
 file:/Users/salomem/.p2/pool/plugins/org.eclipse.cdt.codan.checkers_3.2.0.201509131935.jar
 file:/Users/salomem/.p2/pool/plugins/org.eclipse.cdt.codan.checkers.ui_3.2.0.201509131935.jar
