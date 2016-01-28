@@ -2,7 +2,7 @@ package com.rtlabs.traces
 
 import com.rtlabs.requirements.Requirement
 import org.eclipse.emf.ecore.EObject
-import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper
+import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper
 
 
 class RtLabsTraceModel{
@@ -60,4 +60,4 @@ class ArtifactToArtifact extends Trace {
 		tracedElements.add(target)
 		return tracedElements
 	}
-} 
+}  

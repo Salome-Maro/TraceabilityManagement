@@ -7,22 +7,22 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: com.rtlabs.traces,
- com.rtlabs.traces.impl,
- com.rtlabs.traces.util,
- com.rtlabs.requirements,
+Export-Package: com.rtlabs.requirements,
  com.rtlabs.requirements.impl,
- com.rtlabs.requirements.util
+ com.rtlabs.requirements.util,
+ com.rtlabs.traces,
+ com.rtlabs.traces.impl,
+ com.rtlabs.traces.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore.xcore.lib,
  com.rtlabs.tracemanagement;visibility:=reexport,
- org.amalthea4public.tracemanagement.generic;visibility:=reexport,
  org.eclipse.ui.workbench,
  org.eclipse.jface,
  org.eclipse.emf.ecore.editor,
- org.eclipse.xtext.xbase;bundle-version="2.7.3"
+ org.eclipse.xtext.xbase;bundle-version="2.7.3",
+ org.eclipse.app4mc.capra.generic;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Import-Package: net.sourceforge.plantuml.eclipse.utils
 

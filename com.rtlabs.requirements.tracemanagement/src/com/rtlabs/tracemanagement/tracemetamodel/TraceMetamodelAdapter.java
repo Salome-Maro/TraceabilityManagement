@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.amalthea4public.tracemanagement.generic.adapters.Connection;
-import org.amalthea4public.tracemanagement.generic.artifacts.ArtifactWrapper;
+import org.eclipse.app4mc.capra.generic.adapters.Connection;
+import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -23,7 +23,7 @@ import com.rtlabs.traces.TracesFactory;
 import com.rtlabs.traces.TracesPackage;
 
 public class TraceMetamodelAdapter
-		implements org.amalthea4public.tracemanagement.generic.adapters.TraceMetamodelAdapter {
+		implements org.eclipse.app4mc.capra.generic.adapters.TraceMetamodelAdapter {
 
 	@Override
 	public Collection<EClass> getAvailableTraceTypes(List<EObject> selection) {
