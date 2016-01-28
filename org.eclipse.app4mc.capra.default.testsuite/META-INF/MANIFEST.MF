@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Testsuite
-Bundle-SymbolicName: org.eclipse.app4mc.capra.default.testsuite
+Bundle-SymbolicName: org.amalthea4public.tracemanagement.default.testsuite
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.eclipse.app4mc.capra.testsuite
 Require-Bundle: org.eclipse.equinox.registry,
@@ -10,5 +10,12 @@ Require-Bundle: org.eclipse.equinox.registry,
  org.eclipse.app4mc.capra.generic,
  org.eclipse.app4mc.capra.default.tracemetamodel,
  org.eclipse.ui;bundle-version="3.106.1",
- org.junit;bundle-version="4.11.0"
+ org.junit;bundle-version="4.11.0",
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.launching;bundle-version="3.8.0",
+ org.eclipse.core.runtime;bundle-version="3.11.1",
+ org.eclipse.cdt.core,
+ org.eclipse.app4mc.capra.default.visualisation.plantuml,
+ org.eclipse.app4mc.capra.default.Javahandler,
+ org.eclipse.emf.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

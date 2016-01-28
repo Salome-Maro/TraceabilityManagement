@@ -1,12 +1,15 @@
-package org.amalthea4public.tracemanagement.testsuite;
+package org.eclipse.app4mc.capra.testsuite;
 
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import static org.eclipse.app4mc.capra.testsuite.TestHelper.*;
 
 import java.io.IOException;
 
-import org.amalthea4public.tracemanagement.generic.views.SelectionView;
 import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelPackage;
+import org.eclipse.app4mc.capra.generic.views.SelectionView;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EClass;

@@ -16,12 +16,12 @@ import org.eclipse.app4mc.capra.helpers.TraceTypeHelper;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class TraceMetamodelAdapter
+public class DefaultTraceMetamodelAdapter
 		implements org.eclipse.app4mc.capra.generic.adapters.TraceMetamodelAdapter {
 
 	private Collection<TraceTypeHelper> helpers;
 
-	public TraceMetamodelAdapter() {
+	public DefaultTraceMetamodelAdapter() {
 		helpers = new ArrayList<>();
 		helpers.add(new EObjectToEObjectHelper());
 		helpers.add(new ArtifactToArtifactHelper());

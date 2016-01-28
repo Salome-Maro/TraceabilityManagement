@@ -11,7 +11,7 @@
    <extension
          point="org.amalthea4public.configuration.metamodel.trace">
       <trace_metamodel
-            adapter="org.eclipse.app4mc.capra.adapter.TraceMetamodelAdapter">
+            adapter="org.eclipse.app4mc.capra.adapter.DefaultTraceMetamodelAdapter">
       </trace_metamodel>
    </extension>
 
