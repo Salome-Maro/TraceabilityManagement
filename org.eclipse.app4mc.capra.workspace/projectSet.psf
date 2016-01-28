@@ -31,4 +31,4 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/com.rtlabs.tracemanagement" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/com.rtlabls.workspace" type="4"/>
 </workingSets>
-</psf>
+</psf>  
