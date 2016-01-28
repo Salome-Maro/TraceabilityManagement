@@ -1,17 +1,7 @@
 package org.amalthea4public.tracemanagement.testsuite;
 
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.createEClassInEPackage;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.createEcoreModel;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.createSimpleProject;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.createTraceForCurrentSelectionOfType;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.getProject;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.load;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.projectExists;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.save;
-import static org.amalthea4public.tracemanagement.testsuite.TestHelper.thereIsATraceBetween;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.amalthea4public.tracemanagement.testsuite.TestHelper.*;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
@@ -23,12 +13,21 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.core.IType;
+import org.junit.Before;
 import org.junit.Test;
 
-public class CreateTLinkBetweenModelElements {
+public class LinkCreation {
+
+	@Before
+	public void cleanUpWorkspace() throws CoreException {
+		clearWorkspace();
+		SelectionView.getOpenedView().clearSelection();
+		assertTrue(SelectionView.getOpenedView().getSelection().isEmpty());
+	}
 
 	@Test
-	public void testSimpleLinkCreation() throws CoreException, IOException {
+	public void testLinkCreationEClassToEClass() throws CoreException, IOException {
 		// Create a project
 		createSimpleProject("TestProject");
 		assertTrue(projectExists("TestProject"));
@@ -45,7 +44,7 @@ public class CreateTLinkBetweenModelElements {
 
 		// Load them, choose two elements
 		ResourceSet rs = new ResourceSetImpl();
-		
+
 		EPackage _a = load(testProject, "modelA.ecore", rs);
 		assertEquals(_a.getName(), "modelA");
 		EClass _A = (EClass) _a.getEClassifier("A");
@@ -68,4 +67,37 @@ public class CreateTLinkBetweenModelElements {
 		assertTrue(thereIsATraceBetween(_A, _B));
 	}
 
+	@Test
+	public void testLinkCreationJavaEltToEClass() throws CoreException, IOException {
+		// Create a project
+		IType javaClass = createJavaProjectWithASingleJavaClass("TestProject");
+		assertTrue(projectExists("TestProject"));
+
+		// Create a model and persist
+		IProject testProject = getProject("TestProject");
+		EPackage a = TestHelper.createEcoreModel("modelA");
+		createEClassInEPackage(a, "A");
+		save(testProject, a);
+
+		// Choose the EClass
+		ResourceSet rs = new ResourceSetImpl();
+
+		EPackage _a = load(testProject, "modelA.ecore", rs);
+		assertEquals(_a.getName(), "modelA");
+		EClass _A = (EClass) _a.getEClassifier("A");
+
+		// Drop the EClass in the selection view
+		assertTrue(SelectionView.getOpenedView().getSelection().isEmpty());
+		SelectionView.getOpenedView().dropToSelection(_A);
+
+		// Drop the JavaClass in the selection view
+		SelectionView.getOpenedView().dropToSelection(javaClass);
+
+		// Create a trace via the selection view
+		assertFalse(thereIsATraceBetween(_A, javaClass));
+		createTraceForCurrentSelectionOfType(TracemetamodelPackage.eINSTANCE.getEObjectToArtifact());
+
+		// Check if trace has been created
+		assertTrue(thereIsATraceBetween(_A, javaClass));
+	}
 }
