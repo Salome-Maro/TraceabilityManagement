@@ -5,14 +5,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.SimpleTraceModel;
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelFactory;
 import org.eclipse.app4mc.capra.generic.adapters.Connection;
 import org.eclipse.app4mc.capra.helpers.ArtifactToArtifactHelper;
 import org.eclipse.app4mc.capra.helpers.EObjectToArtifactHelper;
 import org.eclipse.app4mc.capra.helpers.EObjectToEObjectHelper;
 import org.eclipse.app4mc.capra.helpers.TraceTypeHelper;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.SimpleTraceModel;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.TraceElement;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.TracemetamodelFactory;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 

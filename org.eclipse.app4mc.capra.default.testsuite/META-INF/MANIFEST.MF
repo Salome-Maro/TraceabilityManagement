@@ -17,5 +17,11 @@ Require-Bundle: org.eclipse.equinox.registry,
  org.eclipse.cdt.core,
  org.eclipse.app4mc.capra.default.visualisation.plantuml,
  org.eclipse.app4mc.capra.default.Javahandler,
- org.eclipse.emf.common
+ org.eclipse.emf.common,
+ org.eclipse.app4mc.capra.default.CDThandler;bundle-version="1.0.0",
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+

@@ -1,6 +1,9 @@
 
 package org.eclipse.app4mc.capra.testsuite;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +15,28 @@ import org.eclipse.app4mc.capra.generic.adapters.TracePersistenceAdapter;
 import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper;
 import org.eclipse.app4mc.capra.generic.handlers.TraceCreationHandler;
 import org.eclipse.app4mc.capra.generic.helpers.ExtensionPointHelper;
+import org.eclipse.app4mc.capra.generic.views.SelectionView;
+import org.eclipse.app4mc.capra.handlers.CDTHandler;
+import org.eclipse.app4mc.capra.handlers.DisplayTracesHandler;
 import org.eclipse.app4mc.capra.handlers.JavaElementHandler;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.ArtifactToArtifact;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.SimpleTraceModel;
+import org.eclipse.cdt.core.CCorePlugin;
+import org.eclipse.cdt.core.model.CoreModel;
+import org.eclipse.cdt.core.model.ICProject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -53,19 +69,19 @@ public class TestHelper {
 
 	public static IType createJavaProjectWithASingleJavaClass(String projectName) throws CoreException {
 		IProject project = getProject(projectName);
- 
+
 		// Create project
 		IProgressMonitor progressMonitor = new NullProgressMonitor();
 		project.create(progressMonitor);
 		project.open(progressMonitor);
-		
+
 		// Add Java nature
 		IProjectDescription description = project.getDescription();
 		description.setNatureIds(new String[] { JavaCore.NATURE_ID });
 		project.setDescription(description, null);
 
 		// Create as Java project and set up build path etc.
-		IJavaProject javaProject = JavaCore.create(project); 
+		IJavaProject javaProject = JavaCore.create(project);
 		IFolder binFolder = project.getFolder("bin");
 		binFolder.create(false, true, null);
 		javaProject.setOutputLocation(binFolder.getFullPath(), null);
@@ -73,10 +89,10 @@ public class TestHelper {
 		IVMInstall vmInstall = JavaRuntime.getDefaultVMInstall();
 		LibraryLocation[] locations = JavaRuntime.getLibraryLocations(vmInstall);
 		for (LibraryLocation element : locations)
-		 entries.add(JavaCore.newLibraryEntry(element.getSystemLibraryPath(), null, null));
-		
+			entries.add(JavaCore.newLibraryEntry(element.getSystemLibraryPath(), null, null));
+
 		javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[entries.size()]), null);
-		
+
 		// Create a src file
 		IFolder sourceFolder = project.getFolder("src");
 		sourceFolder.create(false, true, null);
@@ -86,24 +102,25 @@ public class TestHelper {
 		System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
 		newEntries[oldEntries.length] = JavaCore.newSourceEntry(root.getPath());
 		javaProject.setRawClasspath(newEntries, null);
-		
-		IPackageFragment pack = javaProject.getPackageFragmentRoot(sourceFolder).createPackageFragment("org.amalthea.test", false, null);
+
+		IPackageFragment pack = javaProject.getPackageFragmentRoot(sourceFolder)
+				.createPackageFragment("org.amalthea.test", false, null);
 
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("package " + pack.getElementName() + ";\n");
 		buffer.append("\n");
 		buffer.append("public class TestClass {}");
-		
+
 		ICompilationUnit icu = pack.createCompilationUnit("TestClass.java", buffer.toString(), false, null);
 		return icu.getType("TestClass");
 	}
 
-	public static void clearWorkspace() throws CoreException{
+	public static void clearWorkspace() throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		for (IProject p : root.getProjects())
-			p.delete(true, new NullProgressMonitor());		
+			p.delete(true, new NullProgressMonitor());
 	}
-	
+
 	public static boolean projectExists(String projectName) {
 		return getProject(projectName).exists();
 	}
@@ -155,7 +172,7 @@ public class TestHelper {
 		return traceAdapter.isThereATraceBetween(a, b,
 				persistenceAdapter.getTraceModel(a.eResource().getResourceSet()));
 	}
-	
+
 	public static boolean thereIsATraceBetween(EObject a, IType b) {
 		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 		TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
@@ -171,5 +188,71 @@ public class TestHelper {
 			return false;
 		}).findAny().isPresent();
 
+	}
+
+	public static boolean thereIsATraceBetween(IResource r1, IResource r2) {
+		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
+		return persistenceAdapter
+			.getTraceModel(new ResourceSetImpl())
+			.map(tm -> {
+				SimpleTraceModel stm = (SimpleTraceModel) tm;
+				return stm.getTraces().get(0);
+			})
+			.map(trace -> {
+				ArtifactToArtifact a2a = (ArtifactToArtifact) trace;
+				return a2a.getSource().getUri().equals(r1.getFullPath().toString()) && 
+					   a2a.getTarget().getUri().equals(r2.getFullPath().toString());
+			})
+			.orElse(false);
+	}
+
+	public static boolean thereIsATraceBetween(EObject a, ICProject b) {
+		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
+		TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
+
+		List<Connection> connected = traceAdapter.getConnectedElements(a,
+				persistenceAdapter.getTraceModel(a.eResource().getResourceSet()));
+
+		return connected.stream().filter(o -> {
+			ArtifactWrapper w = (ArtifactWrapper) o.getTargets().get(0);
+			if (w.getArtifactHandler().equals(CDTHandler.class.getName())) {
+				return w.getUri().equals(b.getHandleIdentifier());
+			}
+			return false;
+		}).findAny().isPresent();
+
+	}
+
+	public static ICProject createCDTProject(String projectName) throws OperationCanceledException, CoreException {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot root = workspace.getRoot();
+		IProject project = root.getProject(projectName);
+		IProjectDescription description = workspace.newProjectDescription(projectName);
+		project = CCorePlugin.getDefault().createCDTProject(description, project, new NullProgressMonitor());
+		project.open(null);
+
+		try {
+			Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_REFRESH, null);
+		} catch (Exception e) {
+			// Ignore
+		}
+
+		ICProject tu = CoreModel.getDefault().create(project);
+
+		return tu;
+	}
+
+	public static IResource createEmptyFileInProject(String fileName, String projectName) throws CoreException {
+		IProject project = getProject(projectName);
+		IFile f = project.getFile(fileName);
+		f.create(new ByteArrayInputStream("hello world!".getBytes()), true, new NullProgressMonitor());
+
+		return f;
+	}
+	
+	public static void resetSelectionView(){
+		SelectionView.getOpenedView().clearSelection();
+		DisplayTracesHandler.setTraceViewTransitive(true);
+		assertTrue(SelectionView.getOpenedView().getSelection().isEmpty());
 	}
 }

@@ -2,11 +2,11 @@ package org.eclipse.app4mc.capra.helpers;
 
 import java.util.List;
 
-import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper;
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.EObjectToArtifact;
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TracemetamodelPackage;
 import org.eclipse.app4mc.capra.generic.adapters.Connection;
+import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.EObjectToArtifact;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.TraceElement;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.TracemetamodelPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 

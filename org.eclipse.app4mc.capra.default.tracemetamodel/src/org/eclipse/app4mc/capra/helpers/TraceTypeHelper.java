@@ -3,8 +3,8 @@ package org.eclipse.app4mc.capra.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.amalthea4public.tracemanagement.simpletrace.tracemetamodel.TraceElement;
 import org.eclipse.app4mc.capra.generic.adapters.Connection;
+import org.eclipse.app4mc.capra.simpletrace.tracemetamodel.TraceElement;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 

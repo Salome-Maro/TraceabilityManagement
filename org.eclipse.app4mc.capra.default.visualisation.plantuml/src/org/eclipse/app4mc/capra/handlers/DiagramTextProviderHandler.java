@@ -29,15 +29,19 @@ import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
 public class DiagramTextProviderHandler implements DiagramTextProvider {
 	private TraceMetamodelAdapter metamodelAdapter;
 	private List<Connection> traces = new ArrayList<>();
-
+	
 	@Override
 	public String getDiagramText(IEditorPart editor, ISelection input) {
-		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
-		metamodelAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
-
 		List<Object> selectedModels = TraceCreationHelper.extractSelectedElements(editor.getSite().getSelectionProvider().getSelection());
+		return getDiagramText(selectedModels);
+	}
+
+	public String getDiagramText(List<Object> selectedModels){
 		List<EObject> firstModelElements = null;
 		List<EObject> secondModelElements = null;
+
+		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
+		metamodelAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 
 		ResourceSet resourceSet = new ResourceSetImpl();
 		if (selectedModels.size() > 0 && selectedModels.get(0) instanceof EObject)
@@ -68,7 +72,6 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 		String umlString = VisualizationHelper.createMatrix(traceModel, firstModelElements, secondModelElements);
 
 		return umlString;
-
 	}
 
 	private List<Connection> getTransitivelyConnectedElements(EObject element, Optional<EObject> traceModel,

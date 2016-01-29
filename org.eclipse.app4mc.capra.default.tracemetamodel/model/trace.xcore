@@ -1,4 +1,4 @@
-package org.amalthea4public.tracemanagement.simpletrace.tracemetamodel
+package org.eclipse.app4mc.capra.simpletrace.tracemetamodel
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.app4mc.capra.generic.artifacts.ArtifactWrapper
 
