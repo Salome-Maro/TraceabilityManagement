@@ -13,7 +13,7 @@ class VisualisationResultHelper {
 	
 	@enduml
 	'''
-	
+	 
 	public static val expectedMatrix2 = '''
 	@startuml
 	salt
