@@ -24,7 +24,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             class="org.eclipse.app4mc.capra.generic.handlers.TraceCreationHandler"
-            commandId="org.eclipse.app4mc.capra.tracecreation.commands.createTrace">
+            commandId="org.eclipse.app4mc.capra.generic.tracecreation.commands.createTrace">
       </handler>
       <handler
             class="org.eclipse.app4mc.capra.generic.handlers.selection.RemoveSelectionHandler"
@@ -44,7 +44,7 @@
                visible="true">
          </separator>
          <command
-               commandId="org.eclipse.app4mc.capra.tracecreation.commands.createTrace"
+               commandId="org.eclipse.app4mc.capra.generic.tracecreation.commands.createTrace"
                id="org.eclipse.app4mc.capra.tracecreation.menus.createTrace"
                label="Create Trace"
                mnemonic="S"

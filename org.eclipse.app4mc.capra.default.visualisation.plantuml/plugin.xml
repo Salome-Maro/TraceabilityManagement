@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="handlers.DisplayTracesHandler"
+            class="org.eclipse.app4mc.capra.handlers.DisplayTracesHandler"
             commandId="org.amalthea4public.tracemanagement.default.visualisation.plantuml.toggleTransitivity">
       </handler>
    </extension>
@@ -44,7 +44,7 @@
                minimized="false"
                ratio="0.25"
                relationship="right"
-               relative="org.amalthea4public.tracemanagement.generic.views.SelectionView">
+               relative="org.eclipse.app4mc.capra.generic.views.SelectionView">
          </view>
       </perspectiveExtension>
    </extension>
