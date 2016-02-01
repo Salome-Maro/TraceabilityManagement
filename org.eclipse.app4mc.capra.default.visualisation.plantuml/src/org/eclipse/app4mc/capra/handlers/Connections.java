@@ -3,6 +3,7 @@ package org.eclipse.app4mc.capra.handlers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +35,13 @@ public class Connections {
 		allObjects.add(origin);
 		connections.forEach(c -> allObjects.addAll(c.getTargets()));
 		
-		object2Id = new HashMap<>();
+		object2Id = new LinkedHashMap<>();
 		int i = 0;
 		for (EObject o : allObjects) {
 			object2Id.put(o, "o" + i++);
 		}
 		
-		id2Label = new HashMap<>();
+		id2Label = new LinkedHashMap<>();
 		allObjects.forEach(o -> {
 			String id = object2Id.get(o);
 			String label = EMFHelper.getIdentifier(o);

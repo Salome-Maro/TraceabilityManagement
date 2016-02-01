@@ -2,10 +2,10 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.amalthea4public.configuration.artifacthandler">
-      <artifact_handler
-            handler="org.eclipse.app4mc.capra.handlers.IFileHandler">
-      </artifact_handler>
+         point="org.eclipse.app4mc.capra.configuration.artifactHandler">
+      <artifactHandler
+            class="org.eclipse.app4mc.capra.handlers.IFileHandler">
+      </artifactHandler>
    </extension>
 
 </plugin>

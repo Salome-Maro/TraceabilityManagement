@@ -15,12 +15,12 @@ import org.eclipse.core.runtime.Platform;
 
 public class ExtensionPointHelper {
 
-	private static final String TRACE_ID = "org.amalthea4public.configuration.metamodel.trace";
-	private static final String TRACE_CONFIG = "adapter";
-	private static final String PERSISTENCE_ID = "org.amalthea4public.configuration.persistence.trace";
-	private static final String PERSISTENCE_CONFIG = "adapter";
-	private static final String ARTIFACT_HANDLER_ID = "org.amalthea4public.configuration.artifacthandler";
-	private static final String ARTIFACT_HANDLER_CONFIG = "handler";
+	private static final String TRACE_ID = "org.eclipse.app4mc.capra.configuration.TraceabilityMetamodel";
+	private static final String TRACE_CONFIG = "class";
+	private static final String PERSISTENCE_ID = "org.eclipse.app4mc.capra.configuration.persistenceHadler";
+	private static final String PERSISTENCE_CONFIG = "class";
+	private static final String ARTIFACT_HANDLER_ID = "org.eclipse.app4mc.capra.configuration.artifactHandler";
+	private static final String ARTIFACT_HANDLER_CONFIG = "class";
 
 	/**
 	 * Gets extension point from the ID and attribute passed

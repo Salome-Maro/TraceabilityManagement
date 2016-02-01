@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ShowViewDialog">
+		<item value="332" key="DIALOG_WIDTH"/>
+		<item value="1|.Helvetica Neue DeskInterface|13.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+		<item value="434" key="DIALOG_HEIGHT"/>
+		<item value="474" key="DIALOG_X_ORIGIN"/>
+		<item value="171" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

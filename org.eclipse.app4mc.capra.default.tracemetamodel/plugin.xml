@@ -2,11 +2,11 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.amalthea4public.configuration.metamodel.trace">
-      <trace_metamodel
-            adapter="org.eclipse.app4mc.capra.adapter.DefaultTraceMetamodelAdapter">
-      </trace_metamodel>
-   </extension>
+         point="org.eclipse.app4mc.capra.configuration.TraceabilityMetamodel">
+      <TraceabilityMetamodelAdpter
+            class="org.eclipse.app4mc.capra.adapter.DefaultTraceMetamodelAdapter">
+      </TraceabilityMetamodelAdpter>
+   </extension> 
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated trace -->

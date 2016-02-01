@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tracemetamodel:SimpleTraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tracemetamodel="org.eclipse.app4mc.capra.simpletrace.tracemetamodel">
+  <traces xsi:type="tracemetamodel:EObjectToEObject">
+    <source href="artifactWrappers.xmi#//@artifacts.0"/>
+    <target href="artifactWrappers.xmi#//@artifacts.1"/>
+  </traces>
+  <traces xsi:type="tracemetamodel:EObjectToEObject">
+    <source href="../DemoProject/Requirements/Requirements.reqif#_B_Lh8MXHEeWvbpo2NrIhVA"/>
+    <target href="../DemoProject/Requirements/Requirements.reqif#_rFB6ZcXGEeWvbpo2NrIhVA"/>
+  </traces>
+</tracemetamodel:SimpleTraceModel>

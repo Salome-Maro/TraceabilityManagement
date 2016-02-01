@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="org.amalthea4public.configuration.metamodel.trace" name="Supply Trace Metamodel" schema="schema/org.amalthea4public.configuration.metamodel.trace.exsd"/>
-   <extension-point id="org.amalthea4public.configuration.persistence.trace" name="Trace Persistence" schema="schema/org.amalthea4public.configuration.persistence.trace.exsd"/>
-   <extension-point id="org.amalthea4public.configuration.artifacthandler" name="org.amalthea4public.configuration.artifacthandler" schema="schema/org.amalthea4public.configuration.artifacthandler.exsd"/>
+   <extension-point id="org.eclipse.app4mc.capra.configuration.TraceabilityMetamodel" name="TraceabilityMetamodel" schema="schema/org.eclipse.app4mc.capra.configuration.TraceabilityMetamodel.exsd"/>
+   <extension-point id="org.eclipse.app4mc.capra.configuration.persistenceHadler" name="persistenceHandler" schema="schema/org.eclipse.app4mc.capra.configuration.persistenceHadler.exsd"/>
+   <extension-point id="org.eclipse.app4mc.capra.configuration.artifactHandler" name="artifactHandler" schema="schema/org.eclipse.app4mc.capra.configuration.artifactHandler.exsd"/>
    <extension
          point="org.eclipse.ui.commands">
       <command
