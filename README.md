@@ -29,7 +29,8 @@ Before downloading and using Capra, download Eclipse Modelling Environment and m
 * Click Finish
 * Once the new workspace opens create or import projects that you want to  use to create traceability links
 * Go to perspectives and switch to the Capra perspective
-* Follow [this video](https://www.dropbox.com/s/9p76ebqvax16uc1/HVAC-Capra%20Incomplete1.mov?dl=0) to create and visualize traceability links
+* Follow [this video](https://www.dropbox.com/s/9p76ebqvax16uc1/HVAC-Capra%20Incomplete1.mov?dl=0) to create and visualize traceability links  
+**NOTE:** For better resolution, download the video first. 
 
 
 
