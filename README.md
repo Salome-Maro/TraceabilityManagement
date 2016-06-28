@@ -24,8 +24,8 @@ Before downloading and using Capra, download Eclipse Modelling Environment and m
 ### Running Capra
 
 * Make sure that all the projects have no errors.
-* Clock on Run --> New Configuration and create a new Eclipse Configuration
-* Select you running workspace
+* Click on Run --> Run Configurations and create a new Eclipse Application Configuration
+* Select your running workspace
 * Click Finish
 * Once the new workspace opens create or import projects that you want to  use to create traceability links
 * Go to perspectives and switch to the Capra perspective
