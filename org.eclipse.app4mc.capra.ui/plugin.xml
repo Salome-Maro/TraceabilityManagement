@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.app4mc.capra.generic.tracecreation.commands.createTrace"
+            name="Create Trace">
+      </command>
+      <command
+            helpContextId="Remove currently selected item from the  list of selection"
+            id="org.eclipse.app4mc.capra.generic.tracecreation.commands.removefromselection"
+            name="Remove from Selection">
+      </command>
+      <command
+            id="org.eclipse.app4mc.capra.generic.tracecreation.clearselection"
+            name="Clear Selection">
+      </command>
+      <command
+            id="org.eclipse.app4mc.capra.generic.addtoselection"
+            name="Add to Selection">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.app4mc.capra.generic.handlers.TraceCreationHandler"
+            commandId="org.eclipse.app4mc.capra.generic.tracecreation.commands.createTrace">
+      </handler>
+      <handler
+            class="org.eclipse.app4mc.capra.generic.handlers.selection.RemoveSelectionHandler"
+            commandId="org.eclipse.app4mc.capra.generic.tracecreation.commands.removefromselection">
+      </handler>
+      <handler
+            class="org.eclipse.app4mc.capra.generic.handlers.selection.ClearSelectionHandler"
+            commandId="org.eclipse.app4mc.capra.generic.tracecreation.clearselection">
+      </handler>
+      <handler
+            class="org.eclipse.app4mc.capra.generic.handlers.selection.AddtoSelection"
+            commandId="org.eclipse.app4mc.capra.generic.addtoselection">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.app4mc.capra.generic.views.SelectionView?after=additions">
+         <separator
+               name="org.eclipse.app4mc.capra.tracecreation.separator2"
+               visible="true">
+         </separator>
+         <command
+               commandId="org.eclipse.app4mc.capra.generic.tracecreation.commands.createTrace"
+               id="org.eclipse.app4mc.capra.tracecreation.menus.createTrace"
+               label="Create Trace"
+               mnemonic="S"
+               tooltip="Gives you a list of available trace types">
+         </command>
+         <command
+               commandId="org.eclipse.app4mc.capra.generic.tracecreation.commands.removefromselection"
+               label="Remove from Selection"
+               style="push"
+               tooltip="Remove the selected item from the current selection">
+         </command>
+         <command
+               commandId="org.eclipse.app4mc.capra.generic.tracecreation.clearselection"
+               label="Clear Selection"
+               style="push"
+               tooltip="Clears the current selection of elements">
+         </command>
+         <separator
+               name="org.eclipse.app4mc.capra.generic.tracecreation.separator1"
+               visible="true">
+         </separator>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <separator
+               name="org.eclipse.app4mc.capra.generic.separator2">
+         </separator>
+         <menu
+               label="Capra">
+            <command
+                  commandId="org.eclipse.app4mc.capra.generic.addtoselection"
+                  label="Add to Selection"
+                  style="push"
+                  tooltip="Add selected item(s) to selection view">
+            </command>
+         </menu>
+         <separator
+               name="org.eclipse.app4mc.capra.generic.separator1">
+         </separator>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.eclipse.app4mc.capra.generic.views"
+            name="AMALTHEA4Public Views">
+      </category>
+      <view
+            category="org.eclipse.app4mc.capra.generic.views"
+            class="org.eclipse.app4mc.capra.generic.views.SelectionView"
+            icon="icons/selectionView.png"
+            id="org.eclipse.app4mc.capra.generic.views.SelectionView"
+            name="Selection View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.app4mc.capra.generic.perspective.CapraPerspective"
+            icon="icons/capra.png"
+            id="org.eclipse.app4mc.capra.generic.perspective.CapraPerspective"
+            name="Capra">
+      </perspective>
+   </extension>
+
+
+</plugin>
