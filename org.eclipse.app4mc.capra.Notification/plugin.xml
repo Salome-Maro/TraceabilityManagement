@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.eclipse.app4mc.capra.notification.StartUp">
+      </startup>
+   </extension>
+   <extension
+         id="mytracemarker"
+         name="Capra Problem"
+         point="org.eclipse.core.resources.markers">
+         <super type="org.eclipse.core.resources.problemmarker"/>
+         <attribute 
+         name="org.eclipse.app4mc.capra.notification.MyAttribute">
+         </attribute>
+         <persistent value="true"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.eclipse.app4mc.capra.notification.MarkerResolutionGenerator"
+            markerType="org.eclipse.app4mc.capra.Notification.mytracemarker">
+      </markerResolutionGenerator>
+   </extension>
+
+</plugin>

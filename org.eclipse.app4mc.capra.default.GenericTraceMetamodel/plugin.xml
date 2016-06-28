@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension
+         point="org.eclipse.app4mc.capra.configuration.TraceabilityMetamodel">
+      <TraceabilityMetamodelAdpter
+            class="org.eclipse.app4mc.capra.adapter.GenericMetamodelAdapter">
+      </TraceabilityMetamodelAdpter>
+   </extension>
+   <extension
+         point="org.eclipse.app4mc.capra.configuration.ArtifactMetaModel">
+      <ArtifactMetaModelAdapter
+            class="org.eclipse.app4mc.capra.adapter.GenericArtifactMetaModelAdapter">
+      </ArtifactMetaModelAdapter>
+   </extension>
+
+
+
+
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated generictrace -->
+      <package
+            uri="org.eclipse.app4mc.capra.GenericTraceMetamodel"
+            class="org.eclipse.app4mc.capra.GenericTraceMetamodel.GenericTraceMetamodelPackage"
+            genModel="model/generictrace.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated artifact -->
+      <package
+            uri="org.eclipse.app4mc.capra.GenericArtifactMetamodel"
+            class="org.eclipse.app4mc.capra.GenericArtifactMetamodel.GenericArtifactMetamodelPackage"
+            genModel="model/artifact.xcore"/>
+   </extension>
+
+</plugin>
