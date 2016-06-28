@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<artifacts:ArtifactWrapperContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:artifacts="org.eclipse.app4mc.capra.generic.artifacts">
-  <artifacts uri="=DemoProject/src&lt;{On.java" name="On.java" ArtifactHandler="org.eclipse.app4mc.capra.handlers.JavaElementHandler"/>
-  <artifacts uri="=DemoProject/src&lt;{Off.java[Off" name="Off" ArtifactHandler="org.eclipse.app4mc.capra.handlers.JavaElementHandler"/>
-  <artifacts uri="/DemoProject/Tests/Off_Test.java" name="Off_Test.java" ArtifactHandler="org.eclipse.app4mc.capra.handlers.IFileHandler"/>
-</artifacts:ArtifactWrapperContainer>
