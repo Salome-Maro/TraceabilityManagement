@@ -69,7 +69,9 @@ public class GenericMetamodelAdapter implements TraceMetamodelAdapter {
 			GenericTraceModel root = (GenericTraceModel) traceModel;
 			List<RelatedTo> traces = root.getTraces();
 			for (RelatedTo trace : traces){
+				if(firstElement!=secondElement) {
 				return trace.getItem().contains(firstElement) && trace.getItem().contains(secondElement);
+				}
 			}
 			return false;
 		}

@@ -40,6 +40,7 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 	@Override
 	public String getDiagramText(IEditorPart editor, ISelection input) {
 		List<Object> selectedModels = TraceCreationHelper.extractSelectedElements(editor.getSite().getSelectionProvider().getSelection());
+		
 		return getDiagramText(selectedModels);
 	}
 
