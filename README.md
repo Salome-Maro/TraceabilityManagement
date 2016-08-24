@@ -12,22 +12,39 @@ Capra uses the Eclipse Modelling Framework (EMF) as its base technology and stor
 
 ### Pre-requisites
 
-Before downloading and using Capra, download Eclipse Modelling Environment and make sure you have the following installed.
+Before downloading and using Capra, download Eclipse Modelling Environment and make sure you have the listed dependencies installed.
 
-* [PlantUML](http://plantuml.com)
-* [Xcore](https://wiki.eclipse.org/Xcore)
-* [Mylyn](https://www.eclipse.org/mylyn/)
-* [C/C++ Development Tools](https://www.eclipse.org/cdt/)
-* [Java Development Tools](https://www.eclipse.org/jdt)
+* [PlantUML](http://plantuml.com/eclipse.html): Use the nightlies [update site](http://basar.idi.ntnu.no/svn/tdt4100/anonymous/trunk/updatesite) in Eclipse's "Install new software..." feature. Version 1.1.11 or higher should be installed through this link. Older versions advertised on the website will not work!
+* [Xcore](https://wiki.eclipse.org/Xcore): Install through Eclipse's "Install new software..." feature
+* [Mylyn](https://www.eclipse.org/mylyn/): Install the "Mylyn Builds Connector: Hudson/Jenkins" through Eclipse's "Install new software..." feature
+* [C/C++ Development Tools](https://www.eclipse.org/cdt/): : Use Eclipse's "Install new software..." feature
+* [Java Development Tools](https://www.eclipse.org/jdt): Use Eclipse's "Install new software..." feature
+* [Xtend](https://eclipse.org/xtend/): Install through the Eclipse Market Place
+* [Papyrus](https://eclipse.org/papyrus/): Install through the Eclipse Market Place  
 
+### Get the source code
 
-### Running Capra
+* Open your Eclipse Environment
+* Go to File >> Import and select Git >> Projects from Git
+* Use the [GitHub repository](https://github.com/Salome-Maro/TraceabilityManagement) and import all available projects to your workspace
+* Build your workspace
+* Make sure that all the projects have no errors.
+* Click on Run >> Run Configurations and create a new Eclipse Application Configuration
+* Select your running workspace
+* Click Finish
+* Once the new workspace opens, create or import projects that you want to use to create traceability links
+* Go to perspectives and switch to the Capra perspective
+* Now you can create traceability links as described in [Creating Traceability Links](#create-trace-links).
+
+If compilation errors occur during the first build, check if any of the dependencies above are missing. Cleaning all binaries also often helps resolve issues.
+
+### Run Capra
 
 * Make sure that all the projects have no errors.
 * Click on Run --> Run Configurations and create a new Eclipse Application Configuration
 * Select your running workspace
-* Click Finish
-* Once the new workspace opens create or import projects that you want to  use to create traceability links
+* Click "Apply", then "Run"
+* Once the new workspace opens, create or import projects that you want to  use to create traceability links
 * Go to perspectives and switch to the Capra perspective
 * Follow [this video](https://www.dropbox.com/s/9p76ebqvax16uc1/HVAC-Capra%20Incomplete1.mov?dl=0) to create and visualize traceability links  
 **NOTE:** For better resolution, download the video first. 
@@ -36,3 +53,21 @@ Before downloading and using Capra, download Eclipse Modelling Environment and m
 
 # How to Extend the Tool - For Developers
 
+## Adding new source files
+
+It is important to maintain the correct copyright messages, indicating the contributors of each file and that it is covered by the EPL. You can use automation to insert a correct copyright header.
+
+Install the [Eclipse Releng Tools](https://wiki.eclipse.org/Development_Resources/How_to_Use_Eclipse_Copyright_Tool). They contain the copyright tool. Use the following copyright header:
+
+```
+Copyright (c) ${date} Chalmers | University of Gothenburg, rt-labs and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+  Contributors:
+     Chalmers | University of Gothenburg and rt-labs - initial API and implementation and/or initial documentation
+```
+
+The Contributors entry can be replaced with the appropriate names. Use "Fix copyrights" from the context menu to add the copyrights to all relevant files in a project or folder.
