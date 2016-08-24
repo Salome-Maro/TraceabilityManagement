@@ -13,9 +13,9 @@
 
 <plugin>
    <extension
-         point="org.eclipse.app4mc.capra.configuration.priorityHandler">
+         point="org.eclipse.capra.configuration.priorityHandler">
       <PriorityHandler
-            class="org.eclipse.app4mc.capra.handlers.DefaultPriorityHandler">
+            class="org.eclipse.capra.handlers.DefaultPriorityHandler">
       </PriorityHandler>
    </extension>
 

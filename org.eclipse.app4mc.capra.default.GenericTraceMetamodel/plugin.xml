@@ -17,15 +17,15 @@
 
 <plugin>
    <extension
-         point="org.eclipse.app4mc.capra.configuration.TraceabilityMetamodel">
+         point="org.eclipse.capra.configuration.TraceabilityMetamodel">
       <TraceabilityMetamodelAdpter
-            class="org.eclipse.app4mc.capra.adapter.GenericMetamodelAdapter">
+            class="org.eclipse.capra.adapter.GenericMetamodelAdapter">
       </TraceabilityMetamodelAdpter>
    </extension>
    <extension
-         point="org.eclipse.app4mc.capra.configuration.ArtifactMetaModel">
+         point="org.eclipse.capra.configuration.ArtifactMetaModel">
       <ArtifactMetaModelAdapter
-            class="org.eclipse.app4mc.capra.adapter.GenericArtifactMetaModelAdapter">
+            class="org.eclipse.capra.adapter.GenericArtifactMetaModelAdapter">
       </ArtifactMetaModelAdapter>
    </extension>
 
@@ -34,19 +34,19 @@
 
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated generictrace -->
+      <!-- @generated artifact -->
       <package
-            uri="org.eclipse.app4mc.capra.GenericTraceMetamodel"
-            class="org.eclipse.app4mc.capra.GenericTraceMetamodel.GenericTraceMetamodelPackage"
-            genModel="model/generictrace.xcore"/>
+            uri="org.eclipse.capra.GenericArtifactMetamodel"
+            class="org.eclipse.capra.GenericArtifactMetamodel.GenericArtifactMetamodelPackage"
+            genModel="model/artifact.xcore"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated artifact -->
+      <!-- @generated generictrace -->
       <package
-            uri="org.eclipse.app4mc.capra.GenericArtifactMetamodel"
-            class="org.eclipse.app4mc.capra.GenericArtifactMetamodel.GenericArtifactMetamodelPackage"
-            genModel="model/artifact.xcore"/>
+            uri="org.eclipse.capra.GenericTraceMetamodel"
+            class="org.eclipse.capra.GenericTraceMetamodel.GenericTraceMetamodelPackage"
+            genModel="model/generictrace.xcore"/>
    </extension>
 
 </plugin>

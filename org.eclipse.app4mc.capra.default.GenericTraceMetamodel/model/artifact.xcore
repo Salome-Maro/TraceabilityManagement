@@ -1,4 +1,4 @@
-package org.eclipse.app4mc.capra.GenericArtifactMetamodel
+package org.eclipse.capra.GenericArtifactMetamodel
 
 class ArtifactWrapperContainer {
 	contains ArtifactWrapper [0..*] artifacts 

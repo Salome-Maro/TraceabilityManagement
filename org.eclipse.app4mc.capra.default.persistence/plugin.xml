@@ -13,9 +13,9 @@
 
 <plugin>
    <extension
-         point="org.eclipse.app4mc.capra.configuration.persistenceHadler">
+         point="org.eclipse.capra.configuration.persistenceHandler">
       <persistenceHandler
-            class="org.eclipse.app4mc.capra.handlers.TracePersistenceAdapter">
+            class="org.eclipse.capra.handlers.TracePersistenceAdapter">
       </persistenceHandler>
    </extension>
 </plugin>

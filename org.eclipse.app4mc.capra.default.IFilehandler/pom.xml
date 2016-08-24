@@ -16,13 +16,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<relativePath>../../build/org.eclipse.app4mc.build/pom.xml</relativePath>
-		<groupId>org.eclipse.app4mc.build</groupId>
+		<relativePath>../../build/org.eclipse.build/pom.xml</relativePath>
+		<groupId>org.eclipse.build</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.7.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>org.eclipse.app4mc.capra.default.IFilehandler</artifactId>
+	<artifactId>org.eclipse.capra.default.IFilehandler</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
 </project>
