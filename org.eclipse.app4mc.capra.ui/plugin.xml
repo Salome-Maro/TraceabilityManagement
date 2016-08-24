@@ -107,7 +107,7 @@
          point="org.eclipse.ui.views">
       <category
             id="org.eclipse.capra.generic.views"
-            name="AMALTHEA4Public Views">
+            name="Capra Views">
       </category>
       <view
             category="org.eclipse.capra.generic.views"
