@@ -14,7 +14,7 @@ Capra uses the Eclipse Modelling Framework (EMF) as its base technology and stor
 
 Before downloading and using Capra, download Eclipse Modelling Environment and make sure you have the listed dependencies installed.
 
-* [PlantUML](http://plantuml.com/eclipse.html): Use the nightlies [update site](http://basar.idi.ntnu.no/svn/tdt4100/anonymous/trunk/updatesite) in Eclipse's "Install new software..." feature. Version 1.1.11 or higher should be installed through this link. Older versions advertised on the website will not work!
+* [PlantUML](http://plantuml.com/eclipse.html): Use the nightlies [update site](http://basar.idi.ntnu.no/svn/tdt4100/anonymous/trunk/updatesite) in Eclipse's "Install new software..." feature. Version 1.1.11 or higher should be installed through this link. Older versions advertised on the website will not work! It might also be necessary to install [Graphviz](http://www.graphviz.org) binaries on your system to view the visualisation of trace links.
 * [Xcore](https://wiki.eclipse.org/Xcore): Install through Eclipse's "Install new software..." feature
 * [Mylyn](https://www.eclipse.org/mylyn/): Install the "Mylyn Builds Connector: Hudson/Jenkins" through Eclipse's "Install new software..." feature
 * [C/C++ Development Tools](https://www.eclipse.org/cdt/): : Use Eclipse's "Install new software..." feature
