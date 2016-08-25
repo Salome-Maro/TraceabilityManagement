@@ -12,9 +12,9 @@ package org.eclipse.capra.ui.notification;
 
 import java.io.IOException;
 
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapper;
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapperContainer;
-import org.eclipse.capra.GenericArtifactMetamodel.GenericArtifactMetamodelFactory;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapper;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapperContainer;
+import org.eclipse.capra.GenericArtifactMetaModel.GenericArtifactMetaModelFactory;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.core.resources.IMarker;
@@ -70,7 +70,7 @@ public class DummyURIOnlyQuickFix implements IMarkerResolution {
 			resourceSet = new ResourceSetImpl();
 			tracePersistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 			awc = tracePersistenceAdapter.getArtifactWrappers(resourceSet);
-			art = GenericArtifactMetamodelFactory.eINSTANCE.createArtifactWrapper();
+			art = GenericArtifactMetaModelFactory.eINSTANCE.createArtifactWrapper();
 			uri = EcoreUtil.getURI(awc);
 			resourceForArtifacts = resourceSet.createResource(uri);
 			EList<ArtifactWrapper> list = ((ArtifactWrapperContainer) awc).getArtifacts();

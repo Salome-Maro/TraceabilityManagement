@@ -14,24 +14,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.capra.GenericTraceMetamodel.GenericTraceMetamodelFactory;
-import org.eclipse.capra.GenericTraceMetamodel.GenericTraceMetamodelPackage;
-import org.eclipse.capra.GenericTraceMetamodel.GenericTraceModel;
-import org.eclipse.capra.GenericTraceMetamodel.RelatedTo;
+import org.eclipse.capra.GenericTraceMetaModel.GenericTraceMetaModelFactory;
+import org.eclipse.capra.GenericTraceMetaModel.GenericTraceMetaModelPackage;
+import org.eclipse.capra.GenericTraceMetaModel.GenericTraceModel;
+import org.eclipse.capra.GenericTraceMetaModel.RelatedTo;
 import org.eclipse.capra.core.adapters.Connection;
 import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class GenericMetamodelAdapter implements TraceMetamodelAdapter {
+public class GenericMetaModelAdapter implements TraceMetamodelAdapter {
 
-	public GenericMetamodelAdapter() {
+	public GenericMetaModelAdapter() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public EObject createModel() {
-		return GenericTraceMetamodelFactory.eINSTANCE.createGenericTraceModel();
+		return GenericTraceMetaModelFactory.eINSTANCE.createGenericTraceModel();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class GenericMetamodelAdapter implements TraceMetamodelAdapter {
 		Collection<EClass> traceTypes = new ArrayList<>();
 		if (selection.size()>1){
 			
-			traceTypes.add(GenericTraceMetamodelPackage.eINSTANCE.getRelatedTo());
+			traceTypes.add(GenericTraceMetaModelPackage.eINSTANCE.getRelatedTo());
 		}
 		return traceTypes;
 	}
@@ -49,7 +49,7 @@ public class GenericMetamodelAdapter implements TraceMetamodelAdapter {
 			List<EObject> selection) {
 		
 		GenericTraceModel TM = (GenericTraceModel)traceModel;
-		EObject trace = GenericTraceMetamodelFactory.eINSTANCE.create(traceType);
+		EObject trace = GenericTraceMetaModelFactory.eINSTANCE.create(traceType);
 		RelatedTo RelatedToTrace = (RelatedTo) trace;
 		RelatedToTrace.getItem().addAll(selection);
 		

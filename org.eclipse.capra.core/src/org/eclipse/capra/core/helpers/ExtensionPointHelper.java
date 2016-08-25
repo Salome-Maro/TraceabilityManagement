@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.Platform;
 
 public class ExtensionPointHelper {
 
-	private static final String TRACE_ID = "org.eclipse.capra.configuration.TraceabilityMetamodel";
+	private static final String TRACE_ID = "org.eclipse.capra.configuration.TraceabilityMetaModel";
 	private static final String TRACE_CONFIG = "class";
 	private static final String PERSISTENCE_ID = "org.eclipse.capra.configuration.persistenceHandler";
 	private static final String PERSISTENCE_CONFIG = "class";

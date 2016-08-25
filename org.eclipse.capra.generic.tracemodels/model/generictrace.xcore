@@ -1,4 +1,4 @@
-package org.eclipse.capra.GenericTraceMetamodel
+package org.eclipse.capra.GenericTraceMetaModel
 import org.eclipse.emf.ecore.EObject
 
 class GenericTraceModel{
@@ -6,5 +6,5 @@ class GenericTraceModel{
 } 
 
 class RelatedTo {
-	refers EObject [0..*] item
+	refers EObject [0..*] item 
 }   

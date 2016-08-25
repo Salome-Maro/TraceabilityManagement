@@ -12,7 +12,7 @@
  -->
 
 <plugin>
-   <extension-point id="org.eclipse.capra.configuration.TraceabilityMetamodel" name="TraceabilityMetamodel" schema="schema/org.eclipse.capra.configuration.TraceabilityMetamodel.exsd"/>
+   <extension-point id="org.eclipse.capra.configuration.TraceabilityMetaModel" name="TraceabilityMetamodel" schema="schema/org.eclipse.capra.configuration.TraceabilityMetamodel.exsd"/>
    <extension-point id="org.eclipse.capra.configuration.persistenceHandler" name="persistenceHandler" schema="schema/org.eclipse.capra.configuration.persistenceHandler.exsd"/>
    <extension-point id="org.eclipse.capra.configuration.artifactHandler" name="artifactHandler" schema="schema/org.eclipse.capra.configuration.artifactHandler.exsd"/>
    <extension-point id="org.eclipse.capra.configuration.priorityHandler" name="Priority Handler for Artifact Handlers" schema="schema/org.eclipse.capra.configuration.priorityHandler.exsd"/>

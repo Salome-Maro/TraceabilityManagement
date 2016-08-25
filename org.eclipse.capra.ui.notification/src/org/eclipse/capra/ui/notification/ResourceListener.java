@@ -10,8 +10,8 @@
  *******************************************************************************/
 package org.eclipse.capra.ui.notification;
 
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapper;
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapperContainer;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapper;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapperContainer;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.core.resources.IFile;

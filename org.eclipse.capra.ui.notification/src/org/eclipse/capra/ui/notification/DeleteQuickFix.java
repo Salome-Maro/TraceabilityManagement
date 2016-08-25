@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapper;
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapperContainer;
-import org.eclipse.capra.GenericTraceMetamodel.GenericTraceMetamodelFactory;
-import org.eclipse.capra.GenericTraceMetamodel.GenericTraceModel;
-import org.eclipse.capra.GenericTraceMetamodel.RelatedTo;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapper;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapperContainer;
+import org.eclipse.capra.GenericTraceMetaModel.GenericTraceMetaModelFactory;
+import org.eclipse.capra.GenericTraceMetaModel.GenericTraceModel;
+import org.eclipse.capra.GenericTraceMetaModel.RelatedTo;
 import org.eclipse.capra.core.adapters.Connection;
 import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
@@ -80,7 +80,7 @@ public class DeleteQuickFix implements IMarkerResolution {
 		traceMetamodelAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 		traceModel = tracePersistenceAdapter.getTraceModel(resourceSet);
 		traceModelURI = EcoreUtil.getURI(traceModel);
-		GenericTraceModel newTraceModel = GenericTraceMetamodelFactory.eINSTANCE.createGenericTraceModel();
+		GenericTraceModel newTraceModel = GenericTraceMetaModelFactory.eINSTANCE.createGenericTraceModel();
 		resourceForTraces = resourceSet.createResource(traceModelURI);
 		
 		GenericTraceModel simpleTM = (GenericTraceModel) traceModel;

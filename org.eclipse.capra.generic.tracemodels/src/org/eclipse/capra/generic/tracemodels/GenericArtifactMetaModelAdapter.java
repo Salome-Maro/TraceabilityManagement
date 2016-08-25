@@ -10,9 +10,9 @@
  *******************************************************************************/
 package org.eclipse.capra.generic.tracemodels;
 
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapper;
-import org.eclipse.capra.GenericArtifactMetamodel.ArtifactWrapperContainer;
-import org.eclipse.capra.GenericArtifactMetamodel.GenericArtifactMetamodelFactory;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapper;
+import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapperContainer;
+import org.eclipse.capra.GenericArtifactMetaModel.GenericArtifactMetaModelFactory;
 import org.eclipse.capra.core.adapters.ArtifactMetaModelAdapter;
 import org.eclipse.emf.ecore.EObject;
 
@@ -25,7 +25,7 @@ public class GenericArtifactMetaModelAdapter implements
 	
 	@Override
 	public EObject createModel() {
-		return GenericArtifactMetamodelFactory.eINSTANCE.createArtifactWrapperContainer();
+		return GenericArtifactMetaModelFactory.eINSTANCE.createArtifactWrapperContainer();
 	}
 
 	public EObject getArtifact(EObject artifactModel, String artifactHandler, String artifactUri) {
@@ -44,7 +44,7 @@ public class GenericArtifactMetaModelAdapter implements
 		if (existingWrapper != null)
 			return existingWrapper;
 		
-		ArtifactWrapper wrapper = GenericArtifactMetamodelFactory.eINSTANCE.createArtifactWrapper();
+		ArtifactWrapper wrapper = GenericArtifactMetaModelFactory.eINSTANCE.createArtifactWrapper();
 		wrapper.setArtifactHandler(artifactHandler);
 		wrapper.setUri(artifactUri);
 		wrapper.setName(artifactName);
