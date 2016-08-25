@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.eclipse.capra.core.adapters.ArtifactMetaModelAdapter;
-import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
+import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -51,7 +51,7 @@ public class TracePersistenceAdapter
 	
 	@Override
 	public EObject getTraceModel(ResourceSet resourceSet) {
-		TraceMetamodelAdapter adapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
+		TraceMetaModelAdapter adapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 		return loadModel(resourceSet, DEFAULT_TRACE_MODEL_NAME).orElse(adapter.createModel());
 	}
 

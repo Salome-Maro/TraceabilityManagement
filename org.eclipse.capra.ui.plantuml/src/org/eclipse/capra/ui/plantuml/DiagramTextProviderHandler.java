@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import org.eclipse.capra.ui.helpers.EMFHelper;
 import org.eclipse.capra.ui.helpers.TraceCreationHelper;
 import org.eclipse.capra.core.adapters.Connection;
-import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
+import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.emf.ecore.EObject;
@@ -34,7 +34,7 @@ import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
  * @author Anthony Anjorin, Salome Maro
  */
 public class DiagramTextProviderHandler implements DiagramTextProvider {
-	private TraceMetamodelAdapter metamodelAdapter;
+	private TraceMetaModelAdapter metamodelAdapter;
 	private List<Connection> traces = new ArrayList<>();
 	
 	@Override

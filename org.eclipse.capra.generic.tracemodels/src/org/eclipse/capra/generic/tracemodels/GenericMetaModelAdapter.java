@@ -19,11 +19,11 @@ import org.eclipse.capra.GenericTraceMetaModel.GenericTraceMetaModelPackage;
 import org.eclipse.capra.GenericTraceMetaModel.GenericTraceModel;
 import org.eclipse.capra.GenericTraceMetaModel.RelatedTo;
 import org.eclipse.capra.core.adapters.Connection;
-import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
+import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class GenericMetaModelAdapter implements TraceMetamodelAdapter {
+public class GenericMetaModelAdapter implements TraceMetaModelAdapter {
 
 	public GenericMetaModelAdapter() {
 		// TODO Auto-generated constructor stub

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * An minimal abstraction of a traceability link used in
- * {@link TraceMetamodelAdapter}, to retain independence of a concrete trace
+ * {@link TraceMetaModelAdapter}, to retain independence of a concrete trace
  * metamodel.
  * 
  * @author Anthony Anjorin, Salome Maro

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @author Anthony Anjorin, Salome Maro
  *
  */
-public interface TraceMetamodelAdapter {
+public interface TraceMetaModelAdapter {
 
 	EObject createModel();
 	

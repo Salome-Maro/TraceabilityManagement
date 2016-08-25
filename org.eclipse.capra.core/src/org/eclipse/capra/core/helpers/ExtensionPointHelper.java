@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.eclipse.capra.core.adapters.ArtifactMetaModelAdapter;
-import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
+import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.handlers.PriorityHandler;
@@ -67,10 +67,10 @@ public class ExtensionPointHelper {
 	 *
 	 * @return Trace metamodel adapter. If this is empty then a null is returned
 	 */
-	public static Optional<TraceMetamodelAdapter> getTraceMetamodelAdapter() {
+	public static Optional<TraceMetaModelAdapter> getTraceMetamodelAdapter() {
 		try {
 			Object extension = getExtensions(TRACE_ID, TRACE_CONFIG).get(0);
-			return Optional.of((TraceMetamodelAdapter) extension);
+			return Optional.of((TraceMetaModelAdapter) extension);
 		} catch (Exception e) {
 			return Optional.empty();
 		}

@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
+import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.handlers.PriorityHandler;
@@ -49,7 +49,7 @@ public class TraceCreationHandler extends AbstractHandler {
 			BiFunction<Collection<EClass>, List<EObject>, Optional<EClass>> chooseTraceType) {
 		List<Object> selection = SelectionView.getOpenedView().getSelection();
 
-		TraceMetamodelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
+		TraceMetaModelAdapter traceAdapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 		TracePersistenceAdapter persistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 
 		ResourceSet resourceSet = new ResourceSetImpl();

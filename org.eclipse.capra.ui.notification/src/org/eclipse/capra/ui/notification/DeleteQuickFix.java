@@ -21,7 +21,7 @@ import org.eclipse.capra.GenericTraceMetaModel.GenericTraceMetaModelFactory;
 import org.eclipse.capra.GenericTraceMetaModel.GenericTraceModel;
 import org.eclipse.capra.GenericTraceMetaModel.RelatedTo;
 import org.eclipse.capra.core.adapters.Connection;
-import org.eclipse.capra.core.adapters.TraceMetamodelAdapter;
+import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.core.resources.IMarker;
@@ -54,7 +54,7 @@ public class DeleteQuickFix implements IMarkerResolution {
 	private ArtifactWrapperContainer container;
 	private String fullPath;
 	private EObject traceModel;
-	private TraceMetamodelAdapter traceMetamodelAdapter;
+	private TraceMetaModelAdapter traceMetamodelAdapter;
 	private List<RelatedTo> toDelete = new ArrayList<>();
 	
 	
