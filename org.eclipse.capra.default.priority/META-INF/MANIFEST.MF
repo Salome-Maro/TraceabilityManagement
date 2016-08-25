@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: HudsonPriorityHandler
-Bundle-SymbolicName: org.eclipse.capra.default.PriorityHandler;singleton:=true
+Bundle-SymbolicName: org.eclipse.capra.default.priority;singleton:=true
 Bundle-Version: 0.7.0.qualifier
-Require-Bundle: org.eclipse.capra.default.Hudsonhandler,
+Require-Bundle: org.eclipse.capra.handler.hudson,
  org.eclipse.capra.core,
  org.eclipse.emf.ecore;bundle-version="2.10.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

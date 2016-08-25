@@ -40,7 +40,7 @@ public class DisplayTracesHandler extends AbstractHandler {
 	}
 
 	private static Preferences getPreference() {
-		Preferences preferences = InstanceScope.INSTANCE.getNode("org.amalthea4public.tracemanagement.generic.preferences");
+		Preferences preferences = InstanceScope.INSTANCE.getNode("org.eclipse.capra.ui.plantuml.toggleTransitivity");
 		Preferences transitivity = preferences.node("transitivity");
 		return transitivity;
 	}

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Papyrushandler
-Bundle-SymbolicName: org.eclipse.capra.default.Papyrushandler;singleton:=true
+Bundle-SymbolicName: org.eclipse.capra.handler.papyrus;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.capra.core,
  org.eclipse.capra.ui,
