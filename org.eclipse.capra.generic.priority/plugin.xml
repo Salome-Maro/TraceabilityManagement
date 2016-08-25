@@ -15,7 +15,7 @@
    <extension
          point="org.eclipse.capra.configuration.priorityHandler">
       <PriorityHandler
-            class="org.eclipse.capra.handlers.DefaultPriorityHandler">
+            class="org.eclipse.capra.generic.priority.DefaultPriorityHandler">
       </PriorityHandler>
    </extension>
 

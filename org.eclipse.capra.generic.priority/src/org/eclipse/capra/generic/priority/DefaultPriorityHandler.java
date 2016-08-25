@@ -8,12 +8,13 @@
  *   Contributors:
  *      Chalmers | University of Gothenburg and rt-labs - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package org.eclipse.capra.handlers;
+package org.eclipse.capra.generic.priority;
 
 import java.util.Collection;
 
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.handlers.PriorityHandler;
+import org.eclipse.capra.handlers.HudsonHandler;
 import org.eclipse.mylyn.builds.internal.core.BuildElement;
 import org.eclipse.mylyn.builds.internal.core.TestElement;
 

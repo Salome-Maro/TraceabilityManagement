@@ -19,13 +19,13 @@
    <extension
          point="org.eclipse.capra.configuration.TraceabilityMetamodel">
       <TraceabilityMetamodelAdpter
-            class="org.eclipse.capra.adapter.GenericMetamodelAdapter">
+            class="org.eclipse.capra.generic.tracemodels.GenericMetamodelAdapter">
       </TraceabilityMetamodelAdpter>
    </extension>
    <extension
          point="org.eclipse.capra.configuration.ArtifactMetaModel">
       <ArtifactMetaModelAdapter
-            class="org.eclipse.capra.adapter.GenericArtifactMetaModelAdapter">
+            class="org.eclipse.capra.generic.tracemodels.GenericArtifactMetaModelAdapter">
       </ArtifactMetaModelAdapter>
    </extension>
 

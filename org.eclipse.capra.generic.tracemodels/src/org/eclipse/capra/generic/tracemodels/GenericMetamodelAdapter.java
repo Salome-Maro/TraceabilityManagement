@@ -8,7 +8,7 @@
  *   Contributors:
  *      Chalmers | University of Gothenburg and rt-labs - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package org.eclipse.capra.adapter;
+package org.eclipse.capra.generic.tracemodels;
 
 import java.util.ArrayList;
 import java.util.Collection;

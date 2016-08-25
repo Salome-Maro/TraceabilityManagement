@@ -8,7 +8,7 @@
  *   Contributors:
  *      Chalmers | University of Gothenburg and rt-labs - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package org.eclipse.capra.handlers;
+package org.eclipse.capra.generic.persistance;
 
 import java.io.IOException;
 import java.util.Optional;
