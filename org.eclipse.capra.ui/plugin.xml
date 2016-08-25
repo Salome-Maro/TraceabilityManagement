@@ -35,19 +35,19 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.capra.generic.handlers.TraceCreationHandler"
+            class="org.eclipse.capra.ui.handlers.TraceCreationHandler"
             commandId="org.eclipse.capra.generic.tracecreation.commands.createTrace">
       </handler>
       <handler
-            class="org.eclipse.capra.generic.handlers.selection.RemoveSelectionHandler"
+            class="org.eclipse.capra.ui.handlers.selection.RemoveSelectionHandler"
             commandId="org.eclipse.capra.generic.tracecreation.commands.removefromselection">
       </handler>
       <handler
-            class="org.eclipse.capra.generic.handlers.selection.ClearSelectionHandler"
+            class="org.eclipse.capra.ui.handlers.selection.ClearSelectionHandler"
             commandId="org.eclipse.capra.generic.tracecreation.clearselection">
       </handler>
       <handler
-            class="org.eclipse.capra.generic.handlers.selection.AddtoSelection"
+            class="org.eclipse.capra.ui.handlers.selection.AddtoSelection"
             commandId="org.eclipse.capra.generic.addtoselection">
       </handler>
    </extension>
@@ -111,7 +111,7 @@
       </category>
       <view
             category="org.eclipse.capra.generic.views"
-            class="org.eclipse.capra.generic.views.SelectionView"
+            class="org.eclipse.capra.ui.views.SelectionView"
             icon="icons/selectionView.png"
             id="org.eclipse.capra.generic.views.SelectionView"
             name="Selection View">
@@ -120,7 +120,7 @@
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            class="org.eclipse.capra.generic.perspective.CapraPerspective"
+            class="org.eclipse.capra.ui.perspective.CapraPerspective"
             icon="icons/capra.png"
             id="org.eclipse.capra.generic.perspective.CapraPerspective"
             name="Capra">

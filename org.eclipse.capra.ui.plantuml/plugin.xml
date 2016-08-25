@@ -15,7 +15,7 @@
    <extension
          point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
       <diagramTextProvider
-            providerClass="org.eclipse.capra.handlers.DiagramTextProviderHandler">
+            providerClass="org.eclipse.capra.ui.plantuml.DiagramTextProviderHandler">
       </diagramTextProvider>
    </extension>
    <extension
@@ -29,7 +29,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.capra.handlers.DisplayTracesHandler"
+            class="org.eclipse.capra.ui.plantuml.DisplayTracesHandler"
             commandId="org.eclipse.capra.ui.plantuml.toggleTransitivity">
       </handler>
    </extension>

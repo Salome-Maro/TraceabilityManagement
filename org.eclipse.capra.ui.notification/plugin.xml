@@ -15,13 +15,13 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="org.eclipse.capra.notification.StartUp">
+            class="org.eclipse.capra.ui.notification.StartUp">
       </startup>
    </extension>
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.capra.notification.MarkerResolutionGenerator"
+            class="org.eclipse.capra.ui.notification.MarkerResolutionGenerator"
             markerType="org.eclipse.capra.ui.notification.capraproblemmarker">
       </markerResolutionGenerator>
    </extension>

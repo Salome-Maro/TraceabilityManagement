@@ -15,7 +15,7 @@
    <extension
          point="org.eclipse.capra.configuration.artifactHandler">
       <artifactHandler
-            class="org.eclipse.capra.handlers.GEFHandler">
+            class="org.eclipse.capra.handler.gef.GEFHandler">
       </artifactHandler>
    </extension>
 

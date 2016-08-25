@@ -14,7 +14,7 @@ import java.util.Collection;
 
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.handlers.PriorityHandler;
-import org.eclipse.capra.handlers.HudsonHandler;
+import org.eclipse.capra.handler.hudson.HudsonHandler;
 import org.eclipse.mylyn.builds.internal.core.BuildElement;
 import org.eclipse.mylyn.builds.internal.core.TestElement;
 
