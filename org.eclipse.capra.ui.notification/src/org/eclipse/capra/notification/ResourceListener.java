@@ -102,8 +102,7 @@ public class ResourceListener implements IResourceChangeListener{
 						
 						if(aw.getName().equals(delta.getResource().getName())){
 
-							IMarker marker = file.createMarker("org.eclipse.capra.Notification.mytracemarker");
-
+							IMarker marker = file.createMarker("org.eclipse.capra.ui.notification.capraproblemmarker");
 							if(issueType == ARTIFACT_RENAMED){
 								marker.setAttribute(IMarker.MESSAGE, delta.getFullPath()
 										+ " has been renamed to " + delta.getMovedToPath());

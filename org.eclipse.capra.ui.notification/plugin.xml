@@ -19,21 +19,21 @@
       </startup>
    </extension>
    <extension
-         id="mytracemarker"
-         name="Capra Problem"
-         point="org.eclipse.core.resources.markers">
-         <super type="org.eclipse.core.resources.problemmarker"/>
-         <attribute 
-         name="org.eclipse.capra.notification.MyAttribute">
-         </attribute>
-         <persistent value="true"/>
-   </extension>
-   <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
             class="org.eclipse.capra.notification.MarkerResolutionGenerator"
-            markerType="org.eclipse.capra.Notification.mytracemarker">
+            markerType="org.eclipse.capra.ui.notification.capraproblemmarker">
       </markerResolutionGenerator>
+   </extension>
+   <extension
+         id="org.eclipse.capra.ui.notification.capraproblemmarker"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
    </extension>
 
 </plugin>

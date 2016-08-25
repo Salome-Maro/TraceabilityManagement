@@ -22,7 +22,7 @@
          point="org.eclipse.ui.commands">
      
       <command
-            id="org.amalthea4public.tracemanagement.default.visualisation.plantuml.toggleTransitivity"
+            id="org.eclipse.capra.ui.plantuml.toggleTransitivity"
             name="Toggle Transitivity">
       </command>
    </extension>
@@ -30,7 +30,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             class="org.eclipse.capra.handlers.DisplayTracesHandler"
-            commandId="org.amalthea4public.tracemanagement.default.visualisation.plantuml.toggleTransitivity">
+            commandId="org.eclipse.capra.ui.plantuml.toggleTransitivity">
       </handler>
    </extension>
 	<extension
@@ -38,7 +38,7 @@
       <menuContribution
             locationURI="menu:net.sourceforge.plantuml.eclipse.views.PlantUmlView?after=additions">
          <command
-               commandId="org.amalthea4public.tracemanagement.default.visualisation.plantuml.toggleTransitivity"
+               commandId="org.eclipse.capra.ui.plantuml.toggleTransitivity"
                label="Toggle Transitivity"
                style="push">
          </command>
