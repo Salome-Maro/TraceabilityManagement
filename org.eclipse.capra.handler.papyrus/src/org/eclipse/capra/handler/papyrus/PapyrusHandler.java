@@ -27,4 +27,10 @@ public class PapyrusHandler implements ArtifactHandler {
 		return EObject.class.cast((TreeElement)selection);
 	}
 
+	@Override
+	public Object resolveArtifact(EObject artifact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

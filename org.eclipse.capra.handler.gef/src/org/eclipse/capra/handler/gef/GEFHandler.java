@@ -33,4 +33,10 @@ public class GEFHandler implements ArtifactHandler {
 
 	}
 
+	@Override
+	public Object resolveArtifact(EObject artifact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

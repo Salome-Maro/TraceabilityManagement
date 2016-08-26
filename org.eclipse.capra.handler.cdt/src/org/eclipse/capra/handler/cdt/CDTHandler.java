@@ -13,6 +13,7 @@ package org.eclipse.capra.handler.cdt;
 import org.eclipse.capra.core.adapters.ArtifactMetaModelAdapter;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
+import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.cdt.core.model.ICElement;
 import org.eclipse.emf.ecore.EObject;
 
@@ -34,6 +35,13 @@ public class CDTHandler implements ArtifactHandler {
 				cu.getHandleIdentifier(), 
 				cu.getElementName());
 		return wrapper;
+	}
+
+	@Override
+	public ICElement resolveArtifact(EObject artifact) {
+		ArtifactMetaModelAdapter adapter = ExtensionPointHelper.getArtifactWrapperMetaModelAdapter().get();
+		String uri = adapter.getArtifactUri(artifact);
+		return CoreModel.create(uri); 
 	}
 
 }

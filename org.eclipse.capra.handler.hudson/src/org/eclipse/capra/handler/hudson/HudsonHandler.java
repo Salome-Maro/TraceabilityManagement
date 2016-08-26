@@ -51,4 +51,10 @@ public class HudsonHandler implements ArtifactHandler {
 		return null;
 	}
 
+	@Override
+	public Object resolveArtifact(EObject artifact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

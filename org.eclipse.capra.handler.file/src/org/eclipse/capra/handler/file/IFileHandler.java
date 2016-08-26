@@ -35,4 +35,10 @@ public class IFileHandler implements ArtifactHandler {
 				selectionAsFile.getName());
 		return wrapper;
 	}
+
+	@Override
+	public Object resolveArtifact(EObject artifact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
