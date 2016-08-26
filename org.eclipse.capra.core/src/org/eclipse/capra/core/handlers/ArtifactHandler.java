@@ -43,4 +43,16 @@ public interface ArtifactHandler {
 	 * @return
 	 */
 	EObject getEObjectForSelection(Object selection, EObject artifactModel);
+	
+	/**
+	 * Resolve the persisted EObject to the originally selected Object from the
+	 * Eclipse workspace. This is essentially the inverse of the
+	 * getEObjectForSelection operation.
+	 * 
+	 * @param artifact
+	 *           The persisted EObject
+	 * @return originally selected object
+	 */
+	Object resolveArtifact(EObject artifact);
+
 }

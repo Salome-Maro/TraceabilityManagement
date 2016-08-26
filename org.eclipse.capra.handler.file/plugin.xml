@@ -13,6 +13,7 @@
 
 <plugin>
    <extension
+         id="org.eclipse.capra.handler.file.IFileHandler"
          point="org.eclipse.capra.configuration.artifactHandler">
       <artifactHandler
             class="org.eclipse.capra.handler.file.IFileHandler">

@@ -23,6 +23,8 @@ import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.handlers.PriorityHandler;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
 public class ExtensionPointHelper {
@@ -39,7 +41,7 @@ public class ExtensionPointHelper {
 	private static final String PRIORITY_HANDLER_CONFIG = "class";
 
 	/**
-	 * Gets extension point from the ID and attribute passed
+	 * Gets all extensions from the extension point ID and attribute passed
 	 * 
 	 * @param ID
 	 *            the ID of the extension point
@@ -47,7 +49,7 @@ public class ExtensionPointHelper {
 	 * @param CONFIG
 	 *            the name of the attribute
 	 * 
-	 * @return List of extension points
+	 * @return List of extensions
 	 */
 	public static List<Object> getExtensions(final String ID, final String CONFIG) {
 		try {
@@ -62,6 +64,24 @@ public class ExtensionPointHelper {
 			return Collections.emptyList();
 		}
 	}
+
+	/**
+	 * Get the executable extension for the extension ID
+	 * 
+	 * @param extensionID The ID of the extension
+	 * @return extension
+	 */
+	public static Optional<ArtifactHandler> getExtension(String extensionID, String ID, String CONFIG) {
+		try {
+			IExtensionRegistry registry = Platform.getExtensionRegistry();
+			IExtension extension = registry.getExtension(ID, extensionID);
+			IConfigurationElement[] elements = extension.getConfigurationElements();
+			return Optional.of((ArtifactHandler) elements[0].createExecutableExtension(CONFIG));
+		} catch (Exception e) {
+			return Optional.empty();
+		}
+	}
+
 
 	/**
 	 *
@@ -119,6 +139,16 @@ public class ExtensionPointHelper {
 		}
 	}
 
+	/**
+	 * Return the artifact handler with the given ID.
+	 * 
+	 * @param ID
+	 * @return ArtifactHandler
+	 */
+	public static Optional<ArtifactHandler> getArtifactHandler(String ID) {
+		return getExtension(ID, ARTIFACT_HANDLER_ID, ARTIFACT_CONFIG);
+	}
+	
 	public static Optional<PriorityHandler> getPriorityHandler() {
 
 		try {

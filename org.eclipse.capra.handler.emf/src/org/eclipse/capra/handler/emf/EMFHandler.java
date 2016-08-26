@@ -24,4 +24,10 @@ public class EMFHandler implements ArtifactHandler {
 	public EObject getEObjectForSelection(Object selection, EObject  artifactModel) {
 		return EObject.class.cast(selection);
 	}
+
+	@Override
+	public Object resolveArtifact(EObject artifact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

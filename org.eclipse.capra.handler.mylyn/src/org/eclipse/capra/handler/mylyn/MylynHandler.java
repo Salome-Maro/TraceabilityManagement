@@ -35,5 +35,11 @@ public class MylynHandler implements ArtifactHandler {
 				task.getSummary());
 		return wrapper;
 	}
+
+	@Override
+	public Object resolveArtifact(EObject artifact) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

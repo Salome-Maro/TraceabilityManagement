@@ -13,7 +13,8 @@
 
 <plugin>
 	<extension
-		point="org.eclipse.capra.configuration.artifactHandler">
+       id="org.eclipse.capra.handler.papyrus.PapyrusHandler"
+       point="org.eclipse.capra.configuration.artifactHandler">
 	  	<artifactHandler
 	    	class="org.eclipse.capra.handler.papyrus.PapyrusHandler">
 	  	</artifactHandler>

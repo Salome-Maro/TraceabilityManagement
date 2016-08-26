@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.capra.core.adapters;
 
+import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.emf.ecore.EObject;
 
 public interface ArtifactMetaModelAdapter {
@@ -61,5 +62,12 @@ public interface ArtifactMetaModelAdapter {
 	 */
 	String getArtifactUri(EObject artifact);
 	
+	/**
+	 * Get an instance of the artifact handler
+	 * 
+	 * @param artifact
+	 * @return artifact handler instance
+	 */
+	ArtifactHandler getArtifactHandlerInstance(EObject artifact);
 
 }

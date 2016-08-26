@@ -13,11 +13,11 @@ package org.eclipse.capra.generic.tracemodels;
 import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapper;
 import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapperContainer;
 import org.eclipse.capra.GenericArtifactMetaModel.GenericArtifactMetaModelFactory;
-import org.eclipse.capra.core.adapters.ArtifactMetaModelAdapter;
+import org.eclipse.capra.core.adapters.AbstractArtifactMetaModelAdapter;
 import org.eclipse.emf.ecore.EObject;
 
-public class GenericArtifactMetaModelAdapter implements
-		ArtifactMetaModelAdapter {
+public class GenericArtifactMetaModelAdapter extends
+		AbstractArtifactMetaModelAdapter {
 
 	private ArtifactWrapperContainer getContainer(EObject artifactModel) {
 		return (ArtifactWrapperContainer) artifactModel;
