@@ -27,6 +27,9 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
+/**
+ * Provides functionality to work with relevant Capra extension points.
+ */
 public class ExtensionPointHelper {
 
 	private static final String TRACE_ID = "org.eclipse.capra.configuration.TraceabilityMetaModel";
@@ -41,7 +44,7 @@ public class ExtensionPointHelper {
 	private static final String PRIORITY_HANDLER_CONFIG = "class";
 
 	/**
-	 * Gets all extensions from the extension point ID and attribute passed
+	 * Gets all extensions from the extension point ID and attribute passed.
 	 * 
 	 * @param ID
 	 *            the ID of the extension point
@@ -66,9 +69,10 @@ public class ExtensionPointHelper {
 	}
 
 	/**
-	 * Get the executable extension for the extension ID
+	 * Get the executable extension for the extension ID.
 	 * 
-	 * @param extensionID The ID of the extension
+	 * @param extensionID
+	 *            The ID of the extension
 	 * @return extension
 	 */
 	public static Optional<ArtifactHandler> getExtension(String extensionID, String ID, String CONFIG) {
@@ -82,10 +86,11 @@ public class ExtensionPointHelper {
 		}
 	}
 
-
 	/**
-	 *
-	 * @return Trace metamodel adapter. If this is empty then a null is returned
+	 * Gets the configured {@link TraceMetaModelAdapter}.
+	 * 
+	 * @return The configured {@code TraceMetaModelAdapter}. If none is
+	 *         configured, an empty instance of {@link Optional} is returned.
 	 */
 	public static Optional<TraceMetaModelAdapter> getTraceMetamodelAdapter() {
 		try {
@@ -97,9 +102,10 @@ public class ExtensionPointHelper {
 	}
 
 	/**
-	 *
-	 * @return Trace persistence adapter. If this is empty, then a null is
-	 *         returned
+	 * Gets the configured {@link TracePersistenceAdapter}.
+	 * 
+	 * @return The configured {@code TracePersistenceAdapter}. If none is
+	 *         configured, an empty instance of {@link Optional} is returned.
 	 */
 	public static Optional<TracePersistenceAdapter> getTracePersistenceAdapter() {
 		try {
@@ -111,9 +117,10 @@ public class ExtensionPointHelper {
 	}
 
 	/**
-	 *
-	 * @return Artifact wrapper adapter. If this is empty, then a null is
-	 *         returned
+	 * Gets the configured {@link ArtifactMetaModelAdapter}.
+	 * 
+	 * @return The configured {@code ArtifactMetaModelAdapter}. If none is
+	 *         configured, an empty instance of {@link Optional} is returned.
 	 */
 	public static Optional<ArtifactMetaModelAdapter> getArtifactWrapperMetaModelAdapter() {
 		try {
@@ -125,6 +132,7 @@ public class ExtensionPointHelper {
 	}
 
 	/**
+	 * Gets the available {@link ArtifactHandler} instances.
 	 * 
 	 * @return A collection of all the artifact handlers available. This method
 	 *         collects all plugins that have an extension to the
@@ -135,7 +143,7 @@ public class ExtensionPointHelper {
 			return getExtensions(ARTIFACT_HANDLER_ID, ARTIFACT_HANDLER_CONFIG).stream().map(ArtifactHandler.class::cast)
 					.collect(Collectors.toList());
 		} catch (Exception e) {
-			return Collections.<ArtifactHandler> emptyList();
+			return Collections.<ArtifactHandler>emptyList();
 		}
 	}
 
@@ -148,9 +156,14 @@ public class ExtensionPointHelper {
 	public static Optional<ArtifactHandler> getArtifactHandler(String ID) {
 		return getExtension(ID, ARTIFACT_HANDLER_ID, ARTIFACT_CONFIG);
 	}
-	
-	public static Optional<PriorityHandler> getPriorityHandler() {
 
+	/**
+	 * Gets the configured {@link PriorityHandler}.
+	 * 
+	 * @return The configured {@code PriorityHandler}. If none is configured, an
+	 *         empty instance of {@link Optional} is returned.
+	 */
+	public static Optional<PriorityHandler> getPriorityHandler() {
 		try {
 			Object extension = getExtensions(PRIORITY_HANDLER_ID, PRIORITY_HANDLER_CONFIG).get(0);
 			return Optional.of((PriorityHandler) extension);

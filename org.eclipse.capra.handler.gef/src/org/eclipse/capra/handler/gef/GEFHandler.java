@@ -15,13 +15,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.papyrus.infra.emf.utils.EMFHelper;
 
+/**
+ * Handler to allow tracing to and from visual model representations handled by
+ * editors built with GEF.
+ */
 public class GEFHandler implements ArtifactHandler {
 
 	@Override
 	public boolean canHandleSelection(Object selection) {
 		// TODO Auto-generated method stub
 		return selection instanceof EditPart;
-		
+
 	}
 
 	@Override

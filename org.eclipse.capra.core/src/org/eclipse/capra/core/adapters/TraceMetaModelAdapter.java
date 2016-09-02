@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface TraceMetaModelAdapter {
 
 	EObject createModel();
-	
+
 	/**
 	 * Used to retrieve a set of types of traces that can be created for the
 	 * given selection of objects in the Eclipse workspace
@@ -94,7 +94,7 @@ public interface TraceMetaModelAdapter {
 	 *         all objects connected to element via t}]
 	 */
 	List<Connection> getConnectedElements(EObject element, EObject traceModel);
-	
+
 	/**
 	 * Determine a list of all objects connected to element according to the
 	 * given trace model

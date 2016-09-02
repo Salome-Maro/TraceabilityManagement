@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.eclipse.capra.ui.helpers.EMFHelper;
-import org.eclipse.capra.ui.helpers.TraceCreationHelper;
 import org.eclipse.capra.core.adapters.Connection;
 import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
+import org.eclipse.capra.ui.helpers.EMFHelper;
+import org.eclipse.capra.ui.helpers.TraceCreationHelper;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -29,22 +29,35 @@ import org.eclipse.ui.IEditorPart;
 import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
 
 /**
- * Provides PlantUML with a string representation of elements connected by trace links
+ * Provides PlantUML with a string representation of elements connected by trace
+ * links.
  * 
  * @author Anthony Anjorin, Salome Maro
  */
 public class DiagramTextProviderHandler implements DiagramTextProvider {
 	private TraceMetaModelAdapter metamodelAdapter;
 	private List<Connection> traces = new ArrayList<>();
-	
+
 	@Override
 	public String getDiagramText(IEditorPart editor, ISelection input) {
-		List<Object> selectedModels = TraceCreationHelper.extractSelectedElements(editor.getSite().getSelectionProvider().getSelection());
-		
+		List<Object> selectedModels = TraceCreationHelper
+				.extractSelectedElements(editor.getSite().getSelectionProvider().getSelection());
+
 		return getDiagramText(selectedModels);
 	}
 
-	public String getDiagramText(List<Object> selectedModels){
+	/**
+	 * Creates the {@code String} representation PlantUML uses to render the
+	 * graphics. Based on the selected models, the relevant trace links are
+	 * extracted and a decision is made whether a matrix of a tree view has to
+	 * be displayed.
+	 * 
+	 * @param selectedModels
+	 *            the models whose trace links should be displayed
+	 * @return a string representation of the visualisation that can be rendered
+	 *         by PlantUML
+	 */
+	public String getDiagramText(List<Object> selectedModels) {
 		List<EObject> firstModelElements = null;
 		List<EObject> secondModelElements = null;
 
@@ -54,7 +67,7 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		if (selectedModels.size() > 0 && selectedModels.get(0) instanceof EObject)
 			resourceSet = ((EObject) selectedModels.get(0)).eResource().getResourceSet();
-		
+
 		EObject traceModel = persistenceAdapter.getTraceModel(resourceSet);
 
 		if (selectedModels.size() == 1 && selectedModels.get(0) instanceof EObject) {

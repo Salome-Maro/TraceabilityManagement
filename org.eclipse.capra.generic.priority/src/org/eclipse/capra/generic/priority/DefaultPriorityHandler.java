@@ -18,14 +18,18 @@ import org.eclipse.capra.handler.hudson.HudsonHandler;
 import org.eclipse.mylyn.builds.internal.core.BuildElement;
 import org.eclipse.mylyn.builds.internal.core.TestElement;
 
-public class DefaultPriorityHandler implements PriorityHandler{
+/**
+ * Provides a simple default policy for selecting an {@link ArtifactHandler} in
+ * cases where tests or builds from Hudson are selected by returning the first
+ * available {@link HudsonHandler}.
+ */
+public class DefaultPriorityHandler implements PriorityHandler {
 
 	@Override
 	public ArtifactHandler getSelectedHandler(Collection<ArtifactHandler> handlers, Object selectedElement) {
-		if (selectedElement instanceof TestElement || selectedElement instanceof BuildElement)
-		{
+		if (selectedElement instanceof TestElement || selectedElement instanceof BuildElement) {
 			return handlers.stream().filter(h -> h instanceof HudsonHandler).findAny().get();
-			
+
 		}
 		return null;
 	}

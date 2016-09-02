@@ -16,7 +16,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 
-public class EMFHelper {	
+/**
+ * Contains methods to work with {@link EObject} instances encountered when
+ * handling EMF models.
+ */
+public class EMFHelper {
+
 	/**
 	 * Builds an identifier String for the given EObject. This identifier starts
 	 * with
@@ -29,35 +34,34 @@ public class EMFHelper {
 	 * </li>
 	 * </ul>
 	 * The identifier ends with " : " followed by the type of the EObject. <br>
-	 * Example: A Node with the name "foo" will result in "foo : Node"
-	 * <br>
+	 * Example: A Node with the name "foo" will result in "foo : Node" <br>
 	 * If the EObject does not have any attributes or all attributes have the
 	 * value null, this function will only return the type of the EObject.
 	 */
 	public static String getIdentifier(final EObject eObject) {
-		if(eObject == null)
+		if (eObject == null)
 			return "<null>";
-		if(eObject.eClass() == null)
+		if (eObject.eClass() == null)
 			return eObject.toString();
-		
+
 		boolean success = false;
-		
+
 		List<EAttribute> attributes = eObject.eClass().getEAllAttributes();
 		StringBuilder identifier = new StringBuilder();
-	
+
 		success = tryGetSingleAttribute(eObject, attributes, identifier);
-	
+
 		if (!success)
 			success = tryGetNameAttribute(eObject, attributes, identifier);
-	
+
 		if (!success)
 			success = tryGetAnyAttribute(eObject, attributes, identifier);
-	
+
 		if (success)
 			identifier.append(" : ");
-	
+
 		identifier.append(eObject.eClass().getName());
-	
+
 		return identifier.toString();
 	}
 
@@ -81,7 +85,7 @@ public class EMFHelper {
 		}
 		return success;
 	}
-	
+
 	/**
 	 * @param name
 	 *            Use an empty StringBuilder as input. If this function returns
@@ -138,10 +142,20 @@ public class EMFHelper {
 			success = true;
 		}
 		return success;
-	} 
-	
-	
-	public static List<EObject> linearize(Object object) {		
+	}
+
+	/**
+	 * Linearizes a tree to a list. The function checks if the provided
+	 * parameter is of type {@link EObject} and linearizes only if that is the
+	 * case.
+	 * 
+	 * @param object
+	 *            the object to linearize
+	 * @return a list of {@link EObject}s originally contained in the tree
+	 *         structure of the parameter or an empty list if the paramter was
+	 *         not an {@link EObject}
+	 */
+	public static List<EObject> linearize(Object object) {
 		ArrayList<EObject> elementList = new ArrayList<EObject>();
 		if (object instanceof EObject) {
 			EObject root = (EObject) object;
@@ -150,8 +164,5 @@ public class EMFHelper {
 		}
 		return elementList;
 	}
-	
-	
+
 }
-
-

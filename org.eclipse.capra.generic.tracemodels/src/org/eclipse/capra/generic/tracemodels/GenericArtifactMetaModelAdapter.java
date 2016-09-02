@@ -16,13 +16,15 @@ import org.eclipse.capra.GenericArtifactMetaModel.GenericArtifactMetaModelFactor
 import org.eclipse.capra.core.adapters.AbstractArtifactMetaModelAdapter;
 import org.eclipse.emf.ecore.EObject;
 
-public class GenericArtifactMetaModelAdapter extends
-		AbstractArtifactMetaModelAdapter {
+/**
+ * Provides generic functionality to deal with artifact meta models.
+ */
+public class GenericArtifactMetaModelAdapter extends AbstractArtifactMetaModelAdapter {
 
 	private ArtifactWrapperContainer getContainer(EObject artifactModel) {
 		return (ArtifactWrapperContainer) artifactModel;
 	}
-	
+
 	@Override
 	public EObject createModel() {
 		return GenericArtifactMetaModelFactory.eINSTANCE.createArtifactWrapperContainer();
@@ -31,25 +33,26 @@ public class GenericArtifactMetaModelAdapter extends
 	public EObject getArtifact(EObject artifactModel, String artifactHandler, String artifactUri) {
 		ArtifactWrapperContainer container = getContainer(artifactModel);
 		for (ArtifactWrapper artifact : container.getArtifacts()) {
-			if (getArtifactHandler(artifact).equals(artifactHandler) && getArtifactUri(artifact).equals(artifactUri))								
-				return artifact;			
+			if (getArtifactHandler(artifact).equals(artifactHandler) && getArtifactUri(artifact).equals(artifactUri))
+				return artifact;
 		}
 		return null;
 	}
 
 	@Override
-	public EObject createArtifact(EObject artifactModel, String artifactHandler, String artifactUri, String artifactName) {		
+	public EObject createArtifact(EObject artifactModel, String artifactHandler, String artifactUri,
+			String artifactName) {
 		ArtifactWrapperContainer container = getContainer(artifactModel);
 		EObject existingWrapper = getArtifact(artifactModel, artifactHandler, artifactUri);
 		if (existingWrapper != null)
 			return existingWrapper;
-		
+
 		ArtifactWrapper wrapper = GenericArtifactMetaModelFactory.eINSTANCE.createArtifactWrapper();
 		wrapper.setArtifactHandler(artifactHandler);
 		wrapper.setUri(artifactUri);
 		wrapper.setName(artifactName);
 		container.getArtifacts().add(wrapper);
-		
+
 		return wrapper;
 	}
 
@@ -79,7 +82,5 @@ public class GenericArtifactMetaModelAdapter extends
 		}
 		return null;
 	}
-
-
 
 }

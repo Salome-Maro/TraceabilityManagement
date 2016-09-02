@@ -18,15 +18,18 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-
-public class AddtoSelection extends AbstractHandler{
+/**
+ * Action to add an object to the selection view.
+ * 
+ * @author Anthony Anjorin, Salome Maro
+ */
+public class AddtoSelection extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		List<Object> selection = TraceCreationHelper.extractSelectedElements(event);
-		SelectionView.getOpenedView().dropToSelection(selection);;
+		SelectionView.getOpenedView().dropToSelection(selection);
 		return null;
 	}
-
 
 }

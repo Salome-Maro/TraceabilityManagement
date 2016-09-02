@@ -53,6 +53,17 @@ If compilation errors occur during the first build, check if any of the dependen
 
 # How to Extend the Tool - For Developers
 
+## Before committing
+
+Please make sure that *all* points in the following checklist are fullfilled before committing your work to a Capra repository:
+
+* The code is formatted according to the built-in Eclipse code formatting rules.
+* All classes and all public methods are documented.
+* Each source code file has a copyright header (see below).
+* The imports are organised.
+
+Organisation of imports and code formatting can be automated by selecting them as save actions for the Java editor in the Eclipse preferences.
+
 ## Adding new source files
 
 It is important to maintain the correct copyright messages, indicating the contributors of each file and that it is covered by the EPL. You can use automation to insert a correct copyright header.

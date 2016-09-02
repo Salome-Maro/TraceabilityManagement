@@ -16,7 +16,9 @@ import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.mylyn.tasks.core.ITask;
 
-
+/**
+ * A handler to allow tracing from and to tasks handled by Mylyn.
+ */
 public class MylynHandler implements ArtifactHandler {
 
 	@Override
@@ -28,10 +30,7 @@ public class MylynHandler implements ArtifactHandler {
 	public EObject getEObjectForSelection(Object selection, EObject artifactModel) {
 		ITask task = (ITask) selection;
 		ArtifactMetaModelAdapter adapter = ExtensionPointHelper.getArtifactWrapperMetaModelAdapter().get();
-		EObject wrapper = adapter.createArtifact(
-				artifactModel, 
-				this.getClass().getName(), 
-				task.getUrl(), 
+		EObject wrapper = adapter.createArtifact(artifactModel, this.getClass().getName(), task.getUrl(),
 				task.getSummary());
 		return wrapper;
 	}
@@ -41,5 +40,5 @@ public class MylynHandler implements ArtifactHandler {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

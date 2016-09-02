@@ -36,11 +36,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IMarkerResolution;
 
 /**
+ * A quick fix to delete a trace link if one of the linked objects is no longer
+ * available.
  * 
  * @author Michael Warne
- *
  */
-
 public class DeleteQuickFix implements IMarkerResolution {
 
 	private URI artifactModelURI;
@@ -56,11 +56,11 @@ public class DeleteQuickFix implements IMarkerResolution {
 	private EObject traceModel;
 	private TraceMetaModelAdapter traceMetamodelAdapter;
 	private List<RelatedTo> toDelete = new ArrayList<>();
-	
-	
+
 	DeleteQuickFix(String label) {
 		this.label = label;
 	}
+
 	@Override
 	public String getLabel() {
 		return label;
@@ -82,30 +82,30 @@ public class DeleteQuickFix implements IMarkerResolution {
 		traceModelURI = EcoreUtil.getURI(traceModel);
 		GenericTraceModel newTraceModel = GenericTraceMetaModelFactory.eINSTANCE.createGenericTraceModel();
 		resourceForTraces = resourceSet.createResource(traceModelURI);
-		
+
 		GenericTraceModel simpleTM = (GenericTraceModel) traceModel;
 		List<RelatedTo> traces = simpleTM.getTraces();
-		
+
 		awc = tracePersistenceAdapter.getArtifactWrappers(resourceSet);
 		artifactModelURI = EcoreUtil.getURI(awc);
-		
+
 		resourceForArtifacts = resourceSet.createResource(artifactModelURI);
 		EList<ArtifactWrapper> list = ((ArtifactWrapperContainer) awc).getArtifacts();
 		container = (ArtifactWrapperContainer) awc;
 		int counter = -1;
 		for (ArtifactWrapper aw : list) {
-			counter ++;
+			counter++;
 			String s = aw.getUri().replace("<{", "/");
 			s = s.substring(1);
 			s = s.replace("<", "/");
 			s = s.replace("{", "/");
 			s = "/" + s;
 
-			if(s.equals(fullPath)){	
-			List<Connection> connections = traceMetamodelAdapter.getConnectedElements(aw, traceModel);
+			if (s.equals(fullPath)) {
+				List<Connection> connections = traceMetamodelAdapter.getConnectedElements(aw, traceModel);
 				connections.forEach(c -> {
-					for(RelatedTo t: traces) {
-						if(c.getTlink().equals(t)) {
+					for (RelatedTo t : traces) {
+						if (c.getTlink().equals(t)) {
 							toDelete.add(t);
 						}
 					}
@@ -113,7 +113,7 @@ public class DeleteQuickFix implements IMarkerResolution {
 				traces.removeAll(toDelete);
 				newTraceModel.getTraces().addAll(traces);
 				resourceForTraces.getContents().add(newTraceModel);
-				
+
 				ArtifactWrapper toRemove = container.getArtifacts().get(counter);
 				EcoreUtil.delete(toRemove);
 				resourceForArtifacts.getContents().add(container);
@@ -121,20 +121,19 @@ public class DeleteQuickFix implements IMarkerResolution {
 					resourceForTraces.save(null);
 					resourceForArtifacts.save(null);
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				}
-				
+
 				break;
-			}												
-		}					
+			}
+		}
 
 		try {
 			marker.delete();
 		} catch (CoreException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
 }
-
