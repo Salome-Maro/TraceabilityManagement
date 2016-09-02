@@ -30,7 +30,7 @@ import net.sourceforge.plantuml.eclipse.utils.DiagramTextProvider;
 
 /**
  * Provides PlantUML with a string representation of elements connected by trace
- * links
+ * links.
  * 
  * @author Anthony Anjorin, Salome Maro
  */
@@ -46,6 +46,17 @@ public class DiagramTextProviderHandler implements DiagramTextProvider {
 		return getDiagramText(selectedModels);
 	}
 
+	/**
+	 * Creates the {@code String} representation PlantUML uses to render the
+	 * graphics. Based on the selected models, the relevant trace links are
+	 * extracted and a decision is made whether a matrix of a tree view has to
+	 * be displayed.
+	 * 
+	 * @param selectedModels
+	 *            the models whose trace links should be displayed
+	 * @return a string representation of the visualisation that can be rendered
+	 *         by PlantUML
+	 */
 	public String getDiagramText(List<Object> selectedModels) {
 		List<EObject> firstModelElements = null;
 		List<EObject> secondModelElements = null;

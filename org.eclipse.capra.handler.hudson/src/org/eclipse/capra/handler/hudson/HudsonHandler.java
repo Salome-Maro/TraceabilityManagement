@@ -17,6 +17,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.mylyn.builds.internal.core.BuildElement;
 import org.eclipse.mylyn.builds.internal.core.TestElement;
 
+/**
+ * A handler to allow tracing to and from elements handled by the continuous
+ * integration server Hudson via the integrated Mylyn facilities. In particular,
+ * it is possible to trace to tests and to builds.
+ */
 public class HudsonHandler implements ArtifactHandler {
 
 	@Override

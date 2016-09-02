@@ -36,9 +36,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IMarkerResolution;
 
 /**
+ * A quick fix to delete a trace link if one of the linked objects is no longer
+ * available.
  * 
  * @author Michael Warne
- *
  */
 public class DeleteQuickFix implements IMarkerResolution {
 

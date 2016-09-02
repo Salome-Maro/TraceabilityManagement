@@ -16,6 +16,9 @@ import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Handler to allow tracing to and from arbitrary files in the file system.
+ */
 public class IFileHandler implements ArtifactHandler {
 
 	@Override

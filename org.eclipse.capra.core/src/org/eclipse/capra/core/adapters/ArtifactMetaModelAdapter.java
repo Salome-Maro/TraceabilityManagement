@@ -13,8 +13,17 @@ package org.eclipse.capra.core.adapters;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * This interface defines the functionality necessary to deal with meta models
+ * that describe the artifacts to and from which trace links are created.
+ */
 public interface ArtifactMetaModelAdapter {
 
+	/**
+	 * Create a new model for artifacts.
+	 * 
+	 * @return the new model
+	 */
 	EObject createModel();
 
 	/**
@@ -44,7 +53,7 @@ public interface ArtifactMetaModelAdapter {
 	EObject getArtifact(EObject artifactModel, String artifactHandler, String artifactUri);
 
 	/**
-	 * Get artifact handler
+	 * Get a handler for the given artifact
 	 * 
 	 * @param artifact
 	 * @return artifact handler
@@ -52,7 +61,7 @@ public interface ArtifactMetaModelAdapter {
 	String getArtifactHandler(EObject artifact);
 
 	/**
-	 * Get artifact name
+	 * Get the name of the given artifact.
 	 * 
 	 * @param artifact
 	 * @return artifact name
@@ -60,7 +69,7 @@ public interface ArtifactMetaModelAdapter {
 	String getArtifactName(EObject artifact);
 
 	/**
-	 * Get artifact Uri
+	 * Get the URI of the given artifact.
 	 * 
 	 * @param artifact
 	 * @return artifact uri
@@ -68,7 +77,7 @@ public interface ArtifactMetaModelAdapter {
 	String getArtifactUri(EObject artifact);
 
 	/**
-	 * Get an instance of the artifact handler
+	 * Get an instance of the artifact handler.
 	 * 
 	 * @param artifact
 	 * @return artifact handler instance

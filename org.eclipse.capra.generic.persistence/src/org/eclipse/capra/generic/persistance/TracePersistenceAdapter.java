@@ -27,6 +27,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+/**
+ * This generic implementation of
+ * {@link org.eclipse.capra.core.adapters.TracePersistenceAdapter} creates a
+ * special project in the workspace to house the trace link model and the
+ * artifact model.
+ */
 public class TracePersistenceAdapter implements org.eclipse.capra.core.adapters.TracePersistenceAdapter {
 
 	private static final String DEFAULT_PROJECT_NAME = "__WorkspaceTraceModels";

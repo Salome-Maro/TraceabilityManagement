@@ -16,6 +16,9 @@ import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.mylyn.tasks.core.ITask;
 
+/**
+ * A handler to allow tracing from and to tasks handled by Mylyn.
+ */
 public class MylynHandler implements ArtifactHandler {
 
 	@Override

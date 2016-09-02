@@ -16,6 +16,9 @@ import org.eclipse.capra.GenericArtifactMetaModel.GenericArtifactMetaModelFactor
 import org.eclipse.capra.core.adapters.AbstractArtifactMetaModelAdapter;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Provides generic functionality to deal with artifact meta models.
+ */
 public class GenericArtifactMetaModelAdapter extends AbstractArtifactMetaModelAdapter {
 
 	private ArtifactWrapperContainer getContainer(EObject artifactModel) {

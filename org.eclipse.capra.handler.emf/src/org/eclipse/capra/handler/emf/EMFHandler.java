@@ -13,6 +13,9 @@ package org.eclipse.capra.handler.emf;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Handler to allow tracing to and from arbitrary model elements handled by EMF.
+ */
 public class EMFHandler implements ArtifactHandler {
 
 	public boolean canHandleSelection(Object selection) {

@@ -29,9 +29,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IMarkerResolution;
 
 /**
+ * TODO: Document this class. I am not sure what it actually does.
  * 
  * @author Michael Warne
- *
  */
 public class RenameOrMoveQuickFix implements IMarkerResolution {
 

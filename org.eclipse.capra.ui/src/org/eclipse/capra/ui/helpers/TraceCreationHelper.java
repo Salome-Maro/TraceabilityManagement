@@ -18,10 +18,13 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+/**
+ * Contains supporting functionality required when creating trace links.
+ */
 public class TraceCreationHelper {
-	
+
 	/**
-	 * Extract selected elements from a selection event
+	 * Extract selected elements from a selection event.
 	 * 
 	 * @param event
 	 *            This is the click event to create a trace
@@ -33,7 +36,7 @@ public class TraceCreationHelper {
 	}
 
 	/**
-	 * Extract selected elements from an {@link ISelection}
+	 * Extract selected elements from an {@link ISelection}.
 	 * 
 	 * @param selection
 	 * @return A list of all the selected elements

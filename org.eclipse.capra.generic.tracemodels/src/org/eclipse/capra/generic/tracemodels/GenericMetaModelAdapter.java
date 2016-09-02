@@ -23,6 +23,9 @@ import org.eclipse.capra.core.adapters.TraceMetaModelAdapter;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Provides generic functionality to deal with traceability meta models.
+ */
 public class GenericMetaModelAdapter implements TraceMetaModelAdapter {
 
 	public GenericMetaModelAdapter() {

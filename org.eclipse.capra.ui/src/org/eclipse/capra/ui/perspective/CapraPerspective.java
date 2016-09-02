@@ -15,6 +15,10 @@ import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
+/**
+ * Defines the Eclipse perspective for Capra, in particular the initial views
+ * that will be shown when the perspective is chosen.
+ */
 public class CapraPerspective implements IPerspectiveFactory {
 
 	private IPageLayout factory;

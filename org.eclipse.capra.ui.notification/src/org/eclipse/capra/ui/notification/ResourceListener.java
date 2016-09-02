@@ -36,13 +36,14 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
+ * Listens to resource changes to detect if the trace links are still
+ * consistent.
  * 
  * @author Michael Warne
- * 
- *
  */
 public class ResourceListener implements IResourceChangeListener {
 
+	// TODO Change this into an enumeration
 	final static int ARTIFACT_RENAMED = 0;
 	final static int ARTIFACT_MOVED = 1;
 	final static int ARTIFACT_DELETED = 2;
@@ -84,6 +85,15 @@ public class ResourceListener implements IResourceChangeListener {
 		}
 	}
 
+	/**
+	 * Creates and schedules the job to create error markers for any
+	 * inconsistencies detected.
+	 * 
+	 * @param delta
+	 *            the changes in the resources that have been detected
+	 * @param issueType
+	 *            the kind of change that has taken place
+	 */
 	public void markupJob(IResourceDelta delta, int issueType) {
 
 		WorkspaceJob job = new WorkspaceJob("myJob") {

@@ -12,8 +12,13 @@ package org.eclipse.capra.core.handlers;
 
 import java.util.Collection;
 
+/**
+ * A priority handler is used to define which {@link ArtifactHandler} should
+ * preferably be used when creating a new trace link. Depending on the choice,
+ * different trace types can then be selected.
+ */
 public interface PriorityHandler {
-	
+
 	/**
 	 * This method gets a list of available handers for a selection and returns
 	 * the best (prioritized) handler that can handle the selection

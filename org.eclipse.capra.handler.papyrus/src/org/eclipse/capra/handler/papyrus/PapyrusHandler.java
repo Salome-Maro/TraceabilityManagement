@@ -14,6 +14,10 @@ import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.papyrus.emf.facet.custom.metamodel.v0_2_0.internal.treeproxy.TreeElement;
 
+/**
+ * A handler to create trace links from and to model elements created in
+ * Papyrus.
+ */
 public class PapyrusHandler implements ArtifactHandler {
 
 	@Override

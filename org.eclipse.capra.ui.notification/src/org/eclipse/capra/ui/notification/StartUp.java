@@ -13,6 +13,9 @@ package org.eclipse.capra.ui.notification;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.ui.IStartup;
 
+/**
+ * Registers the startup extension to get access to resource changes.
+ */
 public class StartUp implements IStartup {
 
 	@Override

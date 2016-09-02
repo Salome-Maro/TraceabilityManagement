@@ -18,6 +18,11 @@ import org.eclipse.capra.handler.hudson.HudsonHandler;
 import org.eclipse.mylyn.builds.internal.core.BuildElement;
 import org.eclipse.mylyn.builds.internal.core.TestElement;
 
+/**
+ * Provides a simple default policy for selecting an {@link ArtifactHandler} in
+ * cases where tests or builds from Hudson are selected by returning the first
+ * available {@link HudsonHandler}.
+ */
 public class DefaultPriorityHandler implements PriorityHandler {
 
 	@Override

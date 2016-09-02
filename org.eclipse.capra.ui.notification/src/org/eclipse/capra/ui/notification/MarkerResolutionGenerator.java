@@ -16,9 +16,10 @@ import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator;
 
 /**
+ * Registers the possible quick fix resolutions for consistency issues detected
+ * in the traceability model.
  * 
  * @author Michael Warne
- *
  */
 public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 

@@ -23,6 +23,7 @@ import org.osgi.service.prefs.Preferences;
  * @author Anthony Anjorin, Salome Maro
  */
 public class DisplayTracesHandler extends AbstractHandler {
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		if (isTraceViewTransitive())
@@ -33,6 +34,12 @@ public class DisplayTracesHandler extends AbstractHandler {
 		return null;
 	}
 
+	/**
+	 * Checks whether the trace view is set to show transitive traces.
+	 * 
+	 * @return {@code true} if transitive traces are enabled, {@code false}
+	 *         otherwise
+	 */
 	public static boolean isTraceViewTransitive() {
 		Preferences transitivity = getPreference();
 
@@ -45,6 +52,12 @@ public class DisplayTracesHandler extends AbstractHandler {
 		return transitivity;
 	}
 
+	/**
+	 * Sets whether the trace view is set to show transitive traces.
+	 * 
+	 * @param value
+	 *            indicates whether transitive traces should be shown
+	 */
 	public static void setTraceViewTransitive(boolean value) {
 		Preferences transitivity = getPreference();
 

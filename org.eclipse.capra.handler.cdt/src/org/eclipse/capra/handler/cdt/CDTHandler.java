@@ -17,6 +17,10 @@ import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.cdt.core.model.ICElement;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Handler to allow tracing to and from elements of C such as files and
+ * functions. Uses CDT as the foundation.
+ */
 public class CDTHandler implements ArtifactHandler {
 
 	@Override
