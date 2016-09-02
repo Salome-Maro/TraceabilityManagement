@@ -60,8 +60,7 @@ public class TraceCreationHandler extends AbstractHandler {
 
 		Collection<ArtifactHandler> artifactHandlers = ExtensionPointHelper.getArtifactHandlers();
 
-		List<EObject> selectionAsEObjects = mapSelectionToEObjects(window, artifactModel, artifactHandlers,
-				selection);
+		List<EObject> selectionAsEObjects = mapSelectionToEObjects(window, artifactModel, artifactHandlers, selection);
 
 		Collection<EClass> traceTypes = traceAdapter.getAvailableTraceTypes(selectionAsEObjects);
 		Optional<EClass> chosenType = chooseTraceType.apply(traceTypes, selectionAsEObjects);
@@ -72,9 +71,8 @@ public class TraceCreationHandler extends AbstractHandler {
 		}
 	}
 
-	private List<EObject> mapSelectionToEObjects(IWorkbenchWindow window,
-			EObject artifactModel, Collection<ArtifactHandler> artifactHandlers,
-			List<Object> selection) {
+	private List<EObject> mapSelectionToEObjects(IWorkbenchWindow window, EObject artifactModel,
+			Collection<ArtifactHandler> artifactHandlers, List<Object> selection) {
 		return selection.stream().map(sel -> convertToEObject(window, sel, artifactHandlers, artifactModel))
 				.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 	}

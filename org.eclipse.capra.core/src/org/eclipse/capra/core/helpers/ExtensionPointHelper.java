@@ -68,7 +68,8 @@ public class ExtensionPointHelper {
 	/**
 	 * Get the executable extension for the extension ID
 	 * 
-	 * @param extensionID The ID of the extension
+	 * @param extensionID
+	 *            The ID of the extension
 	 * @return extension
 	 */
 	public static Optional<ArtifactHandler> getExtension(String extensionID, String ID, String CONFIG) {
@@ -81,7 +82,6 @@ public class ExtensionPointHelper {
 			return Optional.empty();
 		}
 	}
-
 
 	/**
 	 *
@@ -135,7 +135,7 @@ public class ExtensionPointHelper {
 			return getExtensions(ARTIFACT_HANDLER_ID, ARTIFACT_HANDLER_CONFIG).stream().map(ArtifactHandler.class::cast)
 					.collect(Collectors.toList());
 		} catch (Exception e) {
-			return Collections.<ArtifactHandler> emptyList();
+			return Collections.<ArtifactHandler>emptyList();
 		}
 	}
 
@@ -148,7 +148,7 @@ public class ExtensionPointHelper {
 	public static Optional<ArtifactHandler> getArtifactHandler(String ID) {
 		return getExtension(ID, ARTIFACT_HANDLER_ID, ARTIFACT_CONFIG);
 	}
-	
+
 	public static Optional<PriorityHandler> getPriorityHandler() {
 
 		try {

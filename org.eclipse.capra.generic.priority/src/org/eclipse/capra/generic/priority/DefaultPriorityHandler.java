@@ -18,14 +18,13 @@ import org.eclipse.capra.handler.hudson.HudsonHandler;
 import org.eclipse.mylyn.builds.internal.core.BuildElement;
 import org.eclipse.mylyn.builds.internal.core.TestElement;
 
-public class DefaultPriorityHandler implements PriorityHandler{
+public class DefaultPriorityHandler implements PriorityHandler {
 
 	@Override
 	public ArtifactHandler getSelectedHandler(Collection<ArtifactHandler> handlers, Object selectedElement) {
-		if (selectedElement instanceof TestElement || selectedElement instanceof BuildElement)
-		{
+		if (selectedElement instanceof TestElement || selectedElement instanceof BuildElement) {
 			return handlers.stream().filter(h -> h instanceof HudsonHandler).findAny().get();
-			
+
 		}
 		return null;
 	}

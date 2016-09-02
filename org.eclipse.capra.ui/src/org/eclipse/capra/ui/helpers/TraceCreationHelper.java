@@ -19,6 +19,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 public class TraceCreationHelper {
+	
 	/**
 	 * Extract selected elements from a selection event
 	 * 

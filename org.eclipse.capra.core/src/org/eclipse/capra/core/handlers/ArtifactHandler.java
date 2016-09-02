@@ -39,18 +39,18 @@ public interface ArtifactHandler {
 	 * 
 	 * @param selection
 	 *            The object to be mapped
-	 * @param artifactModel 
+	 * @param artifactModel
 	 * @return
 	 */
 	EObject getEObjectForSelection(Object selection, EObject artifactModel);
-	
+
 	/**
 	 * Resolve the persisted EObject to the originally selected Object from the
 	 * Eclipse workspace. This is essentially the inverse of the
 	 * getEObjectForSelection operation.
 	 * 
 	 * @param artifact
-	 *           The persisted EObject
+	 *            The persisted EObject
 	 * @return originally selected object
 	 */
 	Object resolveArtifact(EObject artifact);

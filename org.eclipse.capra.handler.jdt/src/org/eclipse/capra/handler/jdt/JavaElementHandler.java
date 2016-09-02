@@ -20,21 +20,18 @@ import org.eclipse.jdt.core.JavaCore;
 public class JavaElementHandler implements ArtifactHandler {
 	@Override
 	public boolean canHandleSelection(Object selection) {
-		if(selection instanceof IJavaElement){
+		if (selection instanceof IJavaElement) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
-	@Override  
+	@Override
 	public EObject getEObjectForSelection(Object selection, EObject artifactModel) {
 		IJavaElement cu = (IJavaElement) selection;
 		ArtifactMetaModelAdapter adapter = ExtensionPointHelper.getArtifactWrapperMetaModelAdapter().get();
-		EObject wrapper = adapter.createArtifact(
-				artifactModel,
-				this.getClass().getName(), 
-				cu.getHandleIdentifier(), 
+		EObject wrapper = adapter.createArtifact(artifactModel, this.getClass().getName(), cu.getHandleIdentifier(),
 				cu.getElementName());
 		return wrapper;
 	}

@@ -21,7 +21,7 @@ public class GEFHandler implements ArtifactHandler {
 	public boolean canHandleSelection(Object selection) {
 		// TODO Auto-generated method stub
 		return selection instanceof EditPart;
-		
+
 	}
 
 	@Override

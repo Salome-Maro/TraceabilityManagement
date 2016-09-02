@@ -20,7 +20,7 @@ import org.eclipse.core.commands.ExecutionException;
  * 
  * @author Anthony Anjorin, Salome Maro
  */
-public class ClearSelectionHandler extends AbstractHandler  {
+public class ClearSelectionHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		SelectionView.getOpenedView().clearSelection();

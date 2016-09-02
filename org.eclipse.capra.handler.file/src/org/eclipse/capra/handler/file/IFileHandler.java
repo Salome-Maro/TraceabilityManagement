@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.capra.handler.file;
 
-
 import org.eclipse.capra.core.adapters.ArtifactMetaModelAdapter;
 import org.eclipse.capra.core.handlers.ArtifactHandler;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
@@ -25,14 +24,11 @@ public class IFileHandler implements ArtifactHandler {
 	}
 
 	@Override
-	public EObject getEObjectForSelection(Object selection, EObject  artifactModel) {
+	public EObject getEObjectForSelection(Object selection, EObject artifactModel) {
 		IFile selectionAsFile = (IFile) selection;
 		ArtifactMetaModelAdapter adapter = ExtensionPointHelper.getArtifactWrapperMetaModelAdapter().get();
-		EObject wrapper = adapter.createArtifact(
-				artifactModel,
-				this.getClass().getName(), 
-				selectionAsFile.getFullPath().toString(), 
-				selectionAsFile.getName());
+		EObject wrapper = adapter.createArtifact(artifactModel, this.getClass().getName(),
+				selectionAsFile.getFullPath().toString(), selectionAsFile.getName());
 		return wrapper;
 	}
 

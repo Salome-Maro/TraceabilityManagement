@@ -30,7 +30,7 @@ public class CapraPerspective implements IPerspectiveFactory {
 
 		IFolderLayout topLeft = factory.createFolder("topLeft", IPageLayout.LEFT, 0.25f, factory.getEditorArea());
 		topLeft.addView(IPageLayout.ID_PROJECT_EXPLORER);
-		
+
 		IFolderLayout topRight = factory.createFolder("topRight", IPageLayout.RIGHT, 0.75f, factory.getEditorArea());
 		topRight.addView(IPageLayout.ID_OUTLINE);
 	}

@@ -30,20 +30,14 @@ public class HudsonHandler implements ArtifactHandler {
 		if (selection instanceof TestElement) {
 			TestElement test = (TestElement) selection;
 
-			EObject testWrapper = adapter.createArtifact(
-					artifactModel,
-					this.getClass().getName(), 
-					test.getLabel(), //TODO Need to get the URI for where the test is
+			// TODO Need to get the URI for where the test is
+			EObject testWrapper = adapter.createArtifact(artifactModel, this.getClass().getName(), test.getLabel(),
 					test.getLabel());
 			return testWrapper;
-		} 
-		else if (selection instanceof BuildElement) {
+		} else if (selection instanceof BuildElement) {
 			BuildElement build = (BuildElement) selection;
 
-			EObject buildWrapper = adapter.createArtifact(
-					artifactModel,	
-					this.getClass().getName(), 
-					build.getUrl(),
+			EObject buildWrapper = adapter.createArtifact(artifactModel, this.getClass().getName(), build.getUrl(),
 					build.getLabel());
 			return buildWrapper;
 		}

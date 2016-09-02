@@ -21,7 +21,7 @@ public class EMFHandler implements ArtifactHandler {
 	}
 
 	@Override
-	public EObject getEObjectForSelection(Object selection, EObject  artifactModel) {
+	public EObject getEObjectForSelection(Object selection, EObject artifactModel) {
 		return EObject.class.cast(selection);
 	}
 

@@ -13,11 +13,10 @@ package org.eclipse.capra.ui.notification;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.ui.IStartup;
 
-public class StartUp implements IStartup{
+public class StartUp implements IStartup {
 
 	@Override
 	public void earlyStartup() {
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(new ResourceListener());  
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(new ResourceListener());
 	}
 }
-

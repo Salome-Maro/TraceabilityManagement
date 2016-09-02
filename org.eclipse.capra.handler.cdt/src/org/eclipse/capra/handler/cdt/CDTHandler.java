@@ -17,22 +17,18 @@ import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.cdt.core.model.ICElement;
 import org.eclipse.emf.ecore.EObject;
 
-
 public class CDTHandler implements ArtifactHandler {
 
 	@Override
 	public boolean canHandleSelection(Object selection) {
-		return selection instanceof ICElement; 
+		return selection instanceof ICElement;
 	}
 
 	@Override
-	public EObject getEObjectForSelection(Object selection, EObject  artifactModel) {
-		ICElement cu = (ICElement)selection;
+	public EObject getEObjectForSelection(Object selection, EObject artifactModel) {
+		ICElement cu = (ICElement) selection;
 		ArtifactMetaModelAdapter adapter = ExtensionPointHelper.getArtifactWrapperMetaModelAdapter().get();
-		EObject wrapper = adapter.createArtifact(
-				artifactModel,
-				this.getClass().getName(), 
-				cu.getHandleIdentifier(), 
+		EObject wrapper = adapter.createArtifact(artifactModel, this.getClass().getName(), cu.getHandleIdentifier(),
 				cu.getElementName());
 		return wrapper;
 	}
@@ -41,7 +37,7 @@ public class CDTHandler implements ArtifactHandler {
 	public ICElement resolveArtifact(EObject artifact) {
 		ArtifactMetaModelAdapter adapter = ExtensionPointHelper.getArtifactWrapperMetaModelAdapter().get();
 		String uri = adapter.getArtifactUri(artifact);
-		return CoreModel.create(uri); 
+		return CoreModel.create(uri);
 	}
 
 }

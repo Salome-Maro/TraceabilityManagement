@@ -37,69 +37,65 @@ public class GenericMetaModelAdapter implements TraceMetaModelAdapter {
 	@Override
 	public Collection<EClass> getAvailableTraceTypes(List<EObject> selection) {
 		Collection<EClass> traceTypes = new ArrayList<>();
-		if (selection.size()>1){
-			
+		if (selection.size() > 1) {
+
 			traceTypes.add(GenericTraceMetaModelPackage.eINSTANCE.getRelatedTo());
 		}
 		return traceTypes;
 	}
 
 	@Override
-	public EObject createTrace(EClass traceType, EObject traceModel,
-			List<EObject> selection) {
-		
-		GenericTraceModel TM = (GenericTraceModel)traceModel;
+	public EObject createTrace(EClass traceType, EObject traceModel, List<EObject> selection) {
+
+		GenericTraceModel TM = (GenericTraceModel) traceModel;
 		EObject trace = GenericTraceMetaModelFactory.eINSTANCE.create(traceType);
 		RelatedTo RelatedToTrace = (RelatedTo) trace;
 		RelatedToTrace.getItem().addAll(selection);
-		
+
 		TM.getTraces().add(RelatedToTrace);
-		return  TM;
+		return TM;
 	}
 
 	@Override
 	public void deleteTrace(EObject first, EObject second, EObject traceModel) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public boolean isThereATraceBetween(EObject firstElement, EObject secondElement,
-			EObject traceModel) {
-			GenericTraceModel root = (GenericTraceModel) traceModel;
-			List<RelatedTo> traces = root.getTraces();
-			for (RelatedTo trace : traces){
-				if(firstElement!=secondElement) {
+	public boolean isThereATraceBetween(EObject firstElement, EObject secondElement, EObject traceModel) {
+		GenericTraceModel root = (GenericTraceModel) traceModel;
+		List<RelatedTo> traces = root.getTraces();
+		for (RelatedTo trace : traces) {
+			if (firstElement != secondElement) {
 				return trace.getItem().contains(firstElement) && trace.getItem().contains(secondElement);
-				}
 			}
-			return false;
 		}
+		return false;
+	}
 
 	@Override
-	public List<Connection> getConnectedElements(EObject element,
-			EObject tracemodel) {
+	public List<Connection> getConnectedElements(EObject element, EObject tracemodel) {
 		GenericTraceModel root = (GenericTraceModel) tracemodel;
 		List<Connection> connections = new ArrayList<>();
 		List<RelatedTo> traces = root.getTraces();
-		
-		if(element instanceof RelatedTo){
+
+		if (element instanceof RelatedTo) {
 			RelatedTo trace = (RelatedTo) element;
 			connections.add(new Connection(element, trace.getItem(), trace));
 		} else {
-			
-	
-		for (RelatedTo trace: traces) {
-			if(trace.getItem().contains(element)) {
-				connections.add(new Connection(element, trace.getItem(), trace));
+
+			for (RelatedTo trace : traces) {
+				if (trace.getItem().contains(element)) {
+					connections.add(new Connection(element, trace.getItem(), trace));
 				}
-		}
+			}
 		}
 		return connections;
 	}
 
-	
-	private List<Connection> getTransitivelyConnectedElements(EObject element, EObject traceModel, List<Object> accumulator) {
+	private List<Connection> getTransitivelyConnectedElements(EObject element, EObject traceModel,
+			List<Object> accumulator) {
 		List<Connection> directElements = getConnectedElements(element, traceModel);
 		List<Connection> allElements = new ArrayList<>();
 
@@ -121,6 +117,5 @@ public class GenericMetaModelAdapter implements TraceMetaModelAdapter {
 		List<Object> accumulator = new ArrayList<>();
 		return getTransitivelyConnectedElements(element, traceModel, accumulator);
 	}
-	
 
 }

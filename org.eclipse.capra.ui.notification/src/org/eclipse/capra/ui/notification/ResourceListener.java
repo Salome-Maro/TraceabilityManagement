@@ -41,8 +41,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * 
  *
  */
-
-public class ResourceListener implements IResourceChangeListener{
+public class ResourceListener implements IResourceChangeListener {
 
 	final static int ARTIFACT_RENAMED = 0;
 	final static int ARTIFACT_MOVED = 1;
@@ -52,6 +51,7 @@ public class ResourceListener implements IResourceChangeListener{
 	private TracePersistenceAdapter tracePersistenceAdapter;
 	private ResourceSet resourceSet;
 	private EObject awc;
+
 	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
 
@@ -63,13 +63,14 @@ public class ResourceListener implements IResourceChangeListener{
 
 				IPath toPath = delta.getMovedToPath();
 
-				if(delta.getKind() == IResourceDelta.REMOVED && toPath!=null) {
+				if (delta.getKind() == IResourceDelta.REMOVED && toPath != null) {
 
-					if(delta.getFullPath().toFile().getName().equalsIgnoreCase(toPath.toFile().getName()))
+					if (delta.getFullPath().toFile().getName().equalsIgnoreCase(toPath.toFile().getName()))
 						markupJob(delta, ARTIFACT_MOVED);
-					else markupJob(delta, ARTIFACT_RENAMED);
+					else
+						markupJob(delta, ARTIFACT_RENAMED);
 				}
-				if(delta.getKind() == IResourceDelta.REMOVED && toPath==null){
+				if (delta.getKind() == IResourceDelta.REMOVED && toPath == null) {
 					markupJob(delta, ARTIFACT_DELETED);
 				}
 				return true;
@@ -83,7 +84,7 @@ public class ResourceListener implements IResourceChangeListener{
 		}
 	}
 
-	public void markupJob(IResourceDelta delta, int issueType){
+	public void markupJob(IResourceDelta delta, int issueType) {
 
 		WorkspaceJob job = new WorkspaceJob("myJob") {
 			@Override
@@ -93,36 +94,35 @@ public class ResourceListener implements IResourceChangeListener{
 					tracePersistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 					tracePersistenceAdapter.getTraceModel(resourceSet);
 					awc = tracePersistenceAdapter.getArtifactWrappers(resourceSet);
-					//if(! tracemodel.isPresent() || ! awc.isPresent()) return Status.OK_STATUS;
-					uri = EcoreUtil.getURI(awc);					
+					// if(! tracemodel.isPresent() || ! awc.isPresent()) return
+					// Status.OK_STATUS;
+					uri = EcoreUtil.getURI(awc);
 					IPath path = new Path(uri.toPlatformString(false));
 					IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 					EList<ArtifactWrapper> list = ((ArtifactWrapperContainer) awc).getArtifacts();
 					for (ArtifactWrapper aw : list) {
-						
-						if(aw.getName().equals(delta.getResource().getName())){
+
+						if (aw.getName().equals(delta.getResource().getName())) {
 
 							IMarker marker = file.createMarker("org.eclipse.capra.ui.notification.capraproblemmarker");
-							if(issueType == ARTIFACT_RENAMED){
-								marker.setAttribute(IMarker.MESSAGE, delta.getFullPath()
-										+ " has been renamed to " + delta.getMovedToPath());
+							if (issueType == ARTIFACT_RENAMED) {
+								marker.setAttribute(IMarker.MESSAGE,
+										delta.getFullPath() + " has been renamed to " + delta.getMovedToPath());
 								marker.setAttribute("DeltaMovedToPath", delta.getMovedToPath().toString());
 								marker.setAttribute("FileName", delta.getMovedToPath().toFile().getName().toString());
 								marker.setAttribute("IssueType", "Rename");
-							}else 
-								if(issueType == ARTIFACT_MOVED){
-									marker.setAttribute(IMarker.MESSAGE, delta.getResource()
-											.getName() + " has been moved from " + delta.getFullPath()
-											+ " to " + delta.getMovedToPath());
-									marker.setAttribute("DeltaMovedToPath", delta.getMovedToPath().toString());
-									marker.setAttribute("FileName", delta.getMovedToPath().toFile().getName().toString());
-									marker.setAttribute("IssueType", "Move");
-								}else
-									if(issueType == ARTIFACT_DELETED){
-										marker.setAttribute(IMarker.MESSAGE, delta.getResource()
-												.getName() + " has been deleted from " + delta.getFullPath());
-										marker.setAttribute("IssueType", "Delete");
-									}
+							} else if (issueType == ARTIFACT_MOVED) {
+								marker.setAttribute(IMarker.MESSAGE,
+										delta.getResource().getName() + " has been moved from " + delta.getFullPath()
+												+ " to " + delta.getMovedToPath());
+								marker.setAttribute("DeltaMovedToPath", delta.getMovedToPath().toString());
+								marker.setAttribute("FileName", delta.getMovedToPath().toFile().getName().toString());
+								marker.setAttribute("IssueType", "Move");
+							} else if (issueType == ARTIFACT_DELETED) {
+								marker.setAttribute(IMarker.MESSAGE, delta.getResource().getName()
+										+ " has been deleted from " + delta.getFullPath());
+								marker.setAttribute("IssueType", "Delete");
+							}
 							marker.setAttribute("DeltaFullPath", delta.getFullPath().toString());
 							marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 						}

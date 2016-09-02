@@ -27,8 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public class TracePersistenceAdapter
-		implements org.eclipse.capra.core.adapters.TracePersistenceAdapter {
+public class TracePersistenceAdapter implements org.eclipse.capra.core.adapters.TracePersistenceAdapter {
 
 	private static final String DEFAULT_PROJECT_NAME = "__WorkspaceTraceModels";
 	private static final String DEFAULT_TRACE_MODEL_NAME = "traceModel.xmi";
@@ -48,16 +47,15 @@ public class TracePersistenceAdapter
 		}
 		return Optional.empty();
 	}
-	
+
 	@Override
 	public EObject getTraceModel(ResourceSet resourceSet) {
 		TraceMetaModelAdapter adapter = ExtensionPointHelper.getTraceMetamodelAdapter().get();
 		return loadModel(resourceSet, DEFAULT_TRACE_MODEL_NAME).orElse(adapter.createModel());
 	}
 
-
 	private boolean fileExists(String path) {
-		return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path)).exists();		
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path)).exists();
 	}
 
 	private boolean projectExist(String defaultProjectName) {
@@ -115,5 +113,4 @@ public class TracePersistenceAdapter
 		return null;
 	}
 
-	
 }

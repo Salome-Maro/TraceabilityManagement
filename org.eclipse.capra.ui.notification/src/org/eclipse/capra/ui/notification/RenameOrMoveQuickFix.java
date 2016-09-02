@@ -33,7 +33,6 @@ import org.eclipse.ui.IMarkerResolution;
  * @author Michael Warne
  *
  */
-
 public class RenameOrMoveQuickFix implements IMarkerResolution {
 
 	private URI uri;
@@ -51,6 +50,7 @@ public class RenameOrMoveQuickFix implements IMarkerResolution {
 	RenameOrMoveQuickFix(String label) {
 		this.label = label;
 	}
+
 	@Override
 	public String getLabel() {
 		return label;
@@ -60,8 +60,8 @@ public class RenameOrMoveQuickFix implements IMarkerResolution {
 	public void run(IMarker marker) {
 		try {
 			fullPath = (String) marker.getAttribute("DeltaFullPath");
-			movedToPath = (String)marker.getAttribute("DeltaMovedToPath");
-			fileName = (String)marker.getAttribute("FileName");
+			movedToPath = (String) marker.getAttribute("DeltaMovedToPath");
+			fileName = (String) marker.getAttribute("FileName");
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,34 +77,34 @@ public class RenameOrMoveQuickFix implements IMarkerResolution {
 		container = (ArtifactWrapperContainer) awc;
 		int counter = -1;
 		for (ArtifactWrapper aw : list) {
-			counter ++;
+			counter++;
 			String s = aw.getUri().replace("<{", "/");
 			s = s.substring(1);
 			s = s.replace("<", "/");
 			s = s.replace("{", "/");
 			s = "/" + s;
-			if(s.equals(fullPath)){
+			if (s.equals(fullPath)) {
 				art.setArtifactHandler(aw.getArtifactHandler());
 				art.setName(fileName);
 				art.setUri(movedToPath);
 				break;
-			}												
-		}					
+			}
+		}
 
-		if(art.getUri() != null ){
+		if (art.getUri() != null) {
 			container.getArtifacts().set(counter, art);
 			resourceForArtifacts.getContents().add(container);
 			try {
 				resourceForArtifacts.save(null);
 			} catch (IOException e) {
-				
+
 				e.printStackTrace();
 			}
 		}
 		try {
 			marker.delete();
 		} catch (CoreException e) {
-			
+
 			e.printStackTrace();
 		}
 	}

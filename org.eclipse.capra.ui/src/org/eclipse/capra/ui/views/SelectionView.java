@@ -139,16 +139,12 @@ public class SelectionView extends ViewPart {
 		hookContextMenu();
 
 		int ops = DND.DROP_COPY | DND.DROP_MOVE;
-		Transfer[] transfers = new Transfer[] { 
-				org.eclipse.ui.part.ResourceTransfer.getInstance(),
-				org.eclipse.ui.part.EditorInputTransfer.getInstance(), 
-				org.eclipse.swt.dnd.FileTransfer.getInstance(),
-				org.eclipse.swt.dnd.RTFTransfer.getInstance(),
-				org.eclipse.swt.dnd.TextTransfer.getInstance(),
+		Transfer[] transfers = new Transfer[] { org.eclipse.ui.part.ResourceTransfer.getInstance(),
+				org.eclipse.ui.part.EditorInputTransfer.getInstance(), org.eclipse.swt.dnd.FileTransfer.getInstance(),
+				org.eclipse.swt.dnd.RTFTransfer.getInstance(), org.eclipse.swt.dnd.TextTransfer.getInstance(),
 				org.eclipse.swt.dnd.URLTransfer.getInstance(),
 				org.eclipse.jface.util.LocalSelectionTransfer.getTransfer(),
-				org.eclipse.emf.edit.ui.dnd.LocalTransfer.getInstance()
-		};
+				org.eclipse.emf.edit.ui.dnd.LocalTransfer.getInstance() };
 
 		viewer.addDropSupport(ops, transfers, new SelectionDropAdapter(viewer));
 	}
@@ -198,8 +194,9 @@ public class SelectionView extends ViewPart {
 		} else if (availableHandlers.size() > 1 && !priorityHandler.isPresent()) {
 			MessageDialog.openWarning(getSite().getShell(), "Multiple handlers for selected item",
 					"There are multiple handlers for " + target + " so it will be ignored.");
-		} else if  (availableHandlers.size() > 1 && !priorityHandler.isPresent()) {
-			//TODO check if the priority handler can give exactly one artifact handler, if not flag for multiple selections
+		} else if (availableHandlers.size() > 1 && !priorityHandler.isPresent()) {
+			// TODO check if the priority handler can give exactly one artifact
+			// handler, if not flag for multiple selections
 		} else
 			return true;
 
