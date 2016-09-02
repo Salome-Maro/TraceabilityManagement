@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapper;
 import org.eclipse.capra.GenericArtifactMetaModel.ArtifactWrapperContainer;
-import org.eclipse.capra.GenericArtifactMetaModel.GenericArtifactMetaModelFactory;
 import org.eclipse.capra.core.adapters.TracePersistenceAdapter;
 import org.eclipse.capra.core.helpers.ExtensionPointHelper;
 import org.eclipse.core.resources.IMarker;
@@ -29,23 +28,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.IMarkerResolution;
 
 /**
- * TODO: Document this class. I am not sure what it actually does.
+ * Renames the associated artifact wrapper in the artifact model to reflect
+ * changes in the original resource represented by the wrapper. If the original
+ * resource has been renamed or moved, the respective wrapper if renamed to
+ * reflect the new name/location of file.
  * 
  * @author Michael Warne
  */
 public class RenameOrMoveQuickFix implements IMarkerResolution {
 
-	private URI uri;
-	private TracePersistenceAdapter tracePersistenceAdapter;
-	private ResourceSet resourceSet;
-	private EObject awc;
 	private String label;
-	private ArtifactWrapper art;
-	private Resource resourceForArtifacts;
-	private ArtifactWrapperContainer container;
-	private String movedToPath;
-	private String fullPath;
-	private String fileName;
 
 	RenameOrMoveQuickFix(String label) {
 		this.label = label;
@@ -58,48 +50,45 @@ public class RenameOrMoveQuickFix implements IMarkerResolution {
 
 	@Override
 	public void run(IMarker marker) {
+		URI uri;
+		TracePersistenceAdapter tracePersistenceAdapter;
+		ResourceSet resourceSet;
+		EObject awc;
+		Resource resourceForArtifacts;
+		ArtifactWrapperContainer container;
+
+		String movedToPath = null;
+		String oldFileName = null;
+		String newFileName = null;
+
 		try {
-			fullPath = (String) marker.getAttribute("DeltaFullPath");
 			movedToPath = (String) marker.getAttribute("DeltaMovedToPath");
-			fileName = (String) marker.getAttribute("FileName");
+			oldFileName = (String) marker.getAttribute("oldFileName");
+			newFileName = (String) marker.getAttribute("newFileName");
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		resourceSet = new ResourceSetImpl();
 		tracePersistenceAdapter = ExtensionPointHelper.getTracePersistenceAdapter().get();
 		awc = tracePersistenceAdapter.getArtifactWrappers(resourceSet);
-		art = GenericArtifactMetaModelFactory.eINSTANCE.createArtifactWrapper();
 		uri = EcoreUtil.getURI(awc);
 		resourceForArtifacts = resourceSet.createResource(uri);
 		EList<ArtifactWrapper> list = ((ArtifactWrapperContainer) awc).getArtifacts();
 		container = (ArtifactWrapperContainer) awc;
-		int counter = -1;
 		for (ArtifactWrapper aw : list) {
-			counter++;
-			String s = aw.getUri().replace("<{", "/");
-			s = s.substring(1);
-			s = s.replace("<", "/");
-			s = s.replace("{", "/");
-			s = "/" + s;
-			if (s.equals(fullPath)) {
-				art.setArtifactHandler(aw.getArtifactHandler());
-				art.setName(fileName);
-				art.setUri(movedToPath);
-				break;
+			if (aw.getName().equals(oldFileName)) {
+				aw.setName(newFileName);
+				aw.setUri(movedToPath);
 			}
 		}
 
-		if (art.getUri() != null) {
-			container.getArtifacts().set(counter, art);
-			resourceForArtifacts.getContents().add(container);
-			try {
-				resourceForArtifacts.save(null);
-			} catch (IOException e) {
+		resourceForArtifacts.getContents().add(container);
+		try {
+			resourceForArtifacts.save(null);
+		} catch (IOException e) {
 
-				e.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		try {
 			marker.delete();
