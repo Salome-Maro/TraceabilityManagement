@@ -1,8 +1,8 @@
 # Capra - A Traceability Management Tool
 
 ![Notice of move](wehavemoved.png)
-<br>
 
+<br>
 Capra is now an [Eclipse Open Source Project] (https://projects.eclipse.org/projects/modeling.capra) and therefore the development repository has moved to this [address](https://git.eclipse.org/c/capra/org.eclipse.capra.git/) 
 
 ### Background
