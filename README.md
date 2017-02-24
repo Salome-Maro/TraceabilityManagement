@@ -1,5 +1,10 @@
 # Capra - A Traceability Management Tool
 
+![Notice of move](wehavemoved.png)
+<br>
+
+Capra is now an [Eclipse Open Source Project] (https://projects.eclipse.org/projects/modeling.capra) and therefore the development repository has moved to this [address](https://git.eclipse.org/c/capra/org.eclipse.capra.git/) 
+
 ### Background
 Capra is a configurable and extendable traceability management tool. It is created in the context of an ITEA funded project called AMALTHEA4Public whose main aim is to develop a platform that will improve the development of embedded multicore and many core systems.
 
